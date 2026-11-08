@@ -1,1 +1,2524 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hoga Viewer</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f4f6;color:#444;font-family:Arial,"Noto Sans KR",sans-serif;font-size:12px;letter-spacing:0}.app{width:min(100vw,512px);margin:0 auto;background:white;border:1px solid #cfcfcf;box-shadow:0 1px 5px rgba(0,0,0,.08)}.toolbar{display:grid;grid-template-columns:88px 34px 1fr 34px 34px 34px;height:34px;border-bottom:1px solid #9e8f8f;background:#e9e9e9}.toolbar input{width:100%;border:0;border-right:1px solid #c6c6c6;padding:0 10px;background:#fafafa;color:#555;outline:0;font-size:12px}.tool-btn{display:grid;place-items:center;border:0;border-right:1px solid rgba(255,255,255,.25);color:white;font-weight:700;cursor:pointer}.blue{background:#2f80c4}.cyan{background:#35b9d6}.orange{background:#f0a33c}.header-strip{height:18px;line-height:18px;padding:0 8px;background:#a99;color:white;font-weight:700;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.mini-row,.labels-row{display:grid;grid-template-columns:repeat(7,1fr);height:15px;text-align:center;line-height:15px;border-bottom:1px solid #e4e4e4}.mini-row div{background:#eadf95;border-right:1px solid white}.labels-row div{background:#cfdfb9;border-right:1px solid white;font-weight:700;color:#49633b}.book{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-left:1px solid #ededed;border-bottom:1px solid #bfbfbf}.cell{height:15px;line-height:15px;padding:0 3px;overflow:hidden;white-space:nowrap;text-align:right;border-right:1px solid #ededed;border-bottom:1px solid #ededed}.center{text-align:center}.left{text-align:left}.ask{background:#eaf3fb}.ask.price{background:#b8d5ea;color:#175982;font-weight:700}.bid{background:#fff8ee}.bid.price{background:#f5c8c8;color:#9b3131;font-weight:700}.cell.price{cursor:pointer}.cell.price:hover{outline:1px solid #287bbe;outline-offset:-1px}.stat{background:#fbf6ef;color:#444}.muted{color:#9a9a9a}.speed-row{display:grid;grid-template-columns:repeat(7,1fr);height:30px;background:#f4e4f4;border-bottom:1px solid #ededed}.speed-row div{border-right:1px solid #eee}.speed{display:grid;place-items:center;background:#55b85a;color:white;font-weight:700;grid-column:4 / 5;height:15px;margin-top:15px;cursor:pointer}.control-strip{display:grid;grid-template-columns:repeat(9,1fr);gap:4px;padding:4px 20px;border-bottom:1px solid #ddd}.control-strip button{height:42px;border:0;border-radius:3px;color:white;cursor:pointer;font-weight:700}.step{background:#2e80bd}.small-step{background:#41bdd3}.play{background:#55b85a}.inputs{display:grid;grid-template-columns:100px 1fr 34px 66px;gap:16px;padding:4px;align-items:center;border-bottom:1px solid #ddd}.inputs input{height:28px;border:1px solid #d4d4d4;padding:0 8px;min-width:0}.chip{height:28px;line-height:28px;text-align:center;border:1px solid #ddd;background:linear-gradient(#fff,#eee);border-radius:4px}.chip.button-like{cursor:pointer;user-select:none}.trade{display:grid;grid-template-columns:34px 88px 44px 44px 58px 1fr 54px;gap:1px;padding:4px 4px 0;align-items:center;background:#fafafa}.trade div,.trade button,.trade input{height:30px;border:1px solid #d6d6d6;background:white;color:#666;text-align:center;line-height:28px}.trade input{width:100%;min-width:0;padding:0 6px;line-height:normal;text-align:right}.trade button{border:0;color:white;cursor:pointer}.buy{background:#df5a56 !important}.sell{background:#277abd !important}.tabbar{display:grid;grid-template-columns:36px 36px 36px 1fr 52px 52px 38px 1fr 54px;gap:2px;padding:4px;align-items:center}.icon-btn,.tab{height:30px;border:0;color:white;background:#287bbe;font-weight:700}.share{background:#eba93d}.qty{height:30px;border:1px solid #d6d6d6;padding:0 8px;text-align:right}.size-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;padding:0 4px 4px;background:#fafafa}.size-strip button{height:26px;border:0;background:#6d7f8f;color:white;cursor:pointer;font-size:12px;font-weight:700}.condition-panel{display:grid;grid-template-columns:76px 1fr;gap:3px;padding:4px;background:#f7fafb;border-top:1px solid #e3e8ec;align-items:center}.condition-panel select{height:28px;border:1px solid #c8d8df;background:white;color:#36566b;font-size:12px}.condition-status{grid-column:1 / -1;min-height:18px;color:#667;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.broker{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #dedede}.broker-title{height:15px;text-align:center;line-height:15px;border-bottom:1px solid white;background:#e4f0f8}.broker-title:nth-child(2){background:#fae6e6}.broker-row{display:grid;grid-template-columns:20px 1fr 60px;height:15px;line-height:15px;border-bottom:1px solid white;background:#eaf3fb}.broker-col.buy-side .broker-row{background:#fdeaea}.summary{display:grid;grid-template-columns:repeat(6,1fr);height:15px;line-height:15px;text-align:center;background:#dcefee;border-top:1px solid white}.summary-values{background:#eef7f7;color:#31515a;font-weight:700}.orders{border-top:1px solid #d7dde1;background:#fbfcfd}.orders-head{display:grid;grid-template-columns:1fr 60px;align-items:center;min-height:24px;padding:3px 6px;background:#eef5f8;color:#36566b;font-weight:700}.orders-head button{height:22px;border:0;background:#6d7f8f;color:white;cursor:pointer;font-size:12px}.orders-list{min-height:24px}.order-row{display:grid;grid-template-columns:44px 1fr 64px 64px 28px;align-items:center;height:22px;border-top:1px solid #edf0f2;padding:0 4px}.order-row.buy-order{background:#fff2f2;color:#9b3131}.order-row.sell-order{background:#edf6ff;color:#175982}.order-row button{height:18px;border:0;background:transparent;color:inherit;cursor:pointer;font-weight:700}.orders-empty{height:24px;line-height:24px;padding:0 6px;color:#888}.chart-panel{border-top:1px solid #cfcfcf;background:#fff}.chart-head{display:grid;grid-template-columns:1fr 72px 72px;gap:4px;align-items:center;height:30px;padding:3px 4px;background:#eef5f8;border-bottom:1px solid #d9e5ea}.chart-head strong{padding-left:4px;color:#36566b}.chart-head select,.chart-head button{height:24px;border:1px solid #c8d8df;background:#fff;color:#36566b;font-size:12px}.chart-head button{background:#287bbe;color:white;border:0;cursor:pointer;font-weight:700}.chart-wrap{position:relative;height:210px;background:#fff}#chartCanvas{display:block;width:100%;height:210px}.chart-empty{position:absolute;inset:0;display:grid;place-items:center;color:#999;pointer-events:none}.status{padding:5px 8px;color:#777;min-height:24px;border-top:1px solid #ddd}@media (max-width:520px){.cell{padding:0 2px}.control-strip{padding:4px}.toolbar{grid-template-columns:78px 34px 1fr 34px 34px 34px}}body{background:#efefef;color:#303030;font-family:"Malgun Gothic",Arial,sans-serif}.app{width:min(100vw,374px);margin:0 auto;border:1px solid #aeb3b7;box-shadow:none;background:#fff}.quote-window{display:grid;grid-template-columns:minmax(0,1fr) 24px;width:100%;background:#fff;border-bottom:1px solid #6f757a}.quote-main{min-width:0}.quote-head{display:grid;grid-template-columns:272px minmax(0,1fr);width:100%;height:20px;line-height:19px;background:#ededed;border-bottom:1px solid #8f9498;color:#222;text-align:center;font-size:12px;overflow:hidden}.quote-book-head{display:grid;grid-template-columns:42px 50px 55px 45px 50px 30px;min-width:0}.quote-book-head>span{min-width:0;overflow:hidden;white-space:nowrap;border-right:1px solid #c6cacc}.quote-stats-head{min-width:0;border-left:1px solid #8f9498;background:#ededed}.quote-content{display:grid;grid-template-columns:272px minmax(0,1fr);align-items:stretch}.quote-book{width:272px;min-width:0;background:#fff}.quote-title{display:block;height:0;overflow:hidden;opacity:0;pointer-events:none}.quote-side{display:block;width:272px;height:160px;overflow:hidden;border:0;background:#fff}.quote-side.quote-bids{height:160px;overflow:hidden;scrollbar-width:none;border-bottom:1px solid #9ba1a5}.quote-side.quote-bids::-webkit-scrollbar{display:none}.quote-side.quote-bids .quote-row{width:272px;grid-template-columns:42px 50px 55px 45px 50px 30px}.quote-row{display:grid;grid-template-columns:42px 50px 55px 45px 50px 30px;width:272px;height:16px;line-height:16px}.quote-row .cell{width:auto;height:16px;line-height:16px;padding:0 3px;border-right:1px solid #e2e3e4;border-bottom:1px solid #e4e5e6;font-size:12px}.quote-row.ask .cell{background:#eaf4fb}.quote-row.bid .cell{background:#fff0f2}.quote-row .quote-price{color:#f23846;font-weight:400}.quote-row.ask .quote-price{background:#dfeff9 !important}.quote-row.bid .quote-price{background:#fde5e9 !important}.quote-row .quote-rate{color:#f23846}.quote-row .quote-delta{color:#f23846}.depth-cell{position:relative}.depth-cell .depth-bar{position:absolute;top:1px;bottom:1px;z-index:0;pointer-events:none}.depth-cell .depth-bar.ask{right:0;background:#acd7ef}.depth-cell .depth-bar.bid{left:0;background:#f3b8c0}.depth-cell .depth-label{position:relative;z-index:1}.quote-row.current .cell{background:#d9efff !important}.quote-row.current .quote-price{outline:1px solid #f23846;outline-offset:-1px;font-weight:700}.quote-stats{min-width:0;min-height:325px;overflow:hidden;border-left:1px solid #9ba1a5;background:#fff}.quote-stat-row{display:grid;grid-template-columns:31px minmax(0,1fr);height:15px;line-height:15px;border-bottom:1px solid #e4e5e6;background:#fff;font-size:12px}.quote-stat-row span{padding-left:3px;overflow:hidden;white-space:nowrap}.quote-stat-row strong{padding-right:3px;overflow:hidden;white-space:nowrap;text-align:right;font-weight:400}.quote-stat-row:nth-child(-n+6) strong{color:#f23846}.quote-stat-row:nth-child(4) strong{color:#2879c7}.quote-stat-row.trade-volume-up strong{color:#f23846;font-weight:700}.quote-stat-row.trade-volume-down strong{color:#2879c7;font-weight:700}.quote-totals{display:grid;grid-template-columns:90px 92px 90px;height:18px;line-height:17px;text-align:right;border-top:1px solid #9ba1a5;border-bottom:1px solid #d3d5d6;background:#fff;font-size:12px}.quote-totals span{padding:0 3px;border-right:1px solid #e2e3e4;overflow:hidden;white-space:nowrap}.quote-totals .quote-net{color:#2879c7;text-align:center}.quote-after{--sell-strength:0%;--buy-strength:0%;position:relative;display:grid;grid-template-columns:90px 92px 90px;height:26px;line-height:23px;text-align:right;background:#fff;font-size:12px}.quote-after::before,.quote-after::after{position:absolute;bottom:0;height:3px;content:""}.quote-after::before{left:0;width:var(--sell-strength);background:#2879c7}.quote-after::after{right:0;width:var(--buy-strength);background:#ef3949}.quote-after.no-strength::before,.quote-after.no-strength::after{display:none}.quote-after>span,.quote-after>strong{padding:0 3px;overflow:hidden;white-space:nowrap}.quote-after>span:first-child{color:#2879c7}.quote-after strong{text-align:center;font-weight:400}#speedLabel{display:none}.quote-rail{display:grid;grid-template-rows:20px repeat(7,22px);align-content:start;min-height:348px;background:#fff;border-left:1px solid #8f9498}.quote-rail #quoteRefresh{display:grid;place-items:center;width:23px;height:19px;padding:0;color:#4a4a4a;background:#e6e6e6;border:0;border-bottom:1px solid #aeb3b7;font-size:14px;line-height:18px}.quote-rail button{width:23px;height:22px;padding:0;border:0;border-bottom:1px solid #cfd2d4;background:#f6f6f6;color:#303030;cursor:pointer;font-size:11px}.toolbar{height:30px;grid-template-columns:92px 28px minmax(0,1fr) 28px 28px 28px;border-bottom:1px solid #b5b9bb;background:#dedede}.toolbar input{min-width:0;padding:0 5px;border-right:1px solid #aeb3b7;background:#fff;color:#202020;font-size:11px}.toolbar .tool-btn{min-width:0;padding:0;border:0;border-right:1px solid #aeb3b7;background:#e7e7e7;color:#303030;font-size:11px;font-weight:400}.toolbar .tool-btn:hover,.control-strip button:hover,.icon-btn:hover,.tab:hover,.size-strip button:hover,.orders-head button:hover,.chart-head button:hover{background:#d5e8f6}.control-strip{grid-template-columns:42px 38px 38px 28px minmax(32px,1fr) 28px 38px 38px 42px;gap:2px;padding:3px;background:#efefef;border-bottom:1px solid #9fa4a8}.control-strip button{min-width:0;height:25px;padding:0;border:1px solid #9fa4a8;border-radius:0;background:#e7e7e7;color:#202020;font-size:10px;font-weight:400}.control-strip .play{background:#e4efe4;color:#185e2a}.inputs{grid-template-columns:92px minmax(0,1fr) 26px 52px;gap:2px;padding:3px;background:#f3f3f3;border-bottom:1px solid #aeb3b7}.inputs input,.chip{min-width:0;height:24px;padding:0 4px;border:1px solid #aeb3b7;border-radius:0;background:#fff;color:#303030;line-height:22px;font-size:11px}.chip{background:#e7e7e7}.trade{grid-template-columns:30px 68px 34px 34px 46px minmax(0,1fr) 44px;gap:1px;padding:3px;background:#efefef;border-bottom:1px solid #aeb3b7}.trade div,.trade button,.trade input{min-width:0;height:25px;padding:0 3px;border:1px solid #aeb3b7;border-radius:0;line-height:23px;font-size:11px;overflow:hidden;white-space:nowrap}.trade button{border:1px solid #8d9296}.buy{background:#e85b63 !important;color:#fff !important}.sell{background:#357fc2 !important;color:#fff !important}.tabbar{grid-template-columns:26px 26px 26px minmax(0,1fr) 34px 44px 28px minmax(48px,1fr) 44px;gap:2px;padding:3px;background:#f3f3f3;border-bottom:1px solid #aeb3b7}.tabbar>*{min-width:0}.icon-btn,.tab,.qty,#sellButton{width:100%;min-width:0;height:25px;padding:0 2px;border:1px solid #9fa4a8;border-radius:0;font-size:11px;overflow:hidden;white-space:nowrap}.icon-btn,.tab{background:#e7e7e7;color:#303030;font-weight:400}.share{background:#e7e7e7}.size-strip{gap:2px;padding:3px;background:#efefef;border-bottom:1px solid #aeb3b7}.size-strip button{height:23px;padding:0;border:1px solid #9fa4a8;background:#e7e7e7;color:#303030;font-size:11px;font-weight:400}.condition-panel{grid-template-columns:64px minmax(0,1fr);gap:2px;padding:3px;background:#f3f3f3;border-top:0;border-bottom:1px solid #aeb3b7}.condition-panel select{min-width:0;height:24px;border:1px solid #9fa4a8;border-radius:0;color:#303030;font-size:11px}.condition-status{min-height:16px;color:#555;font-size:11px}.broker{border-top:0;border-bottom:1px solid #aeb3b7}.broker-title{background:#e9f2f8;color:#303030}.broker-title:nth-child(2){background:#f8e9e9}.summary{border-top:0;background:#e6eeee;font-size:11px}.summary-values{background:#f2f7f7}.orders{border-top:0}.orders-head{min-height:25px;padding:2px 3px;background:#e7e7e7;color:#303030;font-size:11px}.orders-head button{height:21px;border:1px solid #9fa4a8;background:#f4f4f4;color:#303030;font-size:11px}.chart-panel{border-top:1px solid #8f9498}.chart-head{grid-template-columns:minmax(0,1fr) 66px 58px;gap:2px;height:27px;padding:2px 3px;background:#e7e7e7;border-bottom:1px solid #aeb3b7}.chart-head strong{padding-left:2px;color:#303030}.chart-head select,.chart-head button{min-width:0;height:22px;border:1px solid #9fa4a8;border-radius:0;background:#f7f7f7;color:#303030;font-size:11px;font-weight:400}.status{min-height:22px;padding:4px 5px;border-top:1px solid #aeb3b7;background:#ededed;color:#444;font-size:11px}@media (max-width:380px){.app{width:100%}.quote-window{grid-template-columns:minmax(0,1fr) 22px}.quote-content{grid-template-columns:minmax(0,1fr) 72px}.quote-book,.quote-side,.quote-row{width:100%}.quote-row{grid-template-columns:16% 18% 20% 16% 18% 12%}.quote-side.quote-bids .quote-row{width:100%;grid-template-columns:16% 18% 20% 16% 18% 12%}.quote-totals,.quote-after{grid-template-columns:33.3% 33.4% 33.3%}.quote-head{grid-template-columns:minmax(0,1fr) 72px}.quote-book-head{grid-template-columns:16% 18% 20% 16% 18% 12%}.quote-rail{min-height:348px}.quote-rail #quoteRefresh,.quote-rail button{width:100%}.tabbar{grid-template-columns:24px 24px 24px minmax(0,1fr) 32px 40px 26px minmax(42px,1fr) 40px}.trade{grid-template-columns:28px 56px 32px 32px 42px minmax(0,1fr) 40px}}</style></head><body><main class="app"><section class="toolbar" aria-label="날짜 및 종목 조회"><input id="date" name="date" type="date" value="" aria-label="날짜"><button id="dateButton" class="tool-btn blue" title="달력">▣</button><input id="code" name="code" value="451060" list="symbolList" aria-label="종목코드 또는 종목명" placeholder="종목명"><datalist id="symbolList"></datalist><button id="search" class="tool-btn cyan" title="조회">⌕</button><button class="tool-btn orange" title="랜덤">R</button><button class="tool-btn blue" title="설정">⚙</button></section><section class="quote-window" aria-label="호가창"><div class="quote-main"><div class="quote-head"><div class="quote-book-head"><span>증감</span><span>매도잔량</span><span id="quoteTime">16:00:01</span><span>등락률</span><span>매수잔량</span><span>증감</span></div><div class="quote-stats-head" aria-hidden="true"></div></div><div class="quote-content"><div class="quote-book"><div id="symbolTitle" class="quote-title" aria-live="polite"></div><section id="asks" class="book quote-side quote-asks" aria-label="매도 호가"></section><section id="bids" class="book quote-side quote-bids" aria-label="매수 호가"></section><section id="quoteTotals" class="quote-totals" aria-label="호가 잔량 합계"><span id="quoteAskTotal">-</span><span id="quoteNetTotal" class="quote-net">-</span><span id="quoteBidTotal">-</span></section><section class="quote-after" aria-label="시간외 잔량"><span id="quoteAfterValue">-</span><strong>시간외</strong><span id="quoteAfterRight"></span><button id="speedLabel" type="button" title="배속 변경">x1.0</button></section></div><section id="topInfo" class="quote-stats" aria-label="종목 요약"></section></div></div><aside class="quote-rail" aria-label="호가창 기능"><button id="quoteRefresh" type="button" title="새로고침">↻</button><button type="button" title="수량">수</button><button type="button" title="도구">도</button><button type="button" title="관리">관</button><button type="button" title="리스트">리</button><button type="button" title="자동">자</button><button type="button" title="기준">기</button><button type="button" title="설정">⚙</button></aside></section><section class="control-strip"><button type="button" data-seek-time="090000000" title="장 시작 09:00으로 이동">처음</button><button type="button" data-seek-seconds="-60" title="1분 이전">-1분</button><button type="button" data-seek-seconds="-1" title="1초 이전">-1초</button><button type="button" data-step-event="-1" title="이전 이벤트">←</button><button id="play" type="button" class="play" title="재생">재생</button><button type="button" data-step-event="1" title="다음 이벤트">→</button><button type="button" data-seek-seconds="1" title="1초 이후">+1초</button><button type="button" data-seek-seconds="60" title="1분 이후">+1분</button><button type="button" data-seek-time="153000000" title="장 마감 15:30으로 이동">끝</button></section><section class="inputs"><input id="no" value="0" aria-label="이벤트 번호"><input id="time" aria-label="시간"><div class="chip">◷</div><div id="speedChip" class="chip button-like" title="배속 변경">x1.0</div></section><section class="trade"><div>기초</div><div id="asset">20,000,000</div><div>수수료</div><div>0.21</div><button id="marketButton" class="sell">시장가</button><input id="priceInput" aria-label="주문 가격" inputmode="numeric"><button id="buyButton" class="buy">매수</button></section><section class="tabbar"><button class="icon-btn">↺</button><button class="icon-btn share">↗</button><button class="icon-btn">▤</button><span></span><button class="tab">기초</button><button id="holding" class="tab">보유 0</button><span>수량</span><input id="qtyInput" class="qty" name="quantity" aria-label="수량" value="100"><button id="sellButton" class="sell">매도</button></section><section class="size-strip"><button data-size-pct="10">10%</button><button data-size-pct="30">30%</button><button data-size-pct="50">50%</button><button data-size-pct="60">60%</button><button data-size-pct="90">90%</button><button data-size-pct="100">100%</button></section><section class="condition-panel"><span>매수조건</span><select id="buyCondition"><option value="">조건 없음</option><option value="kiwoomFormula">A/B/D/E/F/G/H/(I or J)/((K and L) or (M and N))</option></select><div id="conditionStatus" class="condition-status">조건 없음</div></section><section class="broker"><div class="broker-col"><div class="broker-title">외국계</div><div id="sellBrokers"></div></div><div class="broker-col buy-side"><div class="broker-title">외국계</div><div id="buyBrokers"></div></div></section><section class="summary"><div>기초자산</div><div>평가자산</div><div>누적수수료</div><div>확정수익</div><div>잔고수익</div><div>수익률</div></section><section class="summary summary-values"><div id="baseAsset">20,000,000</div><div id="evalAsset">20,000,000</div><div id="feeSum">0</div><div id="realizedProfit">0</div><div id="unrealizedProfit">0</div><div id="profitRate">0.00%</div></section><section class="orders"><div class="orders-head"><span id="ordersTitle">대기 주문 0건</span><button id="clearOrders">취소</button></div><div id="ordersList" class="orders-list"><div class="orders-empty">대기 주문 없음</div></div></section><section class="chart-panel"><div class="chart-head"><strong>차트</strong><select id="chartGap" aria-label="차트 간격"><option value="10000">10초</option><option value="60000" selected>1분</option><option value="300000">5분</option></select><button id="chartReload">갱신</button></div><div class="chart-wrap"><canvas id="chartCanvas" width="512" height="210"></canvas><div id="chartEmpty" class="chart-empty">차트 대기 중</div></div></section><div id="status" class="status">대기 중</div></main><script>(()=>{const s=atob("Y29uc3QgJD1lPT5kb2N1bWVudC5nZXRFbGVtZW50QnlJZChlKTtsZXQgc3RhdGU9e25vOjAsdGltZXI6bnVsbCxwbGF5QnVzeTohMSxzeW1ib2xzOltdLHN5bWJvbE1hcDpuZXcgTWFwLGxhc3RUcmFkZTp7fSxsYXN0Qm9vazp7fSxsYXN0QWZ0ZXI6e30sbGFzdEJyb2tlcjp7fSxjdXJyZW50RXZlbnRUaW1lOiIiLHJlY2VudFRyYWRlczpbXSxzZWVuVHJhZGVOb3M6bmV3IFNldCxleGVjdXRlZEJ1eVZvbHVtZTowLGV4ZWN1dGVkU2VsbFZvbHVtZTowLGluZm86e30sY2hhcnRSb3dzOltdLGNvbmRpdGlvbkRhdGE6e2NhdGFsb2c6e30sZGFpbHk6W119LGNvbmRpdGlvbktleToiIixzcGVlZDoxLG9yZGVyUHJpY2VMb2NrZWQ6ITEscGVuZGluZ09yZGVyczpbXSxuZXh0T3JkZXJJZDoxLGluaXRpYWxKdW1wVGltZToiIixwb3NpdGlvbjp7Y2FzaDoyZTcscXR5OjAsYXZnOjAsZmVlOjAscmVhbGl6ZWQ6MH19O2Z1bmN0aW9uIGZtdChlKXtpZihudWxsPT1lfHwiIj09PWUpcmV0dXJuIiI7Y29uc3QgdD1OdW1iZXIoU3RyaW5nKGUpLnJlcGxhY2UoL15cKy8sIiIpKTtyZXR1cm4gTnVtYmVyLmlzRmluaXRlKHQpP3QudG9Mb2NhbGVTdHJpbmcoImtvLUtSIik6ZX1mdW5jdGlvbiBjbG9ja1RleHQoZSl7Y29uc3QgdD1TdHJpbmcoZT8/IiIpLnRyaW0oKTtpZighdClyZXR1cm4iMTY6MDA6MDEiO2lmKHQuaW5jbHVkZXMoIjoiKSlyZXR1cm4gdC5zbGljZSgwLDgpO2NvbnN0IG49dC5yZXBsYWNlKC9cRC9nLCIiKTtpZig4PT09bi5sZW5ndGgpe3JldHVybiBOdW1iZXIobi5zbGljZSgxLDMpKTw9NTk/YCR7bi5zbGljZSgwLDEpLnBhZFN0YXJ0KDIsIjAiKX06JHtuLnNsaWNlKDEsMyl9OiR7bi5zbGljZSgzLDUpfWA6YCR7bi5zbGljZSgwLDIpfToke24uc2xpY2UoMiw0KX06JHtuLnNsaWNlKDQsNil9YH1yZXR1cm4gbi5sZW5ndGg+PTk/YCR7bi5zbGljZSgwLDIpfToke24uc2xpY2UoMiw0KX06JHtuLnNsaWNlKDQsNil9YDpuLmxlbmd0aD49Nj9gJHtuLnNsaWNlKC02LC00KX06JHtuLnNsaWNlKC00LC0yKX06JHtuLnNsaWNlKC0yKX1gOnR9ZnVuY3Rpb24gbnVtKGUpe2NvbnN0IHQ9TnVtYmVyKFN0cmluZyhlPz8iIikucmVwbGFjZSgvLC9nLCIiKS5yZXBsYWNlKC9eXCsvLCIiKSk7cmV0dXJuIE51bWJlci5pc0Zpbml0ZSh0KT90OjB9ZnVuY3Rpb24gY2VsbChlPSIiLHQ9IiIpe2NvbnN0IG49ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgiZGl2Iik7cmV0dXJuIG4uY2xhc3NOYW1lPWBjZWxsICR7dH1gLG4udGV4dENvbnRlbnQ9ZSxufWZ1bmN0aW9uIHByaWNlQ2VsbChlLHQpe2NvbnN0IG49Y2VsbChmbXQoZSksYCR7dH0gcHJpY2VgKTtyZXR1cm4gbnVsbCE9ZSYmIiIhPT1lJiYobi5kYXRhc2V0LnByaWNlPVN0cmluZyhlKSxuLnRpdGxlPSLtgbTrpq3tlbTshJwg7KO866y4IOqwgOqyqSDsnoXroKUiKSxufWZ1bmN0aW9uIHF1YW50aXR5Q2VsbChlLHQsbil7Y29uc3QgYT1NYXRoLm1heCgwLG51bShlKSksbz1jZWxsKCIiLGAke3R9IHF1b3RlLXF0eSBkZXB0aC1jZWxsYCkscj1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCJzcGFuIik7ci5jbGFzc05hbWU9YGRlcHRoLWJhciAke3R9YCxyLnN0eWxlLndpZHRoPWAke24+MD9NYXRoLm1pbigxMDAsYS9uKjEwMCk6MH0lYDtjb25zdCBzPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNwYW4iKTtyZXR1cm4gcy5jbGFzc05hbWU9ImRlcHRoLWxhYmVsIixzLnRleHRDb250ZW50PWZtdChlKSxvLmFwcGVuZChyLHMpLG99ZnVuY3Rpb24gbGF0ZXN0KGUsdCl7Zm9yKGxldCBuPWUubGVuZ3RoLTE7bj49MDtuLS0paWYoZVtuXS5ldmVudF90eXBlPT09dClyZXR1cm4gZVtuXTtyZXR1cm57fX1mdW5jdGlvbiBtYXJrZXROYW1lKGUpe2NvbnN0IHQ9U3RyaW5nKGU/PyIiKTtyZXR1cm4iMTAiPT09dD8iS09TREFRIjoiMCI9PT10PyJLT1NQSSI6dHx8Ii0ifWZ1bmN0aW9uIHJlbmRlclRvcChlLHQpe2NvbnN0IG49bnVtKHQucHJpY2V8fGUuY2xvc2UpLGE9bnVtKGUucHJldl9jbG9zZXx8ZS5iYXNpc19wcmljZSksbz1uJiZhP24tYTowLHI9dC5jaGFuZ2VfcmF0ZSxzPShudWxsIT1yJiYiIiE9PXImJk51bWJlcihyKSxbZS5jb2RlLGUubmFtZV0uZmlsdGVyKEJvb2xlYW4pLmpvaW4oIiAiKSk7JCgic3ltYm9sVGl0bGUiKS50ZXh0Q29udGVudD1zfHwi7KKF66qp7KCV67O0IOyXhuydjCIsJCgic3ltYm9sVGl0bGUiKS50aXRsZT1zfHwiIiwkKCJxdW90ZVRpbWUiKS50ZXh0Q29udGVudD1jbG9ja1RleHQoc3RhdGUuY3VycmVudEV2ZW50VGltZXx8dC50aW1lfHxzdGF0ZS5sYXN0Qm9vay50aW1lKTtjb25zdCBpPVtbIuyLnOqwgCIsZS5vcGVuXSxbIuqzoOqwgCIsZS5oaWdoXSxbIuyggOqwgCIsZS5sb3ddLFsi6riw7KSAIixlLmJhc2lzX3ByaWNlfHxlLnByZXZfY2xvc2VdLFsi7IOB7ZWcIixlLnVwcGVyX2xpbWl0XSxbIu2VmO2VnCIsZS5sb3dlcl9saW1pdF0sWyJQRVIiLGUucGVyXSxbIlBCUiIsZS5wYnJdLFsiUk9FIixlLnJvZV0sWyLsmbjsnbgiLHN0YXRlLmxhc3RCcm9rZXIuZm9yZWlnbl9uZXRfYnV5X2VzdGltYXRlXSxbIuu5hOykkSIsZS5mb3JlaWduX3JhdGlvXV07c3RhdGUucmVjZW50VHJhZGVzLnNsaWNlKCkucmV2ZXJzZSgpLmZvckVhY2goKGUsdCk9Pntjb25zdCBuPW51bShlLnZvbHVtZSk7aS5wdXNoKFswPT09dD8i7LK06rKw65+JIjoiIixlLnZvbHVtZSxuPjA/InRyYWRlLXZvbHVtZS11cCI6bjwwPyJ0cmFkZS12b2x1bWUtZG93biI6IiJdKX0pO2NvbnN0IGw9JCgidG9wSW5mbyIpO2wuaW5uZXJIVE1MPSIiLGkuZm9yRWFjaCgoW2UsdCxuPSIiXSk9Pntjb25zdCBhPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpO2EuY2xhc3NOYW1lPWBxdW90ZS1zdGF0LXJvdyAke259YC50cmltKCk7Y29uc3Qgbz1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCJzcGFuIik7by50ZXh0Q29udGVudD1lO2NvbnN0IHI9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic3Ryb25nIik7ci50ZXh0Q29udGVudD1udWxsPT10fHwiIj09PXQ/Ii0iOmZtdCh0KSxhLmFwcGVuZChvLHIpLGwuYXBwZW5kKGEpfSl9ZnVuY3Rpb24gcmVuZGVyQm9vayhlKXtjb25zdCB0PSQoImFza3MiKSxuPSQoImJpZHMiKTt0LmlubmVySFRNTD0iIixuLmlubmVySFRNTD0iIjtjb25zdCBhPW51bShzdGF0ZS5sYXN0VHJhZGUucHJpY2UpfHxudW0oZS5iaWRfcHJpY2VfMSl8fG51bShlLmFza19wcmljZV8xKSxvPU1hdGgubWF4KDEsLi4uQXJyYXkuZnJvbSh7bGVuZ3RoOjEwfSwodCxuKT0+bnVtKGVbYGFza19xdHlfJHtuKzF9YF0pKSkscj1NYXRoLm1heCgxLC4uLkFycmF5LmZyb20oe2xlbmd0aDoxMH0sKHQsbik9Pm51bShlW2BiaWRfcXR5XyR7bisxfWBdKSkpLHM9ZT0+e2NvbnN0IHQ9bnVtKGUpO3JldHVybiB0JiZhP2AkeygodC1hKS9hKjEwMCkudG9GaXhlZCgyKX1gOiIifSxpPSh0LG4saSk9Pntjb25zdCBsPWVbYCR7bn1fcHJpY2VfJHtpfWBdLGM9ZVtgYXNrX3ByaWNlXyR7aX1gXSx1PWVbYGJpZF9wcmljZV8ke2l9YF0sZD1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCJkaXYiKTtkLmNsYXNzTmFtZT1gcXVvdGUtcm93ICR7bn1gLGEmJihudW0obCk9PT1hfHwiYmlkIj09PW4mJm51bShjKT09PWEpJiZkLmNsYXNzTGlzdC5hZGQoImN1cnJlbnQiKTtjb25zdCBtPWNlbGwoZm10KGVbYCR7bn1fZGVsdGFfJHtpfWBdKSxgJHtufSBxdW90ZS1kZWx0YWApLHA9cXVhbnRpdHlDZWxsKGVbYCR7bn1fcXR5XyR7aX1gXSxuLCJhc2siPT09bj9vOnIpLGg9cHJpY2VDZWxsKGwsYCR7bn0gcXVvdGUtcHJpY2VgKSwkPWNlbGwocyhsKSxgJHtufSBxdW90ZS1yYXRlYCksZj1jZWxsKCIiLGAke259IHF1b3RlLWVtcHR5YCksdj1jZWxsKCIiLGAke259IHF1b3RlLWVtcHR5YCk7aWYoImFzayI9PT1uKWQuYXBwZW5kKG0scCxoLCQsZix2KTtlbHNle2NvbnN0IHQ9cHJpY2VDZWxsKHUsImJpZCBxdW90ZS1wcmljZSIpLG49Y2VsbChzKHUpLCJiaWQgcXVvdGUtcmF0ZSIpLGE9cXVhbnRpdHlDZWxsKGVbYGJpZF9xdHlfJHtpfWBdLCJiaWQiLHIpLG89Y2VsbChmbXQoZVtgYmlkX2RlbHRhXyR7aX1gXSksImJpZCBxdW90ZS1kZWx0YSIpO2QuYXBwZW5kKGYsdix0LG4sYSxvKX10LmFwcGVuZChkKX07Zm9yKGxldCBlPTEwO2U+PTE7ZS0tKWkodCwiYXNrIixlKTtmb3IobGV0IGU9MTtlPD0xMDtlKyspaShuLCJiaWQiLGUpO3JlbmRlclF1b3RlVG90YWxzKGUsc3RhdGUubGFzdEFmdGVyKX1mdW5jdGlvbiByZW5kZXJRdW90ZVRvdGFscyhlLHQpe2NvbnN0IG49QXJyYXkuZnJvbSh7bGVuZ3RoOjEwfSwodCxuKT0+bnVtKGVbYGFza19xdHlfJHtuKzF9YF0pKS5yZWR1Y2UoKGUsdCk9PmUrdCwwKSxhPUFycmF5LmZyb20oe2xlbmd0aDoxMH0sKHQsbik9Pm51bShlW2BiaWRfcXR5XyR7bisxfWBdKSkucmVkdWNlKChlLHQpPT5lK3QsMCk7JCgicXVvdGVBc2tUb3RhbCIpLnRleHRDb250ZW50PWZtdChuKSwkKCJxdW90ZU5ldFRvdGFsIikudGV4dENvbnRlbnQ9Zm10KGEtbiksJCgicXVvdGVCaWRUb3RhbCIpLnRleHRDb250ZW50PWZtdChhKSwkKCJxdW90ZUFmdGVyVmFsdWUiKS50ZXh0Q29udGVudD1mbXQodD8uYWZ0ZXJfc2VsbF90b3RhbCl8fCIiLCQoInF1b3RlQWZ0ZXJSaWdodCIpLnRleHRDb250ZW50PWZtdCh0Py5hZnRlcl9idXlfdG90YWwpfHwiIjtjb25zdCBvPWRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoIi5xdW90ZS1hZnRlciIpLHI9c3RhdGUuZXhlY3V0ZWRCdXlWb2x1bWUscz1zdGF0ZS5leGVjdXRlZFNlbGxWb2x1bWU7aWYocj4wJiZzPjApe2NvbnN0IGU9ci8ocitzKSoxMDAsdD0xMDAtZSxuPXIvcyoxMDA7by5jbGFzc0xpc3QucmVtb3ZlKCJuby1zdHJlbmd0aCIpLG8uc3R5bGUuc2V0UHJvcGVydHkoIi0tYnV5LXN0cmVuZ3RoIixgJHtlfSVgKSxvLnN0eWxlLnNldFByb3BlcnR5KCItLXNlbGwtc3RyZW5ndGgiLGAke3R9JWApLG8udGl0bGU9YOyytOqysOqwleuPhCAke24udG9GaXhlZCgxKX0lIMK3IOunpOyImCDssrTqsrAgJHtlLnRvRml4ZWQoMSl9JSDCtyDrp6Trj4Qg7LK06rKwICR7dC50b0ZpeGVkKDEpfSVgfWVsc2Ugby5jbGFzc0xpc3QuYWRkKCJuby1zdHJlbmd0aCIpLG8uc3R5bGUuc2V0UHJvcGVydHkoIi0tYnV5LXN0cmVuZ3RoIiwiMCUiKSxvLnN0eWxlLnNldFByb3BlcnR5KCItLXNlbGwtc3RyZW5ndGgiLCIwJSIpLG8ucmVtb3ZlQXR0cmlidXRlKCJ0aXRsZSIpfWZ1bmN0aW9uIHJlbmRlckJyb2tlcnMoZSl7Y29uc3QgdD0kKCJzZWxsQnJva2VycyIpLG49JCgiYnV5QnJva2VycyIpLGE9ZG9jdW1lbnQucXVlcnlTZWxlY3RvcigiLmJyb2tlci1jb2wgLmJyb2tlci10aXRsZSIpLG89ZG9jdW1lbnQucXVlcnlTZWxlY3RvcigiLmJyb2tlci1jb2wuYnV5LXNpZGUgLmJyb2tlci10aXRsZSIpO2EmJihhLnRleHRDb250ZW50PWDsmbjqta3qs4Qg66ek64+EICR7Zm10KGUuZm9yZWlnbl9zZWxsX2VzdGltYXRlKXx8Ii0ifWApLG8mJihvLnRleHRDb250ZW50PWDsmbjqta3qs4Qg66ek7IiYICR7Zm10KGUuZm9yZWlnbl9idXlfZXN0aW1hdGUpfHwiLSJ9YCksdC5pbm5lckhUTUw9IiIsbi5pbm5lckhUTUw9IiI7Zm9yKGxldCBhPTE7YTw9NTthKyspdC5pbnNlcnRBZGphY2VudEhUTUwoImJlZm9yZWVuZCIsYDxkaXYgY2xhc3M9ImJyb2tlci1yb3ciPjxkaXY+JHthfTwvZGl2PjxkaXY+JHtlW2BzZWxsX2Jyb2tlcl8ke2F9YF18fCIifTwvZGl2PjxkaXY+JHtmbXQoZVtgc2VsbF9icm9rZXJfcXR5XyR7YX1gXSl9PC9kaXY+PC9kaXY+YCksbi5pbnNlcnRBZGphY2VudEhUTUwoImJlZm9yZWVuZCIsYDxkaXYgY2xhc3M9ImJyb2tlci1yb3ciPjxkaXY+JHthfTwvZGl2PjxkaXY+JHtlW2BidXlfYnJva2VyXyR7YX1gXXx8IiJ9PC9kaXY+PGRpdj4ke2ZtdChlW2BidXlfYnJva2VyX3F0eV8ke2F9YF0pfTwvZGl2PjwvZGl2PmApfWZ1bmN0aW9uIHJlc2V0UnVudGltZVN0YXRlKCl7c3RhdGUubm89MCxzdGF0ZS5sYXN0VHJhZGU9e30sc3RhdGUubGFzdEJvb2s9e30sc3RhdGUubGFzdEFmdGVyPXt9LHN0YXRlLmxhc3RCcm9rZXI9e30sc3RhdGUuY3VycmVudEV2ZW50VGltZT0iIixzdGF0ZS5yZWNlbnRUcmFkZXM9W10sc3RhdGUuc2VlblRyYWRlTm9zPW5ldyBTZXQsc3RhdGUuZXhlY3V0ZWRCdXlWb2x1bWU9MCxzdGF0ZS5leGVjdXRlZFNlbGxWb2x1bWU9MCxzdGF0ZS5vcmRlclByaWNlTG9ja2VkPSExLHN0YXRlLnBlbmRpbmdPcmRlcnM9W10sc3RhdGUubmV4dE9yZGVySWQ9MSxzdGF0ZS5wb3NpdGlvbj17Y2FzaDoyZTcscXR5OjAsYXZnOjAsZmVlOjAscmVhbGl6ZWQ6MH19ZnVuY3Rpb24gbWVyZ2VMYXRlc3QoZSl7ZS5mb3JFYWNoKGU9PntpZigiMSI9PT1lLmV2ZW50X3R5cGUpe3N0YXRlLmxhc3RUcmFkZT1lO2NvbnN0IHQ9YCR7ZS5kYXRlfS8ke2UuY29kZX0vJHtlLm5vfWA7aWYoIXN0YXRlLnNlZW5UcmFkZU5vcy5oYXModCkmJnZvaWQgMCE9PWUudHJhZGVfdm9sdW1lJiZudWxsIT09ZS50cmFkZV92b2x1bWUmJiIiIT09ZS50cmFkZV92b2x1bWUpe3N0YXRlLnNlZW5UcmFkZU5vcy5hZGQodCk7Y29uc3Qgbj1udW0oZS50cmFkZV92b2x1bWUpO24+MCYmKHN0YXRlLmV4ZWN1dGVkQnV5Vm9sdW1lKz1uKSxuPDAmJihzdGF0ZS5leGVjdXRlZFNlbGxWb2x1bWUrPU1hdGguYWJzKG4pKSxzdGF0ZS5yZWNlbnRUcmFkZXMucHVzaCh7bm86ZS5ubyx0aW1lOmUudGltZSx2b2x1bWU6ZS50cmFkZV92b2x1bWV9KSxzdGF0ZS5yZWNlbnRUcmFkZXMubGVuZ3RoPjEwJiZzdGF0ZS5yZWNlbnRUcmFkZXMuc2hpZnQoKX19IjIiPT09ZS5ldmVudF90eXBlJiYoc3RhdGUubGFzdEJvb2s9ZSksIjMiPT09ZS5ldmVudF90eXBlJiYoc3RhdGUubGFzdEFmdGVyPWUpLCI0Ij09PWUuZXZlbnRfdHlwZSYmKHN0YXRlLmxhc3RCcm9rZXI9ZSl9KX1mdW5jdGlvbiBjdXJyZW50UHJpY2UoKXtyZXR1cm4gbnVtKHN0YXRlLmxhc3RUcmFkZS5wcmljZSl8fG51bShzdGF0ZS5sYXN0Qm9vay5iaWRfcHJpY2VfMSl8fG51bShzdGF0ZS5sYXN0Qm9vay5hc2tfcHJpY2VfMSl8fG51bSgkKCJwcmljZUlucHV0Iik/LnZhbHVlKX1mdW5jdGlvbiBwY3RDaGFuZ2UoZSx0KXtjb25zdCBuPW51bShlKSxhPW51bSh0KTtyZXR1cm4gbj8oYS1uKS9uKjEwMDowfWZ1bmN0aW9uIG1vdmluZ0F2ZXJhZ2UoZSx0KXtpZihlLmxlbmd0aDx0KXJldHVybiBudWxsO3JldHVybiBlLnNsaWNlKC10KS5yZWR1Y2UoKGUsdCk9PmUrbnVtKHQuY2xvc2UpLDApL3R9ZnVuY3Rpb24gc3RkZGV2KGUpe2lmKCFlLmxlbmd0aClyZXR1cm4gMDtjb25zdCB0PWUucmVkdWNlKChlLHQpPT5lK3QsMCkvZS5sZW5ndGgsbj1lLnJlZHVjZSgoZSxuKT0+ZSsobi10KSoqMiwwKS9lLmxlbmd0aDtyZXR1cm4gTWF0aC5zcXJ0KG4pfWZ1bmN0aW9uIGxyc1Nsb3BlKGUpe2NvbnN0IHQ9ZS5sZW5ndGg7aWYodDwyKXJldHVybiBudWxsO2NvbnN0IG49KHQtMSkvMixhPWUucmVkdWNlKChlLHQpPT5lK251bSh0LmNsb3NlKSwwKS90O2xldCBvPTAscj0wO3JldHVybiBlLmZvckVhY2goKGUsdCk9PntvKz0odC1uKSoobnVtKGUuY2xvc2UpLWEpLHIrPSh0LW4pKioyfSkscj9vL3I6bnVsbH1mdW5jdGlvbiBjdXJyZW50TWludXRlUm93cygpe2NvbnN0IGU9TnVtYmVyKCQoIm5vIikudmFsdWV8fHN0YXRlLm5vfHwwKTtyZXR1cm4gc3RhdGUuY2hhcnRSb3dzLmZpbHRlcih0PT4hdC5tYXhOb3x8dC5tYXhObzw9ZSkuc29ydCgoZSx0KT0+ZS5zdGFtcC10LnN0YW1wKX1mdW5jdGlvbiBhZ2dyZWdhdGVCYXJzKGUsdCl7Y29uc3Qgbj1uZXcgTWFwO3JldHVybiBlLmZvckVhY2goZT0+e2NvbnN0IGE9TWF0aC5mbG9vcihudW0oZS5zdGFtcCkvKDZlNCp0KSk7aWYoIW4uaGFzKGEpKXJldHVybiB2b2lkIG4uc2V0KGEse3N0YW1wOmEqdCo2ZTQsb3BlbjpudW0oZS5vcGVuKSxoaWdoOm51bShlLmhpZ2gpLGxvdzpudW0oZS5sb3cpLGNsb3NlOm51bShlLmNsb3NlKX0pO2NvbnN0IG89bi5nZXQoYSk7by5oaWdoPU1hdGgubWF4KG8uaGlnaCxudW0oZS5oaWdoKSksby5sb3c9TWF0aC5taW4oby5sb3csbnVtKGUubG93KSksby5jbG9zZT1udW0oZS5jbG9zZSl9KSxbLi4ubi52YWx1ZXMoKV0uc29ydCgoZSx0KT0+ZS5zdGFtcC10LnN0YW1wKX1mdW5jdGlvbiBkYWlseVJvd3MoKXtyZXR1cm4oc3RhdGUuY29uZGl0aW9uRGF0YS5kYWlseXx8W10pLm1hcChlPT4oey4uLmUsb3BlbjpudW0oZS5vcGVuKSxoaWdoOm51bShlLmhpZ2gpLGxvdzpudW0oZS5sb3cpLGNsb3NlOm51bShlLmNsb3NlKSx2b2x1bWU6bnVtKGUudm9sdW1lKX0pKS5maWx0ZXIoZT0+ZS5jbG9zZSl9ZnVuY3Rpb24gZXZhbHVhdGVLaXdvb21Gb3JtdWxhKCl7Y29uc3QgZT1zdGF0ZS5pbmZvfHx7fSx0PWN1cnJlbnRNaW51dGVSb3dzKCksbj1kYWlseVJvd3MoKSxhPXRbdC5sZW5ndGgtMV18fHt9LG89dFswXXx8e30scj1udW0oc3RhdGUubGFzdFRyYWRlLnByaWNlKXx8bnVtKGEuY2xvc2UpfHxudW0oZS5jbG9zZSkscz1wY3RDaGFuZ2UoZS5wcmV2X2Nsb3NlLHIpPj0zLGk9bnVtKGUudm9sdW1lKT49MWU3JiZudW0oZS52b2x1bWUpPD05OTk5OTk5OTksbD1wY3RDaGFuZ2Uoby5vcGVuLHIpPj0zLGM9dC5zbGljZSgtMjApLm1hcChlPT5udW0oZS5jbG9zZSkpLHU9MjA9PT1jLmxlbmd0aD9jLnJlZHVjZSgoZSx0KT0+ZSt0LDApLzIwOm51bGwsZD1udWxsPT09dT9udWxsOnUrMipzdGRkZXYoYyksbT1kP3BjdENoYW5nZShkLHIpOm51bGwscD1udWxsIT09bSYmbT49LjMsaD1tb3ZpbmdBdmVyYWdlKG4sNSksJD1tb3ZpbmdBdmVyYWdlKG4sMjApLGY9bW92aW5nQXZlcmFnZShuLDYwKSx2PW51bGwhPT1oJiYkPyhoLSQpLyQqMTAwOm51bGwsZz1udWxsIT09JCYmZj8oJC1mKS9mKjEwMDpudWxsLHk9bnVsbCE9PXYmJm51bGwhPT1nJiZ2PjAmJmc+MCYmZzw9MjUsYj1uLnNsaWNlKC0yNiksQz0yNj09PWIubGVuZ3RoPyhNYXRoLm1heCguLi5iLm1hcChlPT5lLmhpZ2gpKStNYXRoLm1pbiguLi5iLm1hcChlPT5lLmxvdykpKS8yOm51bGwseD1udWxsIT09QyYmcj5DLGs9Qz9wY3RDaGFuZ2UoQyxyKTpudWxsLFQ9bnVsbCE9PWsmJms8MTQsdz1udW0oZS5wcmV2X2Nsb3NlKT49M2UzJiZudW0oZS5wcmV2X2Nsb3NlKTw9OTk5OTk5OTksTT1wY3RDaGFuZ2UoZS5wcmV2X29wZW4sbnVtKGUub3BlbikpPj0tNC41LFM9cGN0Q2hhbmdlKGUucHJldl9sb3csZS5wcmV2X2hpZ2gpPD0xMCxfPXBjdENoYW5nZShlLnByZXZfaGlnaCxlLnByZXZfY2xvc2UpPj0tOCxFPXBjdENoYW5nZShlLnByZXZfaGlnaCxlLnByZXZfY2xvc2UpPD0tOCxOPW1vdmluZ0F2ZXJhZ2UodCw1KSxMPW1vdmluZ0F2ZXJhZ2UodCwyMCkscT1tb3ZpbmdBdmVyYWdlKHQsNjApLFA9bnVsbCE9PU4mJkw/KE4tTCkvTCoxMDA6bnVsbCxBPW51bGwhPT1MJiZxPyhMLXEpL3EqMTAwOm51bGwsUj1udWxsIT09UCYmbnVsbCE9PUEmJlA+PS40JiZBPjAsTz1hZ2dyZWdhdGVCYXJzKHQsMyksQj1tb3ZpbmdBdmVyYWdlKE8sMSksST1tb3ZpbmdBdmVyYWdlKE8sMzApLFY9bW92aW5nQXZlcmFnZShPLDM3KSxVPW1vdmluZ0F2ZXJhZ2UoTyw2MCksRj1udWxsIT09QiYmbnVsbCE9PUkmJm51bGwhPT1WJiZudWxsIT09VSYmQj5JJiZJPlYmJlY+VSxLPXtBOnMsQjppLEQ6bCxFOnAsRjp5LEc6eCxIOncsSTpNLEo6UyxLOl8sTDpSLE06RSxOOkYsTzpUfSxEPXMmJmkmJmwmJnAmJnkmJngmJncmJlQmJihNfHxTKSYmKF8mJlJ8fEUmJkYpLGo9WyJBIiwiQiIsIkQiLCJFIiwiRiIsIkciLCJIIiwiTyIsIkkiLCJKIiwiSyIsIkwiLCJNIiwiTiJdLEg9ai5maWx0ZXIoZT0+S1tlXSkuam9pbigiLCIpLHo9ai5maWx0ZXIoZT0+IUtbZV0pLmpvaW4oIiwiKSxKPWDsnbzrtIkgJHtuLmxlbmd0aH3qsJwgwrcg6rGw656Y65+J7Iic7JyEICR7c3RhdGUuY29uZGl0aW9uRGF0YS5jYXRhbG9nPy5xdWFudGl0eV9yYW5rfHwiLSJ9YDtyZXR1cm57cGFzczpELGNoZWNrczpLLHVuc3VwcG9ydGVkOltdLG1lc3NhZ2U6YOyhsOqxtCAke0Q/Iu2GteqzvCI6IuuMgOq4sCJ9IMK3IO2GteqzvCAke0h8fCItIn0gwrcg66+47Ya16rO8ICR7enx8Ii0ifSDCtyAke0p9YH19ZnVuY3Rpb24gc2VsZWN0ZWRCdXlDb25kaXRpb24oKXtyZXR1cm4gJCgiYnV5Q29uZGl0aW9uIikudmFsdWV9ZnVuY3Rpb24gZXZhbHVhdGVPcmRlckNvbmRpdGlvbihlKXtyZXR1cm4gZS5jb25kaXRpb24/Imtpd29vbUZvcm11bGEiPT09ZS5jb25kaXRpb24/ZXZhbHVhdGVLaXdvb21Gb3JtdWxhKCk6e3Bhc3M6ITEsbWVzc2FnZToi7JWMIOyImCDsl4bripQg7KGw6rG0In06e3Bhc3M6ITAsbWVzc2FnZToi7KGw6rG0IOyXhuydjCJ9fWZ1bmN0aW9uIHVwZGF0ZUNvbmRpdGlvblN0YXR1cygpe3NlbGVjdGVkQnV5Q29uZGl0aW9uKCk/JCgiY29uZGl0aW9uU3RhdHVzIikudGV4dENvbnRlbnQ9ZXZhbHVhdGVLaXdvb21Gb3JtdWxhKCkubWVzc2FnZTokKCJjb25kaXRpb25TdGF0dXMiKS50ZXh0Q29udGVudD0i7KGw6rG0IOyXhuydjCJ9ZnVuY3Rpb24gc3BlZWRUZXh0KCl7cmV0dXJuYHgke051bWJlci5pc0ludGVnZXIoc3RhdGUuc3BlZWQpP3N0YXRlLnNwZWVkLnRvRml4ZWQoMSk6c3RhdGUuc3BlZWR9YH1mdW5jdGlvbiB1cGRhdGVTcGVlZFVpKCl7JCgic3BlZWRMYWJlbCIpLnRleHRDb250ZW50PXNwZWVkVGV4dCgpLCQoInNwZWVkQ2hpcCIpLnRleHRDb250ZW50PXNwZWVkVGV4dCgpfWZ1bmN0aW9uIHN0b3BQbGF5YmFjaygpe3N0YXRlLnRpbWVyJiYoY2xlYXJJbnRlcnZhbChzdGF0ZS50aW1lciksc3RhdGUudGltZXI9bnVsbCksJCgicGxheSIpLnRleHRDb250ZW50PSLsnqzsg50iLCQoInBsYXkiKS50aXRsZT0i7J6s7IOdIn1mdW5jdGlvbiBwbGF5SW50ZXJ2YWxNcygpe3JldHVybiBNYXRoLm1heCg4MCxNYXRoLnJvdW5kKDEyMDAvc3RhdGUuc3BlZWQpKX1mdW5jdGlvbiBzdGFydFBsYXliYWNrKCl7c3RvcFBsYXliYWNrKCksJCgicGxheSIpLnRleHRDb250ZW50PSLsoJXsp4AiLCQoInBsYXkiKS50aXRsZT0i7J287Iuc7KCV7KeAIixzdGF0ZS50aW1lcj1zZXRJbnRlcnZhbCgoKT0+e3N0YXRlLnBsYXlCdXN5fHwoc3RhdGUucGxheUJ1c3k9ITAsbG9hZCgxZTMsITEsITApLnRoZW4oZT0+e2V8fCgkKCJzdGF0dXMiKS50ZXh0Q29udGVudD0i66eI7KeA66eJIOydtOuypO2KuOyeheuLiOuLpCIsc3RvcFBsYXliYWNrKCkpfSkuY2F0Y2goZT0+eyQoInN0YXR1cyIpLnRleHRDb250ZW50PWUubWVzc2FnZSxzdG9wUGxheWJhY2soKX0pLmZpbmFsbHkoKCk9PntzdGF0ZS5wbGF5QnVzeT0hMX0pKX0scGxheUludGVydmFsTXMoKSl9ZnVuY3Rpb24gY3ljbGVTcGVlZCgpe2NvbnN0IGU9Wy4yNSwuNSwxLDIsNCw4XSx0PWUuaW5kZXhPZihzdGF0ZS5zcGVlZCk7c3RhdGUuc3BlZWQ9ZVsodCsxKSVlLmxlbmd0aF0sdXBkYXRlU3BlZWRVaSgpLCQoInN0YXR1cyIpLnRleHRDb250ZW50PWDrsLDsho0gJHtzcGVlZFRleHQoKX1gLHN0YXRlLnRpbWVyJiZzdGFydFBsYXliYWNrKCl9ZnVuY3Rpb24gc2VsZWN0T3JkZXJQcmljZShlKXtjb25zdCB0PW51bShlKTt0JiYoJCgicHJpY2VJbnB1dCIpLnZhbHVlPWZtdCh0KSxzdGF0ZS5vcmRlclByaWNlTG9ja2VkPSEwLCQoInN0YXR1cyIpLnRleHRDb250ZW50PWDsp4DsoJXqsIAgJHtmbXQodCl9IOyEoO2DnWApfWZ1bmN0aW9uIHVwZGF0ZVBvcnRmb2xpbygpeyQoImFzc2V0IikudGV4dENvbnRlbnQ9Zm10KE1hdGgucm91bmQoc3RhdGUucG9zaXRpb24uY2FzaCkpO2NvbnN0IGU9Y3VycmVudFByaWNlKCksdD1zdGF0ZS5wb3NpdGlvbi5hdmcqc3RhdGUucG9zaXRpb24ucXR5LG49c3RhdGUucG9zaXRpb24ucXR5KmUsYT1zdGF0ZS5wb3NpdGlvbi5jYXNoK24sbz1zdGF0ZS5wb3NpdGlvbi5xdHk/KGUtc3RhdGUucG9zaXRpb24uYXZnKSpzdGF0ZS5wb3NpdGlvbi5xdHk6MDskKCJiYXNlQXNzZXQiKS50ZXh0Q29udGVudD1mbXQoTWF0aC5yb3VuZCh0KSksJCgiZXZhbEFzc2V0IikudGV4dENvbnRlbnQ9Zm10KE1hdGgucm91bmQoYSkpLCQoImZlZVN1bSIpLnRleHRDb250ZW50PWZtdChNYXRoLnJvdW5kKHN0YXRlLnBvc2l0aW9uLmZlZSkpLCQoInJlYWxpemVkUHJvZml0IikudGV4dENvbnRlbnQ9Zm10KE1hdGgucm91bmQoc3RhdGUucG9zaXRpb24ucmVhbGl6ZWQpKSwkKCJ1bnJlYWxpemVkUHJvZml0IikudGV4dENvbnRlbnQ9Zm10KE1hdGgucm91bmQobykpLCQoInByb2ZpdFJhdGUiKS50ZXh0Q29udGVudD1gJHsoKGEtMmU3KS8yZTcqMTAwKS50b0ZpeGVkKDIpfSVgLCQoImhvbGRpbmciKS50ZXh0Q29udGVudD1g67O07JygICR7Zm10KHN0YXRlLnBvc2l0aW9uLnF0eSl9YCxyZW5kZXJPcmRlcnMoKX1mdW5jdGlvbiBvcmRlclByaWNlKCl7cmV0dXJuIG51bSgkKCJwcmljZUlucHV0IikudmFsdWUpfHxjdXJyZW50UHJpY2UoKX1mdW5jdGlvbiBhcHBseVNpemVQZXJjZW50KGUpe2NvbnN0IHQ9b3JkZXJQcmljZSgpO2lmKCF0KXJldHVybiB2b2lkKCQoInN0YXR1cyIpLnRleHRDb250ZW50PSLsiJjrn4kg6rOE7IKw7ZWgIOqwgOqyqeydtCDsl4bsirXri4jri6QiKTtjb25zdCBuPXN0YXRlLnBvc2l0aW9uLmNhc2gqKGUvMTAwKSxhPU1hdGguZmxvb3Iobi8oMS4wMDIxKnQpKTskKCJxdHlJbnB1dCIpLnZhbHVlPVN0cmluZyhNYXRoLm1heCgwLGEpKSwkKCJzdGF0dXMiKS50ZXh0Q29udGVudD1gJHtlfSUg7IiY65+JICR7Zm10KGEpfeyjvCBAICR7Zm10KHQpfWB9ZnVuY3Rpb24gcmVuZGVyT3JkZXJzKCl7JCgib3JkZXJzVGl0bGUiKS50ZXh0Q29udGVudD1g64yA6riwIOyjvOusuCAke3N0YXRlLnBlbmRpbmdPcmRlcnMubGVuZ3RofeqxtGA7Y29uc3QgZT0kKCJvcmRlcnNMaXN0Iik7ZS5pbm5lckhUTUw9IiIsc3RhdGUucGVuZGluZ09yZGVycy5sZW5ndGg/c3RhdGUucGVuZGluZ09yZGVycy5mb3JFYWNoKHQ9Pntjb25zdCBuPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpO24uY2xhc3NOYW1lPSJvcmRlci1yb3cgIisoImJ1eSI9PT10LnNpZGU/ImJ1eS1vcmRlciI6InNlbGwtb3JkZXIiKSxuLmlubmVySFRNTD1gXG4gICAgICAgICAgPGRpdj4keyJidXkiPT09dC5zaWRlPyLrp6TsiJgiOiLrp6Trj4QifTwvZGl2PlxuICAgICAgICAgIDxkaXY+JHtmbXQodC5xdHkpfeyjvCR7dC5jb25kaXRpb24/IiDsobDqsbQiOiIifTwvZGl2PlxuICAgICAgICAgIDxkaXY+JHtmbXQodC5wcmljZSl9PC9kaXY+XG4gICAgICAgICAgPGRpdj4keyJidXkiPT09dC5zaWRlPyLsnbTtlZgiOiLsnbTsg4EifTwvZGl2PlxuICAgICAgICAgIDxidXR0b24gdHlwZT0iYnV0dG9uIiBkYXRhLWNhbmNlbC1vcmRlcj0iJHt0LmlkfSIgdGl0bGU9IuyjvOusuCDst6jshowiPsOXPC9idXR0b24+XG4gICAgICAgIGAsZS5hcHBlbmQobil9KTplLmlubmVySFRNTD0nPGRpdiBjbGFzcz0ib3JkZXJzLWVtcHR5Ij7rjIDquLAg7KO866y4IOyXhuydjDwvZGl2Pid9ZnVuY3Rpb24gcGVuZGluZ0J1eUNvbW1pdCgpe3JldHVybiBzdGF0ZS5wZW5kaW5nT3JkZXJzLmZpbHRlcihlPT4iYnV5Ij09PWUuc2lkZSkucmVkdWNlKChlLHQpPT5lK3QucHJpY2UqdC5xdHkqMS4wMDIxLDApfWZ1bmN0aW9uIHBlbmRpbmdTZWxsUXR5KCl7cmV0dXJuIHN0YXRlLnBlbmRpbmdPcmRlcnMuZmlsdGVyKGU9PiJzZWxsIj09PWUuc2lkZSkucmVkdWNlKChlLHQpPT5lK3QucXR5LDApfWZ1bmN0aW9uIGV4ZWN1dGVPcmRlcihlLHQsbil7Y29uc3QgYT1uKnQsbz0uMDAyMSphO2lmKCJidXkiPT09ZSl7aWYoc3RhdGUucG9zaXRpb24uY2FzaDxhK28pcmV0dXJuITE7Y29uc3QgZT1zdGF0ZS5wb3NpdGlvbi5hdmcqc3RhdGUucG9zaXRpb24ucXR5O3N0YXRlLnBvc2l0aW9uLmNhc2gtPWErbyxzdGF0ZS5wb3NpdGlvbi5xdHkrPXQsc3RhdGUucG9zaXRpb24uYXZnPShlK2EpL3N0YXRlLnBvc2l0aW9uLnF0eSxzdGF0ZS5wb3NpdGlvbi5mZWUrPW99ZWxzZXtpZihzdGF0ZS5wb3NpdGlvbi5xdHk8dClyZXR1cm4hMTtzdGF0ZS5wb3NpdGlvbi5jYXNoKz1hLW8sc3RhdGUucG9zaXRpb24ucXR5LT10LHN0YXRlLnBvc2l0aW9uLnJlYWxpemVkKz0obi1zdGF0ZS5wb3NpdGlvbi5hdmcpKnQtbyxzdGF0ZS5wb3NpdGlvbi5mZWUrPW8sMD09PXN0YXRlLnBvc2l0aW9uLnF0eSYmKHN0YXRlLnBvc2l0aW9uLmF2Zz0wKX1yZXR1cm4hMH1mdW5jdGlvbiBhZGRQZW5kaW5nT3JkZXIoZSx0LG4pe2lmKCJidXkiPT09ZSl7Y29uc3QgZT1uKnQqMS4wMDIxO2lmKHN0YXRlLnBvc2l0aW9uLmNhc2gtcGVuZGluZ0J1eUNvbW1pdCgpPGUpcmV0dXJuIHZvaWQoJCgic3RhdHVzIikudGV4dENvbnRlbnQ9IuuMgOq4sCDso7zrrLgg7Y+s7ZWoIO2YhOq4iOydtCDrtoDsobHtlanri4jri6QiKX1lbHNlIGlmKHN0YXRlLnBvc2l0aW9uLnF0eS1wZW5kaW5nU2VsbFF0eSgpPHQpcmV0dXJuIHZvaWQoJCgic3RhdHVzIikudGV4dENvbnRlbnQ9IuuMgOq4sCDso7zrrLgg7Y+s7ZWoIOuztOycoCDsiJjrn4nsnbQg67aA7KGx7ZWp64uI64ukIik7Y29uc3QgYT0iYnV5Ij09PWU/c2VsZWN0ZWRCdXlDb25kaXRpb24oKToiIjtzdGF0ZS5wZW5kaW5nT3JkZXJzLnB1c2goe2lkOnN0YXRlLm5leHRPcmRlcklkKyssc2lkZTplLHF0eTp0LHByaWNlOm4sY29uZGl0aW9uOmEsY3JlYXRlZE5vOk51bWJlcigkKCJubyIpLnZhbHVlfHxzdGF0ZS5ub3x8MCl9KSwkKCJzdGF0dXMiKS50ZXh0Q29udGVudD1gJHsiYnV5Ij09PWU/IuunpOyImCI6IuunpOuPhCJ9IOuMgOq4sCAke2ZtdCh0KX3so7wgQCAke2ZtdChuKX0ke2E/IiDCtyDsobDqsbTsi50iOiIifWAscmVuZGVyT3JkZXJzKCl9ZnVuY3Rpb24gcHJvY2Vzc1BlbmRpbmdPcmRlcnMoZSl7Y29uc3QgdD1bXSxuPWUuZmlsdGVyKGU9PiIxIj09PWUuZXZlbnRfdHlwZSYmbnVtKGUucHJpY2UpKS5tYXAoZT0+KHtwcmljZTpudW0oZS5wcmljZSksbm86TnVtYmVyKGUubm98fDApLHRpbWU6ZS50aW1lfHwiIn0pKTtpZighbi5sZW5ndGh8fCFzdGF0ZS5wZW5kaW5nT3JkZXJzLmxlbmd0aClyZXR1cm4gdDtmb3IoY29uc3QgZSBvZiBuKXtjb25zdCBuPVtdO2Zvcihjb25zdCBhIG9mIHN0YXRlLnBlbmRpbmdPcmRlcnMpe2lmKGUubm8mJmEuY3JlYXRlZE5vJiZlLm5vPD1hLmNyZWF0ZWRObyl7bi5wdXNoKGEpO2NvbnRpbnVlfWNvbnN0IG89ImJ1eSI9PT1hLnNpZGU/ZS5wcmljZTw9YS5wcmljZTplLnByaWNlPj1hLnByaWNlLHI9bz9ldmFsdWF0ZU9yZGVyQ29uZGl0aW9uKGEpOntwYXNzOiExfTtvJiZyLnBhc3MmJmV4ZWN1dGVPcmRlcihhLnNpZGUsYS5xdHksZS5wcmljZSk/dC5wdXNoKGAkeyJidXkiPT09YS5zaWRlPyLrp6TsiJgiOiLrp6Trj4QifSDssrTqsrAgJHtmbXQoYS5xdHkpfeyjvCBAICR7Zm10KGUucHJpY2UpfSAo7KO866y4ICR7Zm10KGEucHJpY2UpfSlgKTpuLnB1c2goYSl9aWYoc3RhdGUucGVuZGluZ09yZGVycz1uLCFzdGF0ZS5wZW5kaW5nT3JkZXJzLmxlbmd0aClicmVha31yZXR1cm4gdH1mdW5jdGlvbiBvcmRlcihlKXtjb25zdCB0PU1hdGgubWF4KDEsTWF0aC5mbG9vcihudW0oJCgicXR5SW5wdXQiKS52YWx1ZSl8fDEpKSxuPW51bSgkKCJwcmljZUlucHV0IikudmFsdWUpLGE9b3JkZXJQcmljZSgpO2lmKGEpcmV0dXJuImJ1eSI9PT1lJiZzZWxlY3RlZEJ1eUNvbmRpdGlvbigpfHxuJiZzdGF0ZS5vcmRlclByaWNlTG9ja2VkPyhhZGRQZW5kaW5nT3JkZXIoZSx0LGEpLHZvaWQgdXBkYXRlUG9ydGZvbGlvKCkpOnZvaWQoZXhlY3V0ZU9yZGVyKGUsdCxhKT8oJCgic3RhdHVzIikudGV4dENvbnRlbnQ9YCR7ImJ1eSI9PT1lPyLrp6TsiJgiOiLrp6Trj4QifSDssrTqsrAgJHtmbXQodCl97KO8IEAgJHtmbXQoYSl9YCx1cGRhdGVQb3J0Zm9saW8oKSk6JCgic3RhdHVzIikudGV4dENvbnRlbnQ9ImJ1eSI9PT1lPyLtmITquIjsnbQg67aA7KGx7ZWp64uI64ukIjoi67O07JygIOyImOufieydtCDrtoDsobHtlanri4jri6QiKTskKCJzdGF0dXMiKS50ZXh0Q29udGVudD0i6rCA6rKp7J20IOyXhuyWtCDso7zrrLjsnYQg7LKY66as7ZWgIOyImCDsl4bsirXri4jri6QifWZ1bmN0aW9uIHJlc29sdmVDb2RlKCl7Y29uc3QgZT0kKCJjb2RlIikudmFsdWUudHJpbSgpO2lmKCFlKXJldHVybiI0NTEwNjAiO2lmKHN0YXRlLnN5bWJvbE1hcC5oYXMoZSkpcmV0dXJuIHN0YXRlLnN5bWJvbE1hcC5nZXQoZSk7Y29uc3QgdD1lLnRvTG93ZXJDYXNlKCksbj1zdGF0ZS5zeW1ib2xzLmZpbmQobj0+bi5jb2RlPT09ZXx8bi5jb2RlTmFtZS50b0xvd2VyQ2FzZSgpPT09dCk7aWYobilyZXR1cm4gbi5jb2RlO2NvbnN0IGE9c3RhdGUuc3ltYm9scy5maW5kKGU9PmUuY29kZU5hbWUudG9Mb3dlckNhc2UoKS5pbmNsdWRlcyh0KXx8ZS5uYW1lLnRvTG93ZXJDYXNlKCkuaW5jbHVkZXModCkpO3JldHVybiBhPygkKCJjb2RlIikudmFsdWU9YS5jb2RlTmFtZSxhLmNvZGUpOmUuc3BsaXQoIiAiKVswXX1hc3luYyBmdW5jdGlvbiBsb2FkUmVwbGF5RGF0ZXMoKXtjb25zdCBlPWF3YWl0IGZldGNoKCIvYXBpL2RhdGVzIiksdD1hd2FpdCBlLmpzb24oKTtpZighZS5va3x8IUFycmF5LmlzQXJyYXkodCl8fCF0Lmxlbmd0aCl0aHJvdyBuZXcgRXJyb3IoIlQg65Oc65287J2067iMIOumrO2UjOugiOydtCDrgqDsp5zqsIAg7JeG7Iq164uI64ukIik7Y29uc3Qgbj0kKCJkYXRlIikudmFsdWUucmVwbGFjZUFsbCgiLSIsIiIpOyQoImRhdGUiKS5taW49ZGF0ZUlucHV0VmFsdWUodFswXSksJCgiZGF0ZSIpLm1heD1kYXRlSW5wdXRWYWx1ZSh0W3QubGVuZ3RoLTFdKSx0LmluY2x1ZGVzKG4pfHwoJCgiZGF0ZSIpLnZhbHVlPWRhdGVJbnB1dFZhbHVlKHRbdC5sZW5ndGgtMV0pKSwkKCJzdGF0dXMiKS50ZXh0Q29udGVudD1gVCDrk5zrnbzsnbTruIwg64Kg7KecICR7dC5sZW5ndGgudG9Mb2NhbGVTdHJpbmcoImtvLUtSIil96rCcYH1hc3luYyBmdW5jdGlvbiBsb2FkU3ltYm9scygpe2NvbnN0IGU9JCgiZGF0ZSIpLnZhbHVlLnJlcGxhY2VBbGwoIi0iLCIiKSx0PWF3YWl0IGZldGNoKGAvcGxheWVyL25hbWUucGhwP2RhdGU9JHtlbmNvZGVVUklDb21wb25lbnQoZSl9YCk7aWYoIXQub2spdGhyb3cgbmV3IEVycm9yKCLsooXrqqkg66qp66Gd7J2EIOu2iOufrOyYpOyngCDrqrvtlojsirXri4jri6QiKTtjb25zdCBuPWF3YWl0IHQudGV4dCgpLGE9JCgic3ltYm9sTGlzdCIpO2EuaW5uZXJIVE1MPSIiLHN0YXRlLnN5bWJvbHM9W10sc3RhdGUuc3ltYm9sTWFwPW5ldyBNYXAsbi50cmltKCkuc3BsaXQoL1xuKy8pLmZvckVhY2goZT0+e2NvbnN0IHQ9ZS5zcGxpdCgiXHQiKVswXXx8IiI7aWYoIXQpcmV0dXJuO2NvbnN0IG49dC5zcGxpdCgiICIpLG89bi5zaGlmdCgpfHwiIixyPW4uam9pbigiICIpO3N0YXRlLnN5bWJvbHMucHVzaCh7Y29kZTpvLG5hbWU6cixjb2RlTmFtZTp0fSksc3RhdGUuc3ltYm9sTWFwLnNldCh0LG8pLHN0YXRlLnN5bWJvbE1hcC5zZXQobyxvKTtjb25zdCBzPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoIm9wdGlvbiIpO3MudmFsdWU9dCxhLmFwcGVuZChzKX0pLHN0YXRlLnN5bWJvbHMubGVuZ3RoJiYhc3RhdGUuc3ltYm9sTWFwLmhhcygkKCJjb2RlIikudmFsdWUudHJpbSgpKSYmKCQoImNvZGUiKS52YWx1ZT1zdGF0ZS5zeW1ib2xzWzBdLmNvZGVOYW1lKSwkKCJzdGF0dXMiKS50ZXh0Q29udGVudD1gJHtlfSDsooXrqqkgJHtzdGF0ZS5zeW1ib2xzLmxlbmd0aC50b0xvY2FsZVN0cmluZygia28tS1IiKX3qsJxgfWZ1bmN0aW9uIHBhcnNlQ2hhcnQoZSl7cmV0dXJuIGUudHJpbSgpLnNwbGl0KC9cbisvKS5tYXAoZT0+e2NvbnN0IHQ9ZS5zcGxpdCgiXHQiKTtyZXR1cm57c3RhbXA6TnVtYmVyKHRbMF0pLGxhYmVsOnRbMV18fCIiLG9wZW46TnVtYmVyKHRbMl0pLGNsb3NlOk51bWJlcih0WzNdKSxoaWdoOk51bWJlcih0WzRdKSxsb3c6TnVtYmVyKHRbNV0pLGJ1eVZvbHVtZTpOdW1iZXIodFs2XSksc2VsbFZvbHVtZTpOdW1iZXIodFs3XSksbmV1dHJhbFZvbHVtZTpOdW1iZXIodFs4XSksbWF4Tm86TnVtYmVyKHRbOV0pLG1pbk5vOk51bWJlcih0WzEwXSl9fSkuZmlsdGVyKGU9Pk51bWJlci5pc0Zpbml0ZShlLm9wZW4pJiZOdW1iZXIuaXNGaW5pdGUoZS5jbG9zZSkpLnNvcnQoKGUsdCk9PmUuc3RhbXAtdC5zdGFtcCl9ZnVuY3Rpb24gZXZlbnRUaW1lVG9DaGFydFN0YW1wKGUpe2NvbnN0IHQ9U3RyaW5nKGU/PyIiKS5yZXBsYWNlKC9cRC9nLCIiKS5wYWRTdGFydCg5LCIwIik7aWYoIXQudHJpbSgpKXJldHVybiAwO3JldHVybiAxZTMqKDYwKig2MCpOdW1iZXIodC5zbGljZSgwLDIpKStOdW1iZXIodC5zbGljZSgyLDQpKSkrTnVtYmVyKHQuc2xpY2UoNCw2KSkpK051bWJlcih0LnNsaWNlKDYsOSkpfWZ1bmN0aW9uIGNoYXJ0Um93c0F0Q3VycmVudFRpbWUoKXtjb25zdCBlPWV2ZW50VGltZVRvQ2hhcnRTdGFtcChzdGF0ZS5jdXJyZW50RXZlbnRUaW1lKTtyZXR1cm4gZT9zdGF0ZS5jaGFydFJvd3MuZmlsdGVyKHQ9PnQuc3RhbXA8PWUpOnN0YXRlLmNoYXJ0Um93c31mdW5jdGlvbiBkcmF3Q2hhcnQoZSl7Y29uc3QgdD0kKCJjaGFydENhbnZhcyIpLG49JCgiY2hhcnRFbXB0eSIpLGE9dC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKSxvPXdpbmRvdy5kZXZpY2VQaXhlbFJhdGlvfHwxO3Qud2lkdGg9TWF0aC5tYXgoMSxNYXRoLmZsb29yKGEud2lkdGgqbykpLHQuaGVpZ2h0PU1hdGgubWF4KDEsTWF0aC5mbG9vcihhLmhlaWdodCpvKSk7Y29uc3Qgcj10LmdldENvbnRleHQoIjJkIik7ci5zZXRUcmFuc2Zvcm0obywwLDAsbywwLDApO2NvbnN0IHM9YS53aWR0aCxpPWEuaGVpZ2h0O2lmKHIuY2xlYXJSZWN0KDAsMCxzLGkpLCFlLmxlbmd0aClyZXR1cm4gdm9pZChuLnN0eWxlLmRpc3BsYXk9ImdyaWQiKTtuLnN0eWxlLmRpc3BsYXk9Im5vbmUiO2NvbnN0IGw9NDIsYz04LHU9MTAsZD0zMCxtPWktZC00MixwPXMtbC1jLGg9TWF0aC5taW4oLi4uZS5tYXAoZT0+ZS5sb3cpKSxmPU1hdGgubWF4KC4uLmUubWFwKGU9PmUuaGlnaCkpLHY9TWF0aC5tYXgoMSxmLWgpLGc9TWF0aC5tYXgoMSwuLi5lLm1hcChlPT5lLmJ1eVZvbHVtZStlLnNlbGxWb2x1bWUrZS5uZXV0cmFsVm9sdW1lKSkseT1wL01hdGgubWF4KDEsZS5sZW5ndGgpLGI9TWF0aC5tYXgoMixNYXRoLm1pbigxMCwuNjIqeSkpLEM9ZT0+dSsoZi1lKS92KihtLXUpLHg9ZT0+aS1kLWUvZyozNztyLnN0cm9rZVN0eWxlPSIjZWRmMGYyIixyLmxpbmVXaWR0aD0xLHIuZmlsbFN0eWxlPSIjNjY3IixyLmZvbnQ9IjExcHggQXJpYWwiO2ZvcihsZXQgZT0wO2U8PTQ7ZSsrKXtjb25zdCB0PXUrKG0tdSkqZS80LG49Zi12KmUvNDtyLmJlZ2luUGF0aCgpLHIubW92ZVRvKGwsdCksci5saW5lVG8ocy1jLHQpLHIuc3Ryb2tlKCksci5maWxsVGV4dChNYXRoLnJvdW5kKG4pLnRvTG9jYWxlU3RyaW5nKCJrby1LUiIpLDMsdCs0KX1yLmJlZ2luUGF0aCgpLHIubW92ZVRvKGwsbSksci5saW5lVG8ocy1jLG0pLHIuc3Ryb2tlU3R5bGU9IiNkN2RkZTEiLHIuc3Ryb2tlKCksZS5mb3JFYWNoKChlLHQpPT57Y29uc3Qgbj1sK3QqeSt5LzIsYT1lLmNsb3NlPj1lLm9wZW4sbz1hPyIjZDk1MzRmIjoiIzI4N2JiZSIscz1DKE1hdGgubWF4KGUub3BlbixlLmNsb3NlKSksYz1DKE1hdGgubWluKGUub3BlbixlLmNsb3NlKSk7ci5zdHJva2VTdHlsZT1vLHIuZmlsbFN0eWxlPW8sci5iZWdpblBhdGgoKSxyLm1vdmVUbyhuLEMoZS5oaWdoKSksci5saW5lVG8obixDKGUubG93KSksci5zdHJva2UoKSxyLmZpbGxSZWN0KG4tYi8yLHMsYixNYXRoLm1heCgxLGMtcykpO2NvbnN0IHU9ZS5idXlWb2x1bWUrZS5zZWxsVm9sdW1lK2UubmV1dHJhbFZvbHVtZTtyLmZpbGxTdHlsZT1hPyJyZ2JhKDIxNyw4Myw3OSwuMzUpIjoicmdiYSg0MCwxMjMsMTkwLC4zNSkiLHIuZmlsbFJlY3Qobi1iLzIseCh1KSxiLGktZC14KHUpKX0pLHIuZmlsbFN0eWxlPSIjNzc3Ijtjb25zdCBrPWVbMF0sVD1lW2UubGVuZ3RoLTFdO3IuZmlsbFRleHQoay5sYWJlbCxsLGktOSk7Y29uc3Qgdz1yLm1lYXN1cmVUZXh0KFQubGFiZWwpLndpZHRoO3IuZmlsbFRleHQoVC5sYWJlbCxzLWMtdyxpLTkpfWFzeW5jIGZ1bmN0aW9uIGxvYWRDaGFydChlLHQpe2NvbnN0IG49JCgidGltZSIpLnZhbHVlfHwiOTAwMDAwMDAiLGE9JCgiY2hhcnRHYXAiKS52YWx1ZSxvPWF3YWl0IGZldGNoKGAvcGxheWVyL2NoYXJ0LnBocD9kYXRlPSR7ZW5jb2RlVVJJQ29tcG9uZW50KGUpfSZjb2RlPSR7ZW5jb2RlVVJJQ29tcG9uZW50KHQpfSZ0aW1lPSR7ZW5jb2RlVVJJQ29tcG9uZW50KG4pfSZib25nPTEmZ2FwPSR7ZW5jb2RlVVJJQ29tcG9uZW50KGEpfWApO2lmKCFvLm9rKXRocm93IG5ldyBFcnJvcigiY2hhcnQgbG9hZCBmYWlsZWQiKTtzdGF0ZS5jaGFydFJvd3M9cGFyc2VDaGFydChhd2FpdCBvLnRleHQoKSksZHJhd0NoYXJ0KGNoYXJ0Um93c0F0Q3VycmVudFRpbWUoKSksdXBkYXRlQ29uZGl0aW9uU3RhdHVzKCl9YXN5bmMgZnVuY3Rpb24gbG9hZENvbmRpdGlvbkRhdGEoZSx0KXtzdGF0ZS5jb25kaXRpb25EYXRhPXtjYXRhbG9nOnt9LGRhaWx5OltdfSx1cGRhdGVDb25kaXRpb25TdGF0dXMoKTtjb25zdCBuPWF3YWl0IGZldGNoKGAvYXBpL2NvbmRpdGlvbi1kYXRhP2RhdGU9JHtlbmNvZGVVUklDb21wb25lbnQoZSl9JmNvZGU9JHtlbmNvZGVVUklDb21wb25lbnQodCl9YCksYT1hd2FpdCBuLmpzb24oKTtpZighbi5va3x8YS5lcnJvcil0aHJvdyBuZXcgRXJyb3IoYS5lcnJvcnx8ImNvbmRpdGlvbiBkYXRhIGxvYWQgZmFpbGVkIik7c3RhdGUuY29uZGl0aW9uRGF0YT1hLHVwZGF0ZUNvbmRpdGlvblN0YXR1cygpfWZ1bmN0aW9uIGRhdGVJbnB1dFZhbHVlKGUpe2NvbnN0IHQ9U3RyaW5nKGV8fCIiKS5yZXBsYWNlQWxsKCItIiwiIik7cmV0dXJuIDg9PT10Lmxlbmd0aD9gJHt0LnNsaWNlKDAsNCl9LSR7dC5zbGljZSg0LDYpfS0ke3Quc2xpY2UoNiw4KX1gOiIifWZ1bmN0aW9uIGFwcGx5SW5pdGlhbFVybFBhcmFtcygpe2NvbnN0IGU9bmV3IFVSTFNlYXJjaFBhcmFtcyh3aW5kb3cubG9jYXRpb24uc2VhcmNoKSx0PWRhdGVJbnB1dFZhbHVlKGUuZ2V0KCJkYXRlIil8fGUuZ2V0KCJkIikpLG49ZS5nZXQoImNvZGUiKXx8ZS5nZXQoImMiKSxhPWUuZ2V0KCJubyIpLG89ZS5nZXQoInRpbWUiKXx8ZS5nZXQoInQiKTt0JiYoJCgiZGF0ZSIpLnZhbHVlPXQpLG4mJigkKCJjb2RlIikudmFsdWU9biksbnVsbCE9PWEmJigkKCJubyIpLnZhbHVlPVN0cmluZyhNYXRoLm1heCgwLE51bWJlcihhKXx8MCkpLHN0YXRlLm5vPU1hdGgubWF4KDAsTnVtYmVyKGEpfHwwKSksbyYmKHN0YXRlLmluaXRpYWxKdW1wVGltZT1vKX1hc3luYyBmdW5jdGlvbiBqdW1wVG9UaW1lKGUsdCxuLGE9ImZvcndhcmQiKXskKCJzdGF0dXMiKS50ZXh0Q29udGVudD1gJHtufSDsi5zsoJDsnLzroZwg7J2064+ZIOykkS4uLmA7Y29uc3Qgbz1hd2FpdCBmZXRjaChgL2FwaS90aW1lLWluZGV4P2RhdGU9JHtlbmNvZGVVUklDb21wb25lbnQoZSl9JmNvZGU9JHtlbmNvZGVVUklDb21wb25lbnQodCl9JnRpbWU9JHtlbmNvZGVVUklDb21wb25lbnQobil9JmRpcmVjdGlvbj0ke2VuY29kZVVSSUNvbXBvbmVudChhKX1gKSxyPWF3YWl0IG8uanNvbigpO2lmKCFvLm9rfHxyLmVycm9yKXRocm93IG5ldyBFcnJvcihyLmVycm9yfHwi7Iuc6rCEIOydtOuPmSDsi6TtjKgiKTtjb25zdCBzPU1hdGgubWF4KDAsTnVtYmVyKHIuZXZlbnRfbm98fDApLTEpO3JldHVybiAkKCJubyIpLnZhbHVlPVN0cmluZyhzKSwkKCJ0aW1lIikudmFsdWU9ci5ldmVudF90aW1lfHxuLHN0YXRlLm5vPXMscn1hc3luYyBmdW5jdGlvbiBsb2FkQXRUaW1lKGUsdD0iZm9yd2FyZCIpe2NvbnN0IG49JCgiZGF0ZSIpLnZhbHVlLnJlcGxhY2VBbGwoIi0iLCIiKSxhPXJlc29sdmVDb2RlKCksbz1hd2FpdCBqdW1wVG9UaW1lKG4sYSxlLHQpLHI9TWF0aC5tYXgoMSxOdW1iZXIoby5ldmVudF9ub3x8MSkpLHM9TWF0aC5tYXgoMCxyLTUwMCk7cmV0dXJuICQoIm5vIikudmFsdWU9U3RyaW5nKHMpLHN0YXRlLm5vPXMsbG9hZChyLXMpfWZ1bmN0aW9uIGxvYWRNYXJrZXRPcGVuKCl7cmV0dXJuIGxvYWRBdFRpbWUoIjA5MDAwMDAwMCIpfWZ1bmN0aW9uIGNoYXJ0U3RhbXBUb0V2ZW50VGltZShlKXtjb25zdCB0PU1hdGgubWF4KDAsTWF0aC5taW4oODYzOTk5OTksTWF0aC5mbG9vcihlKSkpLG49TWF0aC5mbG9vcih0LzM2ZTUpLGE9TWF0aC5mbG9vcih0JTM2ZTUvNmU0KSxvPU1hdGguZmxvb3IodCU2ZTQvMWUzKTtyZXR1cm5gJHtTdHJpbmcobikucGFkU3RhcnQoMiwiMCIpfSR7U3RyaW5nKGEpLnBhZFN0YXJ0KDIsIjAiKX0ke1N0cmluZyhvKS5wYWRTdGFydCgyLCIwIil9MDAwYH1hc3luYyBmdW5jdGlvbiBzZWVrVG9UaW1lKGUsdD0iZm9yd2FyZCIpe3JldHVybiBzdG9wUGxheWJhY2soKSxyZXNldFJ1bnRpbWVTdGF0ZSgpLGxvYWRBdFRpbWUoZSx0KX1mdW5jdGlvbiBzZWVrQnlTZWNvbmRzKGUpe3JldHVybiBzZWVrVG9UaW1lKGNoYXJ0U3RhbXBUb0V2ZW50VGltZShldmVudFRpbWVUb0NoYXJ0U3RhbXAoc3RhdGUuY3VycmVudEV2ZW50VGltZXx8JCgidGltZSIpLnZhbHVlKSsxZTMqTnVtYmVyKGUpKSxlPDA/ImJhY2t3YXJkIjoiZm9yd2FyZCIpfWFzeW5jIGZ1bmN0aW9uIHN0ZXBFdmVudChlKXtzdG9wUGxheWJhY2soKTtjb25zdCB0PU1hdGgubWF4KDEsTnVtYmVyKCQoIm5vIikudmFsdWV8fHN0YXRlLm5vfHwxKSk7aWYoZT4wKXJldHVybiBsb2FkKDEsITEpO2NvbnN0IG49TWF0aC5tYXgoMSx0LTEpLGE9TWF0aC5tYXgoMCxuLTUwMCk7cmV0dXJuIHJlc2V0UnVudGltZVN0YXRlKCksJCgibm8iKS52YWx1ZT1TdHJpbmcoYSksc3RhdGUubm89YSxsb2FkKG4tYSwhMCl9YXN5bmMgZnVuY3Rpb24gbG9hZChlPTFlMyx0PSEwLG49ITEpe2NvbnN0IGE9JCgiZGF0ZSIpLnZhbHVlLnJlcGxhY2VBbGwoIi0iLCIiKSxvPXJlc29sdmVDb2RlKCkscj1NYXRoLm1heCgwLE51bWJlcigkKCJubyIpLnZhbHVlfHxzdGF0ZS5ub3x8MCkpOyQoInN0YXR1cyIpLnRleHRDb250ZW50PSLrtojrn6zsmKTripQg7KSRLi4uIjtjb25zdCBzPU1hdGgubWF4KDEsTWF0aC5mbG9vcihOdW1iZXIoZSl8fDEpKSxpPU1hdGgubWF4KDEsTWF0aC5jZWlsKHMvNTAwKSksbD1uP2AmbmV4dF9zZWNvbmQ9MSZhZnRlcl90aW1lPSR7ZW5jb2RlVVJJQ29tcG9uZW50KHN0YXRlLmN1cnJlbnRFdmVudFRpbWUpfWA6IiIsYz1hd2FpdCBmZXRjaChgL2FwaS9zbmFwc2hvdD9kYXRlPSR7ZW5jb2RlVVJJQ29tcG9uZW50KGEpfSZjb2RlPSR7ZW5jb2RlVVJJQ29tcG9uZW50KG8pfSZubz0ke3J9JmJhdGNoZXM9JHtpfSZsaW1pdD0ke3N9JHtsfWApLHU9YXdhaXQgYy5qc29uKCk7aWYoIWMub2t8fHUuZXJyb3IpdGhyb3cgbmV3IEVycm9yKHUuZXJyb3J8fCJBUEkgZXJyb3IiKTtsYXRlc3QodS5ldmVudHMsIjEiKSxsYXRlc3QodS5ldmVudHMsIjIiKSxsYXRlc3QodS5ldmVudHMsIjMiKSxsYXRlc3QodS5ldmVudHMsIjQiKTtzdGF0ZS5pbmZvPXUuaW5mb3x8e30sbWVyZ2VMYXRlc3QodS5ldmVudHMpO2NvbnN0IGQ9dS5ldmVudHNbdS5ldmVudHMubGVuZ3RoLTFdO2Q/LnRpbWUmJihzdGF0ZS5jdXJyZW50RXZlbnRUaW1lPWQudGltZSk7Y29uc3QgbT1wcm9jZXNzUGVuZGluZ09yZGVycyh1LmV2ZW50cyk7cmVuZGVyVG9wKHUuaW5mbyxzdGF0ZS5sYXN0VHJhZGUpLHJlbmRlckJvb2soc3RhdGUubGFzdEJvb2spLHJlbmRlckJyb2tlcnMoc3RhdGUubGFzdEJyb2tlcik7Y29uc3QgcD11LmV2ZW50cy5yZWR1Y2UoKGUsdCk9Pk1hdGgubWF4KGUsTnVtYmVyKHQubm98fDApKSxyKTtzdGF0ZS5ubz1wLCQoIm5vIikudmFsdWU9U3RyaW5nKHApLCQoInRpbWUiKS52YWx1ZT1zdGF0ZS5jdXJyZW50RXZlbnRUaW1lfHxzdGF0ZS5sYXN0VHJhZGUudGltZXx8c3RhdGUubGFzdEJvb2sudGltZXx8c3RhdGUubGFzdEFmdGVyLnRpbWV8fCIiLHN0YXRlLm9yZGVyUHJpY2VMb2NrZWR8fCgkKCJwcmljZUlucHV0IikudmFsdWU9Zm10KGN1cnJlbnRQcmljZSgpKSksdXBkYXRlUG9ydGZvbGlvKCksdXBkYXRlQ29uZGl0aW9uU3RhdHVzKCk7Y29uc3QgaD1zdGF0ZS5wZW5kaW5nT3JkZXJzLmxlbmd0aD9gIMK3IOuMgOq4sCAke3N0YXRlLnBlbmRpbmdPcmRlcnMubGVuZ3RofeqxtGA6IiIsZj1tLmxlbmd0aD9gIMK3ICR7bS5qb2luKCIsICIpfWA6IiI7JCgic3RhdHVzIikudGV4dENvbnRlbnQ9YCR7dS5kYXRlfSAke3UuY29kZX0gwrcg7J2067Kk7Yq4ICR7dS5ldmVudHMubGVuZ3RoLnRvTG9jYWxlU3RyaW5nKCJrby1LUiIpfeqxtCDCtyBubz0ke3B9JHtofSR7Zn1gLHQ/YXdhaXQgbG9hZENoYXJ0KGEsbyk6ZHJhd0NoYXJ0KGNoYXJ0Um93c0F0Q3VycmVudFRpbWUoKSk7Y29uc3Qgdj1gJHthfS8ke299YDtyZXR1cm4gc3RhdGUuY29uZGl0aW9uS2V5IT09diYmKHN0YXRlLmNvbmRpdGlvbktleT12LGxvYWRDb25kaXRpb25EYXRhKGEsbykuY2F0Y2goKCk9Pnt9KSksdS5ldmVudHMubGVuZ3RofSQoImRhdGVCdXR0b24iKS5hZGRFdmVudExpc3RlbmVyKCJjbGljayIsKCk9Pntjb25zdCBlPSQoImRhdGUiKTsiZnVuY3Rpb24iPT10eXBlb2YgZS5zaG93UGlja2VyP2Uuc2hvd1BpY2tlcigpOmUuZm9jdXMoKX0pLCQoImRhdGUiKS5hZGRFdmVudExpc3RlbmVyKCJjaGFuZ2UiLCgpPT57JCgibm8iKS52YWx1ZT0iMCIscmVzZXRSdW50aW1lU3RhdGUoKSxsb2FkU3ltYm9scygpLnRoZW4oKCk9PmxvYWRNYXJrZXRPcGVuKCkpLmNhdGNoKGU9PiQoInN0YXR1cyIpLnRleHRDb250ZW50PWUubWVzc2FnZSl9KSwkKCJjb2RlIikuYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsZT0+eyJFbnRlciI9PT1lLmtleSYmKCQoIm5vIikudmFsdWU9IjAiLHJlc2V0UnVudGltZVN0YXRlKCksbG9hZE1hcmtldE9wZW4oKS5jYXRjaChlPT4kKCJzdGF0dXMiKS50ZXh0Q29udGVudD1lLm1lc3NhZ2UpKX0pLCQoInNlYXJjaCIpLmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIiwoKT0+eyQoIm5vIikudmFsdWU9IjAiLHJlc2V0UnVudGltZVN0YXRlKCksbG9hZE1hcmtldE9wZW4oKS5jYXRjaChlPT4kKCJzdGF0dXMiKS50ZXh0Q29udGVudD1lLm1lc3NhZ2UpfSksJCgicXVvdGVSZWZyZXNoIikuYWRkRXZlbnRMaXN0ZW5lcigiY2xpY2siLCgpPT57bG9hZCgpLmNhdGNoKGU9PiQoInN0YXR1cyIpLnRleHRDb250ZW50PWUubWVzc2FnZSl9KSwkKCJidXlCdXR0b24iKS5hZGRFdmVudExpc3RlbmVyKCJjbGljayIsKCk9Pm9yZGVyKCJidXkiKSksJCgic2VsbEJ1dHRvbiIpLmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIiwoKT0+b3JkZXIoInNlbGwiKSksJCgib3JkZXJzTGlzdCIpLmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIixlPT57Y29uc3QgdD1lLnRhcmdldC5jbG9zZXN0KCJbZGF0YS1jYW5jZWwtb3JkZXJdIik7aWYoIXQpcmV0dXJuO2NvbnN0IG49TnVtYmVyKHQuZGF0YXNldC5jYW5jZWxPcmRlcik7c3RhdGUucGVuZGluZ09yZGVycz1zdGF0ZS5wZW5kaW5nT3JkZXJzLmZpbHRlcihlPT5lLmlkIT09bikscmVuZGVyT3JkZXJzKCksJCgic3RhdHVzIikudGV4dENvbnRlbnQ9YOuMgOq4sCDso7zrrLgg7Leo7IaMICMke259YH0pLCQoImNsZWFyT3JkZXJzIikuYWRkRXZlbnRMaXN0ZW5lcigiY2xpY2siLCgpPT57Y29uc3QgZT1zdGF0ZS5wZW5kaW5nT3JkZXJzLmxlbmd0aDtzdGF0ZS5wZW5kaW5nT3JkZXJzPVtdLHJlbmRlck9yZGVycygpLCQoInN0YXR1cyIpLnRleHRDb250ZW50PWU/YOuMgOq4sCDso7zrrLggJHtlfeqxtCDst6jshoxgOiLst6jshoztlaAg64yA6riwIOyjvOusuOydtCDsl4bsirXri4jri6QifSksJCgibWFya2V0QnV0dG9uIikuYWRkRXZlbnRMaXN0ZW5lcigiY2xpY2siLCgpPT57JCgicHJpY2VJbnB1dCIpLnZhbHVlPSIiLHN0YXRlLm9yZGVyUHJpY2VMb2NrZWQ9ITEsJCgic3RhdHVzIikudGV4dENvbnRlbnQ9IuyLnOyepeqwgCDrqqjrk5wifSksJCgicHJpY2VJbnB1dCIpLmFkZEV2ZW50TGlzdGVuZXIoImlucHV0IiwoKT0+e3N0YXRlLm9yZGVyUHJpY2VMb2NrZWQ9Qm9vbGVhbigkKCJwcmljZUlucHV0IikudmFsdWUudHJpbSgpKX0pLCQoImFza3MiKS5hZGRFdmVudExpc3RlbmVyKCJjbGljayIsZT0+e2NvbnN0IHQ9ZS50YXJnZXQuY2xvc2VzdCgiW2RhdGEtcHJpY2VdIik7dCYmc2VsZWN0T3JkZXJQcmljZSh0LmRhdGFzZXQucHJpY2UpfSksJCgiYmlkcyIpLmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIixlPT57Y29uc3QgdD1lLnRhcmdldC5jbG9zZXN0KCJbZGF0YS1wcmljZV0iKTt0JiZzZWxlY3RPcmRlclByaWNlKHQuZGF0YXNldC5wcmljZSl9KSwkKCJzcGVlZExhYmVsIikuYWRkRXZlbnRMaXN0ZW5lcigiY2xpY2siLGN5Y2xlU3BlZWQpLCQoInNwZWVkQ2hpcCIpLmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIixjeWNsZVNwZWVkKSwkKCJjaGFydFJlbG9hZCIpLmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIiwoKT0+e2xvYWRDaGFydCgkKCJkYXRlIikudmFsdWUucmVwbGFjZUFsbCgiLSIsIiIpLHJlc29sdmVDb2RlKCkpLmNhdGNoKGU9PiQoInN0YXR1cyIpLnRleHRDb250ZW50PWUubWVzc2FnZSl9KSwkKCJjaGFydEdhcCIpLmFkZEV2ZW50TGlzdGVuZXIoImNoYW5nZSIsKCk9Pntsb2FkQ2hhcnQoJCgiZGF0ZSIpLnZhbHVlLnJlcGxhY2VBbGwoIi0iLCIiKSxyZXNvbHZlQ29kZSgpKS5jYXRjaChlPT4kKCJzdGF0dXMiKS50ZXh0Q29udGVudD1lLm1lc3NhZ2UpfSksJCgiYnV5Q29uZGl0aW9uIikuYWRkRXZlbnRMaXN0ZW5lcigiY2hhbmdlIix1cGRhdGVDb25kaXRpb25TdGF0dXMpLGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoIltkYXRhLXNpemUtcGN0XSIpLmZvckVhY2goZT0+e2UuYWRkRXZlbnRMaXN0ZW5lcigiY2xpY2siLCgpPT5hcHBseVNpemVQZXJjZW50KE51bWJlcihlLmRhdGFzZXQuc2l6ZVBjdCkpKX0pLHdpbmRvdy5hZGRFdmVudExpc3RlbmVyKCJyZXNpemUiLCgpPT57bG9hZENoYXJ0KCQoImRhdGUiKS52YWx1ZS5yZXBsYWNlQWxsKCItIiwiIikscmVzb2x2ZUNvZGUoKSkuY2F0Y2goKCk9Pnt9KX0pLGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoIltkYXRhLXNlZWstdGltZV0iKS5mb3JFYWNoKGU9PntlLmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIiwoKT0+c2Vla1RvVGltZShlLmRhdGFzZXQuc2Vla1RpbWUpLmNhdGNoKGU9PiQoInN0YXR1cyIpLnRleHRDb250ZW50PWUubWVzc2FnZSkpfSksZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgiW2RhdGEtc2Vlay1zZWNvbmRzXSIpLmZvckVhY2goZT0+e2UuYWRkRXZlbnRMaXN0ZW5lcigiY2xpY2siLCgpPT5zZWVrQnlTZWNvbmRzKE51bWJlcihlLmRhdGFzZXQuc2Vla1NlY29uZHMpKS5jYXRjaChlPT4kKCJzdGF0dXMiKS50ZXh0Q29udGVudD1lLm1lc3NhZ2UpKX0pLGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoIltkYXRhLXN0ZXAtZXZlbnRdIikuZm9yRWFjaChlPT57ZS5hZGRFdmVudExpc3RlbmVyKCJjbGljayIsKCk9PnN0ZXBFdmVudChOdW1iZXIoZS5kYXRhc2V0LnN0ZXBFdmVudCkpLmNhdGNoKGU9PiQoInN0YXR1cyIpLnRleHRDb250ZW50PWUubWVzc2FnZSkpfSksJCgicGxheSIpLmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIiwoKT0+e3N0YXRlLnRpbWVyP3N0b3BQbGF5YmFjaygpOnN0YXJ0UGxheWJhY2soKX0pLHVwZGF0ZVNwZWVkVWkoKSxhcHBseUluaXRpYWxVcmxQYXJhbXMoKSxsb2FkUmVwbGF5RGF0ZXMoKS50aGVuKCgpPT5sb2FkU3ltYm9scygpKS50aGVuKGFzeW5jKCk9PntpZihzdGF0ZS5pbml0aWFsSnVtcFRpbWUpe2NvbnN0IGU9c3RhdGUuaW5pdGlhbEp1bXBUaW1lO3JldHVybiBzdGF0ZS5pbml0aWFsSnVtcFRpbWU9IiIsbG9hZEF0VGltZShlKX1yZXR1cm4gbG9hZE1hcmtldE9wZW4oKX0pLmNhdGNoKGU9PiQoInN0YXR1cyIpLnRleHRDb250ZW50PWUubWVzc2FnZSk7"),b=new Uint8Array(s.length);for(let i=0;i<s.length;i++)b[i]=s.charCodeAt(i);new Function(new TextDecoder().decode(b))})()</script></body></html>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hoga Viewer</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f3f4f6;
+      color: #444;
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+    .app {
+      width: min(100vw, 512px);
+      margin: 0 auto;
+      background: white;
+      border: 1px solid #cfcfcf;
+      box-shadow: 0 1px 5px rgba(0,0,0,.08);
+    }
+    .toolbar {
+      display: grid;
+      grid-template-columns: 88px 34px 1fr 34px 34px 34px;
+      height: 34px;
+      border-bottom: 1px solid #9e8f8f;
+      background: #e9e9e9;
+    }
+    .toolbar input {
+      width: 100%;
+      border: 0;
+      border-right: 1px solid #c6c6c6;
+      padding: 0 10px;
+      background: #fafafa;
+      color: #555;
+      outline: 0;
+      font-size: 12px;
+    }
+    .tool-btn {
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-right: 1px solid rgba(255,255,255,.25);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .blue { background: #2f80c4; }
+    .cyan { background: #35b9d6; }
+    .orange { background: #f0a33c; }
+    .header-strip {
+      height: 18px;
+      line-height: 18px;
+      padding: 0 8px;
+      background: #a99;
+      color: white;
+      font-weight: 700;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .mini-row, .labels-row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      height: 15px;
+      text-align: center;
+      line-height: 15px;
+      border-bottom: 1px solid #e4e4e4;
+    }
+    .mini-row div { background: #eadf95; border-right: 1px solid white; }
+    .labels-row div { background: #cfdfb9; border-right: 1px solid white; font-weight: 700; color: #49633b; }
+    .book {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      border-left: 1px solid #ededed;
+      border-bottom: 1px solid #bfbfbf;
+    }
+    .cell {
+      height: 15px;
+      line-height: 15px;
+      padding: 0 3px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-align: right;
+      border-right: 1px solid #ededed;
+      border-bottom: 1px solid #ededed;
+    }
+    .center { text-align: center; }
+    .left { text-align: left; }
+    .ask { background: #eaf3fb; }
+    .ask.price { background: #b8d5ea; color: #175982; font-weight: 700; }
+    .bid { background: #fff8ee; }
+    .bid.price { background: #f5c8c8; color: #9b3131; font-weight: 700; }
+    .cell.price { cursor: pointer; }
+    .cell.price:hover { outline: 1px solid #287bbe; outline-offset: -1px; }
+    .stat { background: #fbf6ef; color: #444; }
+    .muted { color: #9a9a9a; }
+    .speed-row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      height: 30px;
+      background: #f4e4f4;
+      border-bottom: 1px solid #ededed;
+    }
+    .speed-row div { border-right: 1px solid #eee; }
+    .speed {
+      display: grid;
+      place-items: center;
+      background: #55b85a;
+      color: white;
+      font-weight: 700;
+      grid-column: 4 / 5;
+      height: 15px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+    .control-strip {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 4px;
+      padding: 4px 20px;
+      border-bottom: 1px solid #ddd;
+    }
+    .control-strip button {
+      height: 42px;
+      border: 0;
+      border-radius: 3px;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .step { background: #2e80bd; }
+    .small-step { background: #41bdd3; }
+    .play { background: #55b85a; }
+    .inputs {
+      display: grid;
+      grid-template-columns: 100px 1fr 34px 66px;
+      gap: 16px;
+      padding: 4px;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+    }
+    .inputs input {
+      height: 28px;
+      border: 1px solid #d4d4d4;
+      padding: 0 8px;
+      min-width: 0;
+    }
+    .chip {
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      border: 1px solid #ddd;
+      background: linear-gradient(#fff, #eee);
+      border-radius: 4px;
+    }
+    .chip.button-like { cursor: pointer; user-select: none; }
+    .trade {
+      display: grid;
+      grid-template-columns: 34px 88px 44px 44px 58px 1fr 54px;
+      gap: 1px;
+      padding: 4px 4px 0;
+      align-items: center;
+      background: #fafafa;
+    }
+    .trade div, .trade button, .trade input {
+      height: 30px;
+      border: 1px solid #d6d6d6;
+      background: white;
+      color: #666;
+      text-align: center;
+      line-height: 28px;
+    }
+    .trade input {
+      width: 100%;
+      min-width: 0;
+      padding: 0 6px;
+      line-height: normal;
+      text-align: right;
+    }
+    .trade button { border: 0; color: white; cursor: pointer; }
+    .buy { background: #df5a56 !important; }
+    .sell { background: #277abd !important; }
+    .tabbar {
+      display: grid;
+      grid-template-columns: 36px 36px 36px 1fr 52px 52px 38px 1fr 54px;
+      gap: 2px;
+      padding: 4px;
+      align-items: center;
+    }
+    .icon-btn, .tab {
+      height: 30px;
+      border: 0;
+      color: white;
+      background: #287bbe;
+      font-weight: 700;
+    }
+    .share { background: #eba93d; }
+    .qty { height: 30px; border: 1px solid #d6d6d6; padding: 0 8px; text-align: right; }
+    .size-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 3px;
+      padding: 0 4px 4px;
+      background: #fafafa;
+    }
+    .size-strip button {
+      height: 26px;
+      border: 0;
+      background: #6d7f8f;
+      color: white;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .broker {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid #dedede;
+    }
+    .broker-title {
+      height: 15px;
+      text-align: center;
+      line-height: 15px;
+      border-bottom: 1px solid white;
+      background: #e4f0f8;
+    }
+    .broker-title:nth-child(2) { background: #fae6e6; }
+    .broker-row {
+      display: grid;
+      grid-template-columns: 20px 1fr 60px;
+      height: 15px;
+      line-height: 15px;
+      border-bottom: 1px solid white;
+      background: #eaf3fb;
+    }
+    .broker-col.buy-side .broker-row { background: #fdeaea; }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      height: 15px;
+      line-height: 15px;
+      text-align: center;
+      background: #dcefee;
+      border-top: 1px solid white;
+    }
+    .summary-values {
+      background: #eef7f7;
+      color: #31515a;
+      font-weight: 700;
+    }
+    .orders {
+      border-top: 1px solid #d7dde1;
+      background: #fbfcfd;
+    }
+    .orders-head {
+      display: grid;
+      grid-template-columns: 1fr 60px;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 6px;
+      background: #eef5f8;
+      color: #36566b;
+      font-weight: 700;
+    }
+    .orders-head button {
+      height: 22px;
+      border: 0;
+      background: #6d7f8f;
+      color: white;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .orders-list {
+      min-height: 24px;
+    }
+    .order-row {
+      display: grid;
+      grid-template-columns: 44px 1fr 64px 64px 28px;
+      align-items: center;
+      height: 22px;
+      border-top: 1px solid #edf0f2;
+      padding: 0 4px;
+    }
+    .order-row.buy-order { background: #fff2f2; color: #9b3131; }
+    .order-row.sell-order { background: #edf6ff; color: #175982; }
+    .order-row button {
+      height: 18px;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .orders-empty {
+      height: 24px;
+      line-height: 24px;
+      padding: 0 6px;
+      color: #888;
+    }
+    .chart-panel {
+      border-top: 1px solid #cfcfcf;
+      background: #fff;
+    }
+    .chart-head {
+      display: grid;
+      grid-template-columns: 1fr 72px 72px;
+      gap: 4px;
+      align-items: center;
+      height: 30px;
+      padding: 3px 4px;
+      background: #eef5f8;
+      border-bottom: 1px solid #d9e5ea;
+    }
+    .chart-head strong {
+      padding-left: 4px;
+      color: #36566b;
+    }
+    .chart-head select,
+    .chart-head button {
+      height: 24px;
+      border: 1px solid #c8d8df;
+      background: #fff;
+      color: #36566b;
+      font-size: 12px;
+    }
+    .chart-head button {
+      background: #287bbe;
+      color: white;
+      border: 0;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .chart-wrap {
+      position: relative;
+      height: 210px;
+      background: #fff;
+    }
+    #chartCanvas {
+      display: block;
+      width: 100%;
+      height: 210px;
+    }
+    .chart-empty {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #999;
+      pointer-events: none;
+    }
+    .status {
+      padding: 5px 8px;
+      color: #777;
+      min-height: 24px;
+      border-top: 1px solid #ddd;
+    }
+    @media (max-width: 520px) {
+      .cell { padding: 0 2px; }
+      .control-strip { padding: 4px; }
+      .toolbar { grid-template-columns: 78px 34px 1fr 34px 34px 34px; }
+    }
+
+    /* Compact HTS-style quote board. The replay controls stay below the board. */
+    body {
+      background: #efefef;
+      color: #303030;
+      font-family: "Malgun Gothic", Arial, sans-serif;
+    }
+    .app {
+      width: min(100vw, 374px);
+      margin: 0 auto;
+      border: 1px solid #aeb3b7;
+      box-shadow: none;
+      background: #fff;
+    }
+    .quote-window {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      width: 100%;
+      background: #fff;
+      border-bottom: 1px solid #6f757a;
+    }
+    .quote-main { min-width: 0; }
+    .quote-head {
+      display: grid;
+      grid-template-columns: 272px minmax(0, 1fr);
+      width: 100%;
+      height: 20px;
+      line-height: 19px;
+      background: #ededed;
+      border-bottom: 1px solid #8f9498;
+      color: #222;
+      text-align: center;
+      font-size: 12px;
+      overflow: hidden;
+    }
+    .quote-book-head {
+      display: grid;
+      grid-template-columns: 42px 50px 55px 45px 50px 30px;
+      min-width: 0;
+    }
+    .quote-book-head > span {
+      min-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 1px solid #c6cacc;
+    }
+    .quote-stats-head {
+      min-width: 0;
+      border-left: 1px solid #8f9498;
+      background: #ededed;
+    }
+    .quote-content {
+      display: grid;
+      grid-template-columns: 272px minmax(0, 1fr);
+      align-items: stretch;
+    }
+    .quote-book {
+      width: 272px;
+      min-width: 0;
+      background: #fff;
+    }
+    .quote-title {
+      display: block;
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .quote-side {
+      display: block;
+      width: 272px;
+      height: 160px;
+      overflow: hidden;
+      border: 0;
+      background: #fff;
+    }
+    .quote-side.quote-bids {
+      height: 160px;
+      overflow: hidden;
+      scrollbar-width: none;
+      border-bottom: 1px solid #9ba1a5;
+    }
+    .quote-side.quote-bids::-webkit-scrollbar { display: none; }
+    .quote-side.quote-bids .quote-row {
+      width: 272px;
+      grid-template-columns: 42px 50px 55px 45px 50px 30px;
+    }
+    .quote-row {
+      display: grid;
+      grid-template-columns: 42px 50px 55px 45px 50px 30px;
+      width: 272px;
+      height: 16px;
+      line-height: 16px;
+    }
+    .quote-row .cell {
+      width: auto;
+      height: 16px;
+      line-height: 16px;
+      padding: 0 3px;
+      border-right: 1px solid #e2e3e4;
+      border-bottom: 1px solid #e4e5e6;
+      font-size: 12px;
+    }
+    .quote-row.ask .cell { background: #eaf4fb; }
+    .quote-row.bid .cell { background: #fff0f2; }
+    .quote-row .quote-price {
+      color: #f23846;
+      font-weight: 400;
+    }
+    .quote-row.ask .quote-price { background: #dfeff9 !important; }
+    .quote-row.bid .quote-price { background: #fde5e9 !important; }
+    .quote-row .quote-rate { color: #f23846; }
+    .quote-row .quote-delta { color: #f23846; }
+    .depth-cell { position: relative; }
+    .depth-cell .depth-bar {
+      position: absolute;
+      top: 1px;
+      bottom: 1px;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .depth-cell .depth-bar.ask { right: 0; background: #acd7ef; }
+    .depth-cell .depth-bar.bid { left: 0; background: #f3b8c0; }
+    .depth-cell .depth-label { position: relative; z-index: 1; }
+    .quote-row.current .cell { background: #d9efff !important; }
+    .quote-row.current .quote-price {
+      outline: 1px solid #f23846;
+      outline-offset: -1px;
+      font-weight: 700;
+    }
+    .quote-stats {
+      min-width: 0;
+      min-height: 325px;
+      overflow: hidden;
+      border-left: 1px solid #9ba1a5;
+      background: #fff;
+    }
+    .quote-stat-row {
+      display: grid;
+      grid-template-columns: 31px minmax(0, 1fr);
+      height: 15px;
+      line-height: 15px;
+      border-bottom: 1px solid #e4e5e6;
+      background: #fff;
+      font-size: 12px;
+    }
+    .quote-stat-row span {
+      padding-left: 3px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .quote-stat-row strong {
+      padding-right: 3px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-align: right;
+      font-weight: 400;
+    }
+    .quote-stat-group {
+      height: 17px;
+      line-height: 17px;
+      padding: 0 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: #6d7174;
+      background: #f4f2ec;
+      border-bottom: 1px solid #d8dadb;
+    }
+    .quote-stat-row.stat-up strong { color: #f23846; }
+    .quote-stat-row.stat-down strong { color: #2879c7; }
+    .quote-stat-row.trade-volume-up strong { color: #f23846; font-weight: 700; }
+    .quote-stat-row.trade-volume-down strong { color: #2879c7; font-weight: 700; }
+    .quote-totals {
+      display: grid;
+      grid-template-columns: 90px 92px 90px;
+      height: 18px;
+      line-height: 17px;
+      text-align: right;
+      border-top: 1px solid #9ba1a5;
+      border-bottom: 1px solid #d3d5d6;
+      background: #fff;
+      font-size: 12px;
+    }
+    .quote-totals span {
+      padding: 0 3px;
+      border-right: 1px solid #e2e3e4;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .quote-totals .quote-net { color: #2879c7; text-align: center; }
+    .quote-after {
+      --sell-strength: 0%;
+      --buy-strength: 0%;
+      position: relative;
+      display: grid;
+      grid-template-columns: 90px 92px 90px;
+      height: 26px;
+      line-height: 23px;
+      text-align: right;
+      background: #fff;
+      font-size: 12px;
+    }
+    .quote-after::before,
+    .quote-after::after {
+      position: absolute;
+      bottom: 0;
+      height: 3px;
+      content: "";
+    }
+    .quote-after::before { left: 0; width: var(--sell-strength); background: #2879c7; }
+    .quote-after::after { right: 0; width: var(--buy-strength); background: #ef3949; }
+    .quote-after.no-strength::before,
+    .quote-after.no-strength::after { display: none; }
+    .quote-after > span,
+    .quote-after > strong {
+      padding: 0 3px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .quote-after > span:first-child { color: #2879c7; }
+    .quote-after strong { text-align: center; font-weight: 400; }
+    #speedLabel { display: none; }
+    .toolbar {
+      height: 30px;
+      grid-template-columns: 92px 28px minmax(0, 1fr) 28px 28px 28px 28px;
+      border-bottom: 1px solid #b5b9bb;
+      background: #dedede;
+    }
+    .toolbar input {
+      min-width: 0;
+      padding: 0 5px;
+      border-right: 1px solid #aeb3b7;
+      background: #fff;
+      color: #202020;
+      font-size: 11px;
+    }
+    .toolbar .tool-btn {
+      min-width: 0;
+      padding: 0;
+      border: 0;
+      border-right: 1px solid #aeb3b7;
+      background: #e7e7e7;
+      color: #303030;
+      font-size: 11px;
+      font-weight: 400;
+    }
+    .toolbar .tool-btn:hover,
+    .control-strip button:hover,
+    .icon-btn:hover,
+    .tab:hover,
+    .size-strip button:hover,
+    .orders-head button:hover,
+    .chart-head button:hover {
+      background: #d5e8f6;
+    }
+    .control-strip {
+      grid-template-columns: 42px 38px 38px 28px minmax(32px, 1fr) 28px 38px 38px 42px;
+      gap: 2px;
+      padding: 3px;
+      background: #efefef;
+      border-bottom: 1px solid #9fa4a8;
+    }
+    .control-strip button {
+      min-width: 0;
+      height: 25px;
+      padding: 0;
+      border: 1px solid #9fa4a8;
+      border-radius: 0;
+      background: #e7e7e7;
+      color: #202020;
+      font-size: 10px;
+      font-weight: 400;
+    }
+    .control-strip .play { background: #e4efe4; color: #185e2a; }
+    .inputs {
+      grid-template-columns: 92px minmax(0, 1fr) 26px 52px;
+      gap: 2px;
+      padding: 3px;
+      background: #f3f3f3;
+      border-bottom: 1px solid #aeb3b7;
+    }
+    .inputs input,
+    .chip {
+      min-width: 0;
+      height: 24px;
+      padding: 0 4px;
+      border: 1px solid #aeb3b7;
+      border-radius: 0;
+      background: #fff;
+      color: #303030;
+      line-height: 22px;
+      font-size: 11px;
+    }
+    .chip { background: #e7e7e7; }
+    .trade {
+      grid-template-columns: 30px 68px 34px 34px 46px minmax(0, 1fr) 44px;
+      gap: 1px;
+      padding: 3px;
+      background: #efefef;
+      border-bottom: 1px solid #aeb3b7;
+    }
+    .trade div,
+    .trade button,
+    .trade input {
+      min-width: 0;
+      height: 25px;
+      padding: 0 3px;
+      border: 1px solid #aeb3b7;
+      border-radius: 0;
+      line-height: 23px;
+      font-size: 11px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .trade button { border: 1px solid #8d9296; }
+    .buy { background: #e85b63 !important; color: #fff !important; }
+    .sell { background: #357fc2 !important; color: #fff !important; }
+    .tabbar {
+      grid-template-columns: 26px 26px 26px minmax(0, 1fr) 34px 44px 28px minmax(48px, 1fr) 44px;
+      gap: 2px;
+      padding: 3px;
+      background: #f3f3f3;
+      border-bottom: 1px solid #aeb3b7;
+    }
+    .tabbar > * { min-width: 0; }
+    .icon-btn,
+    .tab,
+    .qty,
+    #sellButton {
+      width: 100%;
+      min-width: 0;
+      height: 25px;
+      padding: 0 2px;
+      border: 1px solid #9fa4a8;
+      border-radius: 0;
+      font-size: 11px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .icon-btn,
+    .tab {
+      background: #e7e7e7;
+      color: #303030;
+      font-weight: 400;
+    }
+    .share { background: #e7e7e7; }
+    .size-strip {
+      gap: 2px;
+      padding: 3px;
+      background: #efefef;
+      border-bottom: 1px solid #aeb3b7;
+    }
+    .size-strip button {
+      height: 23px;
+      padding: 0;
+      border: 1px solid #9fa4a8;
+      background: #e7e7e7;
+      color: #303030;
+      font-size: 11px;
+      font-weight: 400;
+    }
+    .broker { border-top: 0; border-bottom: 1px solid #aeb3b7; }
+    .broker-title { background: #e9f2f8; color: #303030; }
+    .broker-title:nth-child(2) { background: #f8e9e9; }
+    .summary { border-top: 0; background: #e6eeee; font-size: 11px; }
+    .summary-values { background: #f2f7f7; }
+    .orders { border-top: 0; }
+    .orders-head {
+      min-height: 25px;
+      padding: 2px 3px;
+      background: #e7e7e7;
+      color: #303030;
+      font-size: 11px;
+    }
+    .orders-head button {
+      height: 21px;
+      border: 1px solid #9fa4a8;
+      background: #f4f4f4;
+      color: #303030;
+      font-size: 11px;
+    }
+    .chart-panel { border-top: 1px solid #8f9498; }
+    .chart-head {
+      grid-template-columns: minmax(0, 1fr) 66px 58px;
+      gap: 2px;
+      height: 27px;
+      padding: 2px 3px;
+      background: #e7e7e7;
+      border-bottom: 1px solid #aeb3b7;
+    }
+    .chart-head strong { padding-left: 2px; color: #303030; }
+    .chart-head select,
+    .chart-head button {
+      min-width: 0;
+      height: 22px;
+      border: 1px solid #9fa4a8;
+      border-radius: 0;
+      background: #f7f7f7;
+      color: #303030;
+      font-size: 11px;
+      font-weight: 400;
+    }
+    .status {
+      min-height: 22px;
+      padding: 4px 5px;
+      border-top: 1px solid #aeb3b7;
+      background: #ededed;
+      color: #444;
+      font-size: 11px;
+    }
+
+    @media (max-width: 380px) {
+      .app { width: 100%; }
+      .quote-window { grid-template-columns: minmax(0, 1fr); }
+      .quote-content { grid-template-columns: minmax(0, 1fr) 72px; }
+      .quote-book, .quote-side, .quote-row { width: 100%; }
+      .quote-row { grid-template-columns: 16% 18% 20% 16% 18% 12%; }
+      .quote-side.quote-bids .quote-row { width: 100%; grid-template-columns: 16% 18% 20% 16% 18% 12%; }
+      .quote-totals, .quote-after { grid-template-columns: 33.3% 33.4% 33.3%; }
+      .quote-head { grid-template-columns: minmax(0, 1fr) 72px; }
+      .quote-book-head { grid-template-columns: 16% 18% 20% 16% 18% 12%; }
+      .tabbar { grid-template-columns: 24px 24px 24px minmax(0, 1fr) 32px 40px 26px minmax(42px, 1fr) 40px; }
+      .trade { grid-template-columns: 28px 56px 32px 32px 42px minmax(0, 1fr) 40px; }
+    }
+
+    /* ---------- Editorial Paper pass ---------- */
+    :root {
+      --paper: #FAFAF7;
+      --card: #FFFDF8;
+      --paper-2: #F4EFE4;
+      --ink: #101010;
+      --muted: #6F6F6A;
+      --muted-2: #8A8578;
+      --line: #CFC9B8;
+      --line-strong: #101010;
+      --yellow: #F6C900;
+      --marker: #FFD84D;
+      --up: #B23A3A;
+      --down: #33557F;
+      --ask-tint: #E8ECF1;
+      --bid-tint: #F6E9E2;
+    }
+    body {
+      background: #E7E4DC;
+      color: var(--ink);
+      font-family: "Pretendard", "Malgun Gothic", Arial, sans-serif;
+    }
+    .app {
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      box-shadow: 8px 8px 0 rgba(16, 16, 16, .12);
+    }
+    .dateline {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 5px 10px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--ink);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      color: var(--muted-2);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .dateline span:nth-child(2) { letter-spacing: .04em; }
+    @media (max-width: 520px) {
+      .dateline span:nth-child(2) { display: none; }
+    }
+    .masthead {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 10px 8px;
+      background: var(--card);
+      border-bottom: 4px double var(--ink);
+    }
+    .masthead-title {
+      font-family: "Noto Serif KR", "NanumMyeongjo", "Batang", "바탕", serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      white-space: nowrap;
+    }
+    .masthead-title::before {
+      content: "";
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      background: var(--yellow);
+      margin-right: 7px;
+      vertical-align: 1px;
+    }
+
+    /* ---------- bundle loader overlay ---------- */
+    .bundle-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(231, 228, 220, .55);
+      backdrop-filter: blur(8px) saturate(.85);
+      -webkit-backdrop-filter: blur(8px) saturate(.85);
+    }
+    .bundle-loader[hidden] { display: none; }
+    .bl-card {
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      box-shadow: 8px 8px 0 rgba(16, 16, 16, .14);
+      padding: 28px 36px 24px;
+      text-align: center;
+      max-width: 360px;
+      width: calc(100vw - 48px);
+    }
+    .bl-kicker {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      color: var(--muted-2);
+      margin-bottom: 8px;
+    }
+    .bl-title {
+      font-family: "Noto Serif KR", "NanumMyeongjo", "Batang", "바탕", serif;
+      font-size: 19px;
+      font-weight: 900;
+      margin-bottom: 18px;
+      line-height: 1.4;
+    }
+    .bl-bar {
+      height: 10px;
+      border: 1.5px solid var(--ink);
+      background: var(--card);
+      overflow: hidden;
+      position: relative;
+    }
+    .bl-bar i {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 38%;
+      left: -38%;
+      background: var(--yellow);
+      animation: blslide 1.15s cubic-bezier(.45,0,.55,1) infinite;
+    }
+    @keyframes blslide { to { left: 100%; } }
+    .bl-mb {
+      margin-top: 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: .04em;
+      min-height: 1em;
+    }
+
+    /* chrome strips: paper tones + ink rules */
+    .toolbar { background: var(--paper-2); border-bottom: 2px solid var(--ink); }
+    .toolbar input { background: var(--card); border-right: 1px solid var(--line); color: var(--ink); }
+    .toolbar .tool-btn {
+      background: var(--card);
+      border-right: 1px solid var(--line);
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .toolbar .tool-btn.blue,
+    .toolbar .tool-btn.cyan,
+    .toolbar .tool-btn.orange { background: var(--card); color: var(--ink); }
+    .quote-window { border-bottom: 2px solid var(--ink); }
+    .quote-head { background: var(--paper-2); border-bottom: 1px solid var(--line-strong); color: var(--ink); }
+    .quote-book-head > span { border-right: 1px solid var(--line); font-weight: 700; }
+    .quote-stats-head { border-left: 1px solid var(--line-strong); background: var(--paper-2); }
+
+    /* order book cells */
+    .quote-row .cell {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      font-variant-numeric: tabular-nums;
+    }
+    .quote-row.ask .cell { background: var(--ask-tint); }
+    .quote-row.bid .cell { background: var(--bid-tint); }
+    .quote-row .quote-price { color: var(--up); }
+    .quote-row.ask .quote-price { background: #D8E2EC !important; }
+    .quote-row.bid .quote-price { background: #EFDCD3 !important; }
+    .quote-row .quote-rate, .quote-row .quote-delta { color: var(--up); }
+    .depth-cell .depth-bar.ask { background: #B7C6D4; }
+    .depth-cell .depth-bar.bid { background: #DDB7AC; }
+    .quote-row.current .cell { background: var(--marker) !important; }
+    .quote-row.current .quote-price { outline: 1.5px solid var(--ink); outline-offset: -1.5px; font-weight: 700; }
+
+    /* totals / after-hours / stats */
+    .quote-totals {
+      border-top: 1px solid var(--line-strong);
+      border-bottom: 1px solid var(--line);
+      background: var(--card);
+    }
+    .quote-totals span { border-right: 1px solid var(--line); }
+    .quote-net { color: var(--down); }
+    .quote-after { background: var(--card); }
+    .quote-after::before { background: var(--down); }
+    .quote-after::after { background: var(--up); }
+    .quote-after > span:first-child { color: var(--down); }
+    .quote-stat-row { border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+    .quote-stat-row strong { font-weight: 700; }
+    .quote-stat-group {
+      height: 18px;
+      line-height: 18px;
+      padding: 0 5px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      color: var(--muted-2);
+      background: var(--paper-2);
+      border-bottom: 1px solid var(--line);
+    }
+    .quote-stat-row.stat-up strong { color: var(--up); }
+    .quote-stat-row.stat-down strong { color: var(--down); }
+    .quote-stat-row.trade-volume-up strong { color: var(--up); }
+    .quote-stat-row.trade-volume-down strong { color: var(--down); }
+
+    /* broker / summary / orders */
+    .broker { border-bottom: 1px solid var(--line); }
+    .broker-title { background: var(--ask-tint); color: var(--ink); border-bottom: 1px solid var(--line); }
+    .broker-title:nth-child(2) { background: var(--bid-tint); }
+    .broker-row { background: var(--ask-tint); border-bottom: 1px solid var(--line); }
+    .broker-col.buy-side .broker-row { background: var(--bid-tint); }
+    .summary { background: #E7E2D2; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; height: 24px; line-height: 24px; font-size: 12px; }
+    .summary-values { background: #EFEADD; color: var(--ink); font-size: 14px; font-weight: 700; }
+    .orders { background: var(--card); }
+    .orders-head { background: var(--paper-2); color: var(--ink); border-bottom: 1px solid var(--line); }
+    .orders-head button { background: var(--card); border: 1px solid var(--line-strong); color: var(--ink); }
+    .order-row { border-top: 1px solid var(--line); }
+    .order-row.buy-order { background: #F3E2DF; color: #7E2A24; }
+    .order-row.sell-order { background: #E3EAF3; color: #2C4A73; }
+
+    /* replay controls */
+    .control-strip {
+      background: var(--paper-2);
+      border-bottom: 1px solid var(--line);
+      gap: 2px;
+    }
+    .control-strip button {
+      background: var(--card);
+      border: 1px solid var(--line-strong);
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .control-strip button:hover { background: var(--marker); }
+    .control-strip .play { background: var(--yellow); color: var(--ink); }
+    .control-strip .play:hover { background: var(--marker); }
+    .inputs { background: var(--paper-2); border-bottom: 1px solid var(--line); }
+    .inputs input, .chip { background: var(--card); border: 1px solid var(--line-strong); color: var(--ink); }
+    .chip { background: var(--paper-2); }
+    .trade { background: var(--paper-2); border-bottom: 1px solid var(--line); }
+    .trade div, .trade button, .trade input {
+      background: var(--card);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+    .trade button { border: 1px solid var(--line-strong); }
+    .buy { background: var(--up) !important; color: #FAFAF7 !important; }
+    .sell { background: var(--down) !important; color: #FAFAF7 !important; }
+    .tabbar { background: var(--paper-2); border-bottom: 1px solid var(--line); }
+    .icon-btn, .tab, .qty, #sellButton {
+      background: var(--card);
+      border: 1px solid var(--line-strong);
+      color: var(--ink);
+    }
+    .share { background: var(--card); }
+    .size-strip { background: var(--paper-2); border-bottom: 1px solid var(--line); }
+    .size-strip button { background: var(--card); border: 1px solid var(--line); color: var(--ink); }
+    .size-strip button:hover { background: var(--marker); }
+    /* chart */
+    .chart-panel { border-top: 2px solid var(--ink); }
+    .chart-head { background: var(--paper-2); border-bottom: 1px solid var(--line); }
+    .chart-head strong {
+      color: var(--ink);
+      font-family: "Noto Serif KR", "NanumMyeongjo", "Batang", "바탕", serif;
+      font-size: 13px;
+      letter-spacing: .12em;
+    }
+    .chart-head select, .chart-head button {
+      background: var(--card);
+      border: 1px solid var(--line-strong);
+      color: var(--ink);
+    }
+    .chart-head button { background: var(--ink); color: var(--paper); border-color: var(--ink); font-weight: 700; }
+    .chart-wrap { background: var(--card); }
+    #chartCanvas { background: var(--card); }
+    .chart-empty { color: var(--muted-2); }
+
+    /* status */
+    .status {
+      background: var(--paper-2);
+      border-top: 1px solid var(--line-strong);
+      color: var(--muted);
+      font-size: 10.5px;
+      letter-spacing: .02em;
+    }
+
+    /* ---------- 매물대 ---------- */
+    .profile-panel {
+      display: flex;
+      flex-direction: column;
+      background: var(--card);
+      border-top: 2px solid var(--ink);
+      min-height: 0;
+    }
+    .profile-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 5px 8px;
+      background: var(--paper-2);
+      border-bottom: 1px solid var(--line);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+    }
+    .profile-sub { color: var(--muted); font-weight: 600; letter-spacing: .02em; }
+    .profile-wrap { position: relative; height: 220px; background: var(--card); }
+    #profileCanvas { display: block; width: 100%; height: 100%; }
+
+    /* ---------- Desktop two-column layout ---------- */
+    .cols { display: block; }
+    .col { display: flex; flex-direction: column; }
+    @media (min-width: 960px) {
+      .app { width: min(100vw - 48px, 920px); }
+      .cols { display: grid; grid-template-columns: 1.45fr 1fr; }
+      .col-charts { border-left: 1.5px solid var(--ink); }
+      .col-charts .chart-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .col-charts .chart-wrap { flex: 1; height: auto; min-height: 280px; }
+      .col-charts #chartCanvas { height: 100%; }
+      .quote-head, .quote-content { grid-template-columns: 336px minmax(0, 1fr); }
+      .quote-book-head { grid-template-columns: 52px 62px 68px 56px 62px 36px; }
+      .quote-book { width: 336px; }
+      .quote-side { width: 336px; }
+      .quote-side.quote-bids .quote-row,
+      .quote-row { width: 336px; grid-template-columns: 52px 62px 68px 56px 62px 36px; }
+      .quote-totals, .quote-after { grid-template-columns: 112px 112px 112px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bundle-loader" id="bundleLoader" hidden>
+    <div class="bl-card">
+      <div class="bl-kicker">HOAGA · REPLAY</div>
+      <div class="bl-title">이벤트 데이터를<br/>준비하고 있습니다</div>
+      <div class="bl-bar"><i></i></div>
+      <div class="bl-mb" id="bundleMb"></div>
+    </div>
+  </div>
+  <main class="app">
+    <div class="dateline">
+      <span>HOAGA · REPLAY</span>
+      <span>장중 호가와 체결의 기록</span>
+      <span id="datelineDate"></span>
+    </div>
+    <div class="masthead">
+      <span class="masthead-title">호가 리플레이</span>
+    </div>
+    <section class="toolbar" aria-label="날짜 및 종목 조회">
+      <input id="date" name="date" type="date" value="" aria-label="날짜">
+      <button id="dateButton" class="tool-btn blue" title="달력">▣</button>
+      <input id="code" name="code" value="451060" list="symbolList" aria-label="종목코드 또는 종목명" placeholder="종목명">
+      <datalist id="symbolList"></datalist>
+      <button id="search" class="tool-btn cyan" title="조회">⌕</button>
+      <button class="tool-btn orange" title="랜덤">R</button>
+      <button class="tool-btn blue" title="설정">⚙</button>
+      <button id="quoteRefresh" class="tool-btn" title="새로고침">↻</button>
+    </section>
+
+    <div class="cols">
+    <div class="col col-main">
+    <section class="quote-window" aria-label="호가창">
+      <div class="quote-main">
+        <div class="quote-head">
+          <div class="quote-book-head">
+            <span>증감</span>
+            <span>매도잔량</span>
+            <span id="quoteTime">16:00:01</span>
+            <span>등락률</span>
+            <span>매수잔량</span>
+            <span>증감</span>
+          </div>
+          <div class="quote-stats-head" aria-hidden="true"></div>
+        </div>
+        <div class="quote-content">
+          <div class="quote-book">
+            <div id="symbolTitle" class="quote-title" aria-live="polite"></div>
+            <section id="asks" class="book quote-side quote-asks" aria-label="매도 호가"></section>
+            <section id="bids" class="book quote-side quote-bids" aria-label="매수 호가"></section>
+            <section id="quoteTotals" class="quote-totals" aria-label="호가 잔량 합계">
+              <span id="quoteAskTotal">-</span>
+              <span id="quoteNetTotal" class="quote-net">-</span>
+              <span id="quoteBidTotal">-</span>
+            </section>
+            <section class="quote-after" aria-label="시간외 잔량">
+              <span id="quoteAfterValue">-</span>
+              <strong>시간외</strong>
+              <span id="quoteAfterRight"></span>
+              <button id="speedLabel" type="button" title="배속 변경">x1.0</button>
+            </section>
+          </div>
+          <section id="topInfo" class="quote-stats" aria-label="종목 요약"></section>
+        </div>
+      </div>
+    </section>
+
+    <section class="broker">
+      <div class="broker-col"><div class="broker-title">외국계</div><div id="sellBrokers"></div></div>
+      <div class="broker-col buy-side"><div class="broker-title">외국계</div><div id="buyBrokers"></div></div>
+    </section>
+
+    <section class="control-strip">
+      <button type="button" data-seek-time="090000000" title="장 시작 09:00으로 이동">처음</button>
+      <button type="button" data-seek-seconds="-60" title="1분 이전">-1분</button>
+      <button type="button" data-seek-seconds="-1" title="1초 이전">-1초</button>
+      <button type="button" data-step-event="-1" title="이전 이벤트">←</button>
+      <button id="play" type="button" class="play" title="재생">재생</button>
+      <button type="button" data-step-event="1" title="다음 이벤트">→</button>
+      <button type="button" data-seek-seconds="1" title="1초 이후">+1초</button>
+      <button type="button" data-seek-seconds="60" title="1분 이후">+1분</button>
+      <button type="button" data-seek-time="153000000" title="장 마감 15:30으로 이동">끝</button>
+    </section>
+    <section class="inputs">
+      <input id="no" value="0" aria-label="이벤트 번호">
+      <input id="time" aria-label="시간">
+      <div class="chip">◷</div>
+      <div id="speedChip" class="chip button-like" title="배속 변경">x1.0</div>
+    </section>
+    <section class="trade">
+      <div>기초</div><div id="asset">10,000,000</div><div>수수료</div><div>0.21</div><button id="marketButton" class="sell">시장가</button><input id="priceInput" aria-label="주문 가격" inputmode="numeric"><button id="buyButton" class="buy">매수</button>
+    </section>
+    <section class="tabbar">
+      <button class="icon-btn">↺</button><button class="icon-btn share">↗</button><button class="icon-btn">▤</button>
+      <span></span><button class="tab">기초</button><button id="holding" class="tab">보유 0</button><span>수량</span><input id="qtyInput" class="qty" name="quantity" aria-label="수량" value="100"><button id="sellButton" class="sell">매도</button>
+    </section>
+    <section class="size-strip">
+      <button data-size-pct="10">10%</button>
+      <button data-size-pct="30">30%</button>
+      <button data-size-pct="50">50%</button>
+      <button data-size-pct="60">60%</button>
+      <button data-size-pct="90">90%</button>
+      <button data-size-pct="100">100%</button>
+    </section>
+    <section class="summary"><div>기초자산</div><div>평가자산</div><div>누적수수료</div><div>확정수익</div><div>잔고수익</div><div>수익률</div></section>
+    <section class="summary summary-values"><div id="baseAsset">10,000,000</div><div id="evalAsset">10,000,000</div><div id="feeSum">0</div><div id="realizedProfit">0</div><div id="unrealizedProfit">0</div><div id="profitRate">0.00%</div></section>
+    <section class="orders">
+      <div class="orders-head"><span id="ordersTitle">대기 주문 0건</span><button id="clearOrders">취소</button></div>
+      <div id="ordersList" class="orders-list"><div class="orders-empty">대기 주문 없음</div></div>
+    </section>
+    </div>
+    <div class="col col-charts">
+    <section class="profile-panel" aria-label="매물대">
+      <div class="profile-head"><strong>매물대</strong><span class="profile-sub" id="profileSub"></span></div>
+      <div class="profile-wrap">
+        <canvas id="profileCanvas"></canvas>
+      </div>
+    </section>
+    <section class="chart-panel">
+      <div class="chart-head">
+        <strong>차트</strong>
+        <select id="chartGap" aria-label="차트 간격">
+          <option value="10000">10초</option>
+          <option value="60000" selected>1분</option>
+          <option value="300000">5분</option>
+        </select>
+        <button id="chartReload">갱신</button>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="chartCanvas" width="512" height="210"></canvas>
+        <div id="chartEmpty" class="chart-empty">차트 대기 중</div>
+      </div>
+    </section>
+    </div>
+  </div>
+
+    <div id="status" class="status">대기 중</div>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let state = {
+      no: 0,
+      timer: null,
+      playBusy: false,
+      symbols: [],
+      symbolMap: new Map(),
+      lastTrade: {},
+      lastBook: {},
+      lastAfter: {},
+      lastBroker: {},
+      currentEventTime: "",
+      recentTrades: [],
+      seenTradeNos: new Set(),
+      executedBuyVolume: 0,
+      executedSellVolume: 0,
+      info: {},
+      chartRows: [],
+      speed: 1,
+      orderPriceLocked: false,
+      pendingOrders: [],
+      nextOrderId: 1,
+      initialJumpTime: "",
+      position: { cash: 10000000, qty: 0, avg: 0, fee: 0, realized: 0 },
+      localLines: null,
+      localNos: null,
+      localKey: "",
+      localInfo: null,
+      localLoading: null,
+      localFailed: new Set()
+    };
+
+    function fmt(v) {
+      if (v === undefined || v === null || v === "") return "";
+      const n = Number(String(v).replace(/^\+/, ""));
+      if (Number.isFinite(n)) return n.toLocaleString("ko-KR");
+      return v;
+    }
+
+    function clockText(value) {
+      const raw = String(value ?? "").trim();
+      if (!raw) return "16:00:01";
+      if (raw.includes(":")) return raw.slice(0, 8);
+      const digits = raw.replace(/\D/g, "");
+      if (digits.length === 8) {
+        const shortMinute = Number(digits.slice(1, 3));
+        if (shortMinute <= 59) return `${digits.slice(0, 1).padStart(2, "0")}:${digits.slice(1, 3)}:${digits.slice(3, 5)}`;
+        return `${digits.slice(0, 2)}:${digits.slice(2, 4)}:${digits.slice(4, 6)}`;
+      }
+      if (digits.length >= 9) return `${digits.slice(0, 2)}:${digits.slice(2, 4)}:${digits.slice(4, 6)}`;
+      if (digits.length >= 6) return `${digits.slice(-6, -4)}:${digits.slice(-4, -2)}:${digits.slice(-2)}`;
+      return raw;
+    }
+
+    function num(v) {
+      const n = Number(String(v ?? "").replace(/,/g, "").replace(/^\+/, ""));
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    function cell(text = "", cls = "") {
+      const div = document.createElement("div");
+      div.className = `cell ${cls}`;
+      div.textContent = text;
+      return div;
+    }
+
+    function priceCell(price, cls) {
+      const div = cell(fmt(price), `${cls} price`);
+      if (price !== undefined && price !== null && price !== "") {
+        div.dataset.price = String(price);
+        div.title = "클릭해서 주문 가격 입력";
+      }
+      return div;
+    }
+
+    function quantityCell(value, side, maximum) {
+      const quantity = Math.max(0, num(value));
+      const div = cell("", `${side} quote-qty depth-cell`);
+      const bar = document.createElement("span");
+      bar.className = `depth-bar ${side}`;
+      bar.style.width = `${maximum > 0 ? Math.min(100, quantity / maximum * 100) : 0}%`;
+      const label = document.createElement("span");
+      label.className = "depth-label";
+      label.textContent = fmt(value);
+      div.append(bar, label);
+      return div;
+    }
+
+    function latest(events, type) {
+      for (let i = events.length - 1; i >= 0; i--) if (events[i].event_type === type) return events[i];
+      return {};
+    }
+
+    function marketName(kind) {
+      const value = String(kind ?? "");
+      if (value === "10") return "KOSDAQ";
+      if (value === "0") return "KOSPI";
+      return value || "-";
+    }
+
+    function renderTop(info, trade) {
+      const current = num(trade.price || info.close);
+      const prev = num(info.prev_close || info.basis_price);
+      const diff = current && prev ? current - prev : 0;
+      const rawRate = trade.change_rate;
+      const diffPct = rawRate !== undefined && rawRate !== null && rawRate !== ""
+        ? Number(rawRate)
+        : (current && prev ? (diff / prev) * 100 : 0);
+      const identity = [info.code, info.name].filter(Boolean).join(" ");
+      $("symbolTitle").textContent = identity || "종목정보 없음";
+      $("symbolTitle").title = identity || "";
+      $("quoteTime").textContent = clockText(state.currentEventTime || trade.time || state.lastBook.time);
+      const statRows = [
+        ["__group", "시세"],
+        ["시가", info.open, "stat-up"],
+        ["고가", info.high, "stat-up"],
+        ["저가", info.low, "stat-up"],
+        ["기준", info.basis_price || info.prev_close, "stat-down"],
+        ["상한", info.upper_limit, "stat-up"],
+        ["하한", info.lower_limit, "stat-up"],
+        ["__group", "지표"],
+        ["PER", info.per],
+        ["PBR", info.pbr],
+        ["ROE", info.roe],
+        ["__group", "수급"],
+        ["외인", state.lastBroker.foreign_net_buy_estimate],
+        ["비중", info.foreign_ratio]
+      ];
+      state.recentTrades.slice().reverse().forEach((item, index) => {
+        const volume = num(item.volume);
+        statRows.push([index === 0 ? "체결량" : "", item.volume, volume > 0 ? "trade-volume-up" : volume < 0 ? "trade-volume-down" : ""]);
+      });
+      const root = $("topInfo");
+      root.innerHTML = "";
+      statRows.forEach(([label, value, tone = ""]) => {
+        if (label === "__group") {
+          const group = document.createElement("div");
+          group.className = "quote-stat-group";
+          group.textContent = value;
+          root.append(group);
+          return;
+        }
+        const row = document.createElement("div");
+        row.className = `quote-stat-row ${tone}`.trim();
+        const labelCell = document.createElement("span");
+        labelCell.textContent = label;
+        const valueCell = document.createElement("strong");
+        valueCell.textContent = value === undefined || value === null || value === "" ? "-" : fmt(value);
+        row.append(labelCell, valueCell);
+        root.append(row);
+      });
+    }
+
+    function renderBook(book) {
+      const asks = $("asks");
+      const bids = $("bids");
+      asks.innerHTML = "";
+      bids.innerHTML = "";
+      const current = num(state.lastTrade.price) || num(book.bid_price_1) || num(book.ask_price_1);
+      const askMax = Math.max(1, ...Array.from({ length: 10 }, (_, index) => num(book[`ask_qty_${index + 1}`])));
+      const bidMax = Math.max(1, ...Array.from({ length: 10 }, (_, index) => num(book[`bid_qty_${index + 1}`])));
+      const rateText = (price) => {
+        const numeric = num(price);
+        if (!numeric || !current) return "";
+        return `${((numeric - current) / current * 100).toFixed(2)}`;
+      };
+      const addRow = (root, side, level) => {
+        const price = book[`${side}_price_${level}`];
+        const askPrice = book[`ask_price_${level}`];
+        const bidPrice = book[`bid_price_${level}`];
+        const row = document.createElement("div");
+        row.className = `quote-row ${side}`;
+        if (current && (num(price) === current || (side === "bid" && num(askPrice) === current))) row.classList.add("current");
+        const delta = cell(fmt(book[`${side}_delta_${level}`]), `${side} quote-delta`);
+        const quantity = quantityCell(book[`${side}_qty_${level}`], side, side === "ask" ? askMax : bidMax);
+        const priceValue = priceCell(price, `${side} quote-price`);
+        const rate = cell(rateText(price), `${side} quote-rate`);
+        const emptyLeft = cell("", `${side} quote-empty`);
+        const emptyRight = cell("", `${side} quote-empty`);
+        if (side === "ask") row.append(delta, quantity, priceValue, rate, emptyLeft, emptyRight);
+        else {
+          const bidPriceValue = priceCell(bidPrice, "bid quote-price");
+          const bidRate = cell(rateText(bidPrice), "bid quote-rate");
+          const bidQuantity = quantityCell(book[`bid_qty_${level}`], "bid", bidMax);
+          const bidDelta = cell(fmt(book[`bid_delta_${level}`]), "bid quote-delta");
+          row.append(emptyLeft, emptyRight, bidPriceValue, bidRate, bidQuantity, bidDelta);
+        }
+        root.append(row);
+      };
+      for (let level = 10; level >= 1; level--) {
+        addRow(asks, "ask", level);
+      }
+      for (let level = 1; level <= 10; level++) {
+        addRow(bids, "bid", level);
+      }
+      renderQuoteTotals(book, state.lastAfter);
+    }
+
+    function renderQuoteTotals(book, after) {
+      const askTotal = Array.from({ length: 10 }, (_, index) => num(book[`ask_qty_${index + 1}`])).reduce((sum, value) => sum + value, 0);
+      const bidTotal = Array.from({ length: 10 }, (_, index) => num(book[`bid_qty_${index + 1}`])).reduce((sum, value) => sum + value, 0);
+      $("quoteAskTotal").textContent = fmt(askTotal);
+      $("quoteNetTotal").textContent = fmt(bidTotal - askTotal);
+      $("quoteBidTotal").textContent = fmt(bidTotal);
+      $("quoteAfterValue").textContent = fmt(after?.after_sell_total) || "";
+      $("quoteAfterRight").textContent = fmt(after?.after_buy_total) || "";
+      const strength = document.querySelector(".quote-after");
+      const buyVolume = state.executedBuyVolume;
+      const sellVolume = state.executedSellVolume;
+      const executedTotal = buyVolume + sellVolume;
+      if (buyVolume > 0 && sellVolume > 0) {
+        const buyRatio = buyVolume / executedTotal * 100;
+        const sellRatio = 100 - buyRatio;
+        const tradeStrength = buyVolume / sellVolume * 100;
+        strength.classList.remove("no-strength");
+        strength.style.setProperty("--buy-strength", `${buyRatio}%`);
+        strength.style.setProperty("--sell-strength", `${sellRatio}%`);
+        strength.title = `체결강도 ${tradeStrength.toFixed(1)}% · 매수 체결 ${buyRatio.toFixed(1)}% · 매도 체결 ${sellRatio.toFixed(1)}%`;
+      } else {
+        strength.classList.add("no-strength");
+        strength.style.setProperty("--buy-strength", "0%");
+        strength.style.setProperty("--sell-strength", "0%");
+        strength.removeAttribute("title");
+      }
+    }
+
+    function renderBrokers(broker) {
+      const sell = $("sellBrokers");
+      const buy = $("buyBrokers");
+      const sellTitle = document.querySelector(".broker-col .broker-title");
+      const buyTitle = document.querySelector(".broker-col.buy-side .broker-title");
+      if (sellTitle) sellTitle.textContent = `외국계 매도 ${fmt(broker.foreign_sell_estimate) || "-"}`;
+      if (buyTitle) buyTitle.textContent = `외국계 매수 ${fmt(broker.foreign_buy_estimate) || "-"}`;
+      sell.innerHTML = "";
+      buy.innerHTML = "";
+      for (let i = 1; i <= 5; i++) {
+        sell.insertAdjacentHTML("beforeend", `<div class="broker-row"><div>${i}</div><div>${broker[`sell_broker_${i}`] || ""}</div><div>${fmt(broker[`sell_broker_qty_${i}`])}</div></div>`);
+        buy.insertAdjacentHTML("beforeend", `<div class="broker-row"><div>${i}</div><div>${broker[`buy_broker_${i}`] || ""}</div><div>${fmt(broker[`buy_broker_qty_${i}`])}</div></div>`);
+      }
+    }
+
+    function resetRuntimeState() {
+      state.no = 0;
+      state.lastTrade = {};
+      state.lastBook = {};
+      state.lastAfter = {};
+      state.lastBroker = {};
+      state.currentEventTime = "";
+      state.recentTrades = [];
+      state.seenTradeNos = new Set();
+      state.executedBuyVolume = 0;
+      state.executedSellVolume = 0;
+      state.orderPriceLocked = false;
+      state.pendingOrders = [];
+      state.nextOrderId = 1;
+      state.position = { cash: 10000000, qty: 0, avg: 0, fee: 0, realized: 0 };
+    }
+
+    function mergeLatest(events) {
+      events.forEach((event) => {
+        if (event.event_type === "1") {
+          state.lastTrade = event;
+          const tradeKey = `${event.date}/${event.code}/${event.no}`;
+          if (!state.seenTradeNos.has(tradeKey) && event.trade_volume !== undefined && event.trade_volume !== null && event.trade_volume !== "") {
+            state.seenTradeNos.add(tradeKey);
+            const volume = num(event.trade_volume);
+            if (volume > 0) state.executedBuyVolume += volume;
+            if (volume < 0) state.executedSellVolume += Math.abs(volume);
+            state.recentTrades.push({ no: event.no, time: event.time, volume: event.trade_volume });
+            if (state.recentTrades.length > 10) state.recentTrades.shift();
+          }
+        }
+        if (event.event_type === "2") state.lastBook = event;
+        if (event.event_type === "3") state.lastAfter = event;
+        if (event.event_type === "4") state.lastBroker = event;
+      });
+    }
+
+    function currentPrice() {
+      return num(state.lastTrade.price) || num(state.lastBook.bid_price_1) || num(state.lastBook.ask_price_1) || num($("priceInput")?.value);
+    }
+
+    function lrsSlope(rows) {
+      const n = rows.length;
+      if (n < 2) return null;
+      const meanX = (n - 1) / 2;
+      const meanY = rows.reduce((sum, row) => sum + num(row.close), 0) / n;
+      let nume = 0;
+      let deno = 0;
+      rows.forEach((row, index) => {
+        nume += (index - meanX) * (num(row.close) - meanY);
+        deno += (index - meanX) ** 2;
+      });
+      return deno ? nume / deno : null;
+    }
+
+    function speedText() {
+      return `x${Number.isInteger(state.speed) ? state.speed.toFixed(1) : state.speed}`;
+    }
+
+    function updateSpeedUi() {
+      $("speedLabel").textContent = speedText();
+      $("speedChip").textContent = speedText();
+    }
+
+    function stopPlayback() {
+      if (state.timer) {
+        clearInterval(state.timer);
+        state.timer = null;
+      }
+      $("play").textContent = "재생";
+      $("play").title = "재생";
+    }
+
+    function playIntervalMs() {
+      return Math.max(80, Math.round(1200 / state.speed));
+    }
+
+    function startPlayback() {
+      stopPlayback();
+      $("play").textContent = "정지";
+      $("play").title = "일시정지";
+      state.timer = setInterval(() => {
+        if (state.playBusy) return;
+        state.playBusy = true;
+        load(1000, false, true)
+          .then((eventCount) => {
+            if (!eventCount) {
+              $("status").textContent = "마지막 이벤트입니다";
+              stopPlayback();
+            }
+          })
+          .catch((err) => {
+            $("status").textContent = err.message;
+            stopPlayback();
+          })
+          .finally(() => {
+            state.playBusy = false;
+          });
+      }, playIntervalMs());
+    }
+
+    function cycleSpeed() {
+      const speeds = [0.25, 0.5, 1, 2, 4, 8];
+      const current = speeds.indexOf(state.speed);
+      state.speed = speeds[(current + 1) % speeds.length];
+      updateSpeedUi();
+      $("status").textContent = `배속 ${speedText()}`;
+      if (state.timer) startPlayback();
+    }
+
+    function selectOrderPrice(rawPrice) {
+      const price = num(rawPrice);
+      if (!price) return;
+      $("priceInput").value = fmt(price);
+      state.orderPriceLocked = true;
+      $("status").textContent = `지정가 ${fmt(price)} 선택`;
+    }
+
+    function updatePortfolio() {
+      $("asset").textContent = fmt(Math.round(state.position.cash));
+      const mark = currentPrice();
+      const holdingCost = state.position.avg * state.position.qty;
+      const holdingValue = state.position.qty * mark;
+      const evalAsset = state.position.cash + holdingValue;
+      const unrealized = state.position.qty ? (mark - state.position.avg) * state.position.qty : 0;
+      $("baseAsset").textContent = fmt(Math.round(holdingCost));
+      $("evalAsset").textContent = fmt(Math.round(evalAsset));
+      $("feeSum").textContent = fmt(Math.round(state.position.fee));
+      $("realizedProfit").textContent = fmt(Math.round(state.position.realized));
+      $("unrealizedProfit").textContent = fmt(Math.round(unrealized));
+      $("profitRate").textContent = `${((evalAsset - 10000000) / 10000000 * 100).toFixed(2)}%`;
+      $("holding").textContent = `보유 ${fmt(state.position.qty)}`;
+      renderOrders();
+    }
+
+    function orderPrice() {
+      return num($("priceInput").value) || currentPrice();
+    }
+
+    function applySizePercent(percent) {
+      const price = orderPrice();
+      if (!price) {
+        $("status").textContent = "수량 계산할 가격이 없습니다";
+        return;
+      }
+      const budget = state.position.cash * (percent / 100);
+      const qty = Math.floor(budget / (price * 1.0021));
+      $("qtyInput").value = String(Math.max(0, qty));
+      $("status").textContent = `${percent}% 수량 ${fmt(qty)}주 @ ${fmt(price)}`;
+    }
+
+    function renderOrders() {
+      $("ordersTitle").textContent = `대기 주문 ${state.pendingOrders.length}건`;
+      const root = $("ordersList");
+      root.innerHTML = "";
+      if (!state.pendingOrders.length) {
+        root.innerHTML = '<div class="orders-empty">대기 주문 없음</div>';
+        return;
+      }
+      state.pendingOrders.forEach((order) => {
+        const row = document.createElement("div");
+        row.className = `order-row ${order.side === "buy" ? "buy-order" : "sell-order"}`;
+        row.innerHTML = `
+          <div>${order.side === "buy" ? "매수" : "매도"}</div>
+          <div>${fmt(order.qty)}주</div>
+          <div>${fmt(order.price)}</div>
+          <div>${order.side === "buy" ? "이하" : "이상"}</div>
+          <button type="button" data-cancel-order="${order.id}" title="주문 취소">×</button>
+        `;
+        root.append(row);
+      });
+    }
+
+    function pendingBuyCommit() {
+      return state.pendingOrders
+        .filter((order) => order.side === "buy")
+        .reduce((sum, order) => sum + order.price * order.qty * 1.0021, 0);
+    }
+
+    function pendingSellQty() {
+      return state.pendingOrders
+        .filter((order) => order.side === "sell")
+        .reduce((sum, order) => sum + order.qty, 0);
+    }
+
+    function executeOrder(side, qty, price) {
+      const feeRate = 0.0021;
+      const gross = price * qty;
+      const fee = gross * feeRate;
+      if (side === "buy") {
+        if (state.position.cash < gross + fee) return false;
+        const prevCost = state.position.avg * state.position.qty;
+        state.position.cash -= gross + fee;
+        state.position.qty += qty;
+        state.position.avg = (prevCost + gross) / state.position.qty;
+        state.position.fee += fee;
+      } else {
+        if (state.position.qty < qty) return false;
+        state.position.cash += gross - fee;
+        state.position.qty -= qty;
+        state.position.realized += (price - state.position.avg) * qty - fee;
+        state.position.fee += fee;
+        if (state.position.qty === 0) state.position.avg = 0;
+      }
+      return true;
+    }
+
+    function addPendingOrder(side, qty, price) {
+      if (side === "buy") {
+        const needed = price * qty * 1.0021;
+        if (state.position.cash - pendingBuyCommit() < needed) {
+          $("status").textContent = "대기 주문 포함 현금이 부족합니다";
+          return;
+        }
+      } else if (state.position.qty - pendingSellQty() < qty) {
+        $("status").textContent = "대기 주문 포함 보유 수량이 부족합니다";
+        return;
+      }
+      state.pendingOrders.push({ id: state.nextOrderId++, side, qty, price, createdNo: Number($("no").value || state.no || 0) });
+      $("status").textContent = `${side === "buy" ? "매수" : "매도"} 대기 ${fmt(qty)}주 @ ${fmt(price)}`;
+      renderOrders();
+    }
+
+    function processPendingOrders(events) {
+      const fills = [];
+      const trades = events
+        .filter((event) => event.event_type === "1" && num(event.price))
+        .map((event) => ({ price: num(event.price), no: Number(event.no || 0), time: event.time || "" }));
+      if (!trades.length || !state.pendingOrders.length) return fills;
+
+      for (const trade of trades) {
+        const remaining = [];
+        for (const order of state.pendingOrders) {
+          if (trade.no && order.createdNo && trade.no <= order.createdNo) {
+            remaining.push(order);
+            continue;
+          }
+          const touched = order.side === "buy" ? trade.price <= order.price : trade.price >= order.price;
+          if (touched && executeOrder(order.side, order.qty, trade.price)) {
+            fills.push(`${order.side === "buy" ? "매수" : "매도"} 체결 ${fmt(order.qty)}주 @ ${fmt(trade.price)} (주문 ${fmt(order.price)})`);
+          } else {
+            remaining.push(order);
+          }
+        }
+        state.pendingOrders = remaining;
+        if (!state.pendingOrders.length) break;
+      }
+      return fills;
+    }
+
+    function order(side) {
+      const qty = Math.max(1, Math.floor(num($("qtyInput").value) || 1));
+      const manualPrice = num($("priceInput").value);
+      const price = orderPrice();
+      if (!price) {
+        $("status").textContent = "가격이 없어 주문을 처리할 수 없습니다";
+        return;
+      }
+      if (manualPrice && state.orderPriceLocked) {
+        addPendingOrder(side, qty, price);
+        updatePortfolio();
+        return;
+      }
+      if (!executeOrder(side, qty, price)) {
+        $("status").textContent = side === "buy" ? "현금이 부족합니다" : "보유 수량이 부족합니다";
+        return;
+      }
+      $("status").textContent = `${side === "buy" ? "매수" : "매도"} 체결 ${fmt(qty)}주 @ ${fmt(price)}`;
+      updatePortfolio();
+    }
+
+    function resolveCode() {
+      const raw = $("code").value.trim();
+      if (!raw) return "451060";
+      if (state.symbolMap.has(raw)) return state.symbolMap.get(raw);
+      const lower = raw.toLowerCase();
+      const exact = state.symbols.find((item) => item.code === raw || item.codeName.toLowerCase() === lower);
+      if (exact) return exact.code;
+      const partial = state.symbols.find((item) => item.codeName.toLowerCase().includes(lower) || item.name.toLowerCase().includes(lower));
+      if (partial) {
+        $("code").value = partial.codeName;
+        return partial.code;
+      }
+      return raw.split(" ")[0];
+    }
+
+    async function loadReplayDates() {
+      const res = await fetch("api/dates");
+      const dates = await res.json();
+      if (!res.ok || !Array.isArray(dates) || !dates.length) throw new Error("T 드라이브 리플레이 날짜가 없습니다");
+      const current = $("date").value.replaceAll("-", "");
+      $("date").min = dateInputValue(dates[0]);
+      $("date").max = dateInputValue(dates[dates.length - 1]);
+      if (!dates.includes(current)) $("date").value = dateInputValue(dates[dates.length - 1]);
+      $("status").textContent = `T 드라이브 날짜 ${dates.length.toLocaleString("ko-KR")}개`;
+    }
+
+    async function loadSymbols() {
+      const date = $("date").value.replaceAll("-", "");
+      const res = await fetch(`player/name.php?date=${encodeURIComponent(date)}`);
+      if (!res.ok) throw new Error("종목 목록을 불러오지 못했습니다");
+      const text = await res.text();
+      const list = $("symbolList");
+      list.innerHTML = "";
+      state.symbols = [];
+      state.symbolMap = new Map();
+      text.trim().split(/\n+/).forEach((line) => {
+        const codeName = line.split("\t")[0] || "";
+        if (!codeName) return;
+        const parts = codeName.split(" ");
+        const code = parts.shift() || "";
+        const name = parts.join(" ");
+        state.symbols.push({ code, name, codeName });
+        state.symbolMap.set(codeName, code);
+        state.symbolMap.set(code, code);
+        const option = document.createElement("option");
+        option.value = codeName;
+        list.append(option);
+      });
+      if (state.symbols.length && !state.symbolMap.has($("code").value.trim())) {
+        $("code").value = state.symbols[0].codeName;
+      }
+      $("status").textContent = `${date} 종목 ${state.symbols.length.toLocaleString("ko-KR")}개`;
+    }
+
+    function parseChart(text) {
+      return text.trim().split(/\n+/).map((line) => {
+        const p = line.split("\t");
+        return {
+          stamp: Number(p[0]),
+          label: p[1] || "",
+          open: Number(p[2]),
+          close: Number(p[3]),
+          high: Number(p[4]),
+          low: Number(p[5]),
+          buyVolume: Number(p[6]),
+          sellVolume: Number(p[7]),
+          neutralVolume: Number(p[8]),
+          maxNo: Number(p[9]),
+          minNo: Number(p[10])
+        };
+      }).filter((d) => Number.isFinite(d.open) && Number.isFinite(d.close)).sort((a, b) => a.stamp - b.stamp);
+    }
+
+    function eventTimeToChartStamp(value) {
+      const digits = String(value ?? "").replace(/\D/g, "").padStart(9, "0");
+      if (!digits.trim()) return 0;
+      const hour = Number(digits.slice(0, 2));
+      const minute = Number(digits.slice(2, 4));
+      const second = Number(digits.slice(4, 6));
+      const millis = Number(digits.slice(6, 9));
+      return ((hour * 60 + minute) * 60 + second) * 1000 + millis;
+    }
+
+    function chartRowsAtCurrentTime() {
+      const currentStamp = eventTimeToChartStamp(state.currentEventTime);
+      if (!currentStamp) return state.chartRows;
+      return state.chartRows.filter((row) => row.stamp <= currentStamp);
+    }
+
+    function chartTimeLabel(label) {
+      const text = String(label ?? "");
+      if (text.includes(":")) return text.slice(0, 5);
+      const digits = text.replace(/\D/g, "");
+      return digits.length >= 4 ? `${digits.slice(0, 2)}:${digits.slice(2, 4)}` : text;
+    }
+
+    function drawChart(rows) {
+      drawProfile(state.chartRows);
+      const canvas = $("chartCanvas");
+      const empty = $("chartEmpty");
+      if (!rows.length) {
+        empty.style.display = "grid";
+        return;
+      }
+      empty.style.display = "none";
+      const rect = canvas.getBoundingClientRect();
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.floor(rect.width * ratio));
+      canvas.height = Math.max(1, Math.floor(rect.height * ratio));
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      const w = rect.width;
+      const h = rect.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const UP = "#B23A3A";
+      const DOWN = "#33557F";
+      const MUTED = "#8A8578";
+      const GRID = "#E6E0D1";
+      const HAIR = "#CFC9B8";
+      const PAPER = "#FAFAF7";
+      const FONT = '10px "Pretendard", "Malgun Gothic", Arial, sans-serif';
+
+      const pad = { top: 12, right: 56, bottom: 30, left: 6 };
+      const plotW = w - pad.left - pad.right;
+      const plotH = h - pad.top - pad.bottom;
+      const priceH = plotH * 0.74;
+      const volTop = pad.top + priceH + plotH * 0.05;
+      const volH = plotH * 0.21;
+
+      const priceMin = Math.min(...rows.map((r) => r.low));
+      const priceMax = Math.max(...rows.map((r) => r.high));
+      const pSpan = Math.max(1, priceMax - priceMin);
+      const pLo = priceMin - pSpan * 0.07;
+      const pHi = priceMax + pSpan * 0.07;
+      const y = (price) => pad.top + ((pHi - price) / (pHi - pLo)) * priceH;
+      const xStep = plotW / rows.length;
+      const candleW = Math.max(1.5, Math.min(12, xStep * 0.6));
+      const cx = (i) => pad.left + i * xStep + xStep / 2;
+
+      ctx.font = FONT;
+      ctx.textBaseline = "middle";
+      for (let i = 0; i <= 5; i++) {
+        const yy = pad.top + (priceH * i) / 5;
+        const price = pHi - ((pHi - pLo) * i) / 5;
+        ctx.strokeStyle = GRID;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(pad.left, yy);
+        ctx.lineTo(pad.left + plotW, yy);
+        ctx.stroke();
+        ctx.fillStyle = MUTED;
+        ctx.textAlign = "left";
+        ctx.fillText(fmt(Math.round(price)), pad.left + plotW + 5, yy);
+      }
+      ctx.strokeStyle = HAIR;
+      ctx.beginPath();
+      ctx.moveTo(pad.left, pad.top);
+      ctx.lineTo(pad.left, pad.top + plotH);
+      ctx.lineTo(pad.left + plotW, pad.top + plotH);
+      ctx.stroke();
+
+      let cumPV = 0;
+      let cumV = 0;
+      const vwap = rows.map((r) => {
+        const volume = r.buyVolume + r.sellVolume + r.neutralVolume;
+        const typical = (r.high + r.low + r.close) / 3;
+        cumPV += typical * volume;
+        cumV += volume;
+        return cumV ? cumPV / cumV : typical;
+      });
+      const drawLine = (values, color, dash = []) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1;
+        ctx.setLineDash(dash);
+        ctx.beginPath();
+        let pen = false;
+        values.forEach((value, i) => {
+          if (value === null || value === undefined || !Number.isFinite(value)) {
+            pen = false;
+            return;
+          }
+          const xx = cx(i);
+          const yy = y(value);
+          if (pen) ctx.lineTo(xx, yy);
+          else ctx.moveTo(xx, yy);
+          pen = true;
+        });
+        ctx.stroke();
+        ctx.setLineDash([]);
+      };
+      drawLine(vwap, "#6F6F6A", [4, 3]);
+      const ma = (period) => rows.map((r, i) => {
+        if (i < period - 1) return null;
+        let sum = 0;
+        for (let j = i - period + 1; j <= i; j++) sum += rows[j].close;
+        return sum / period;
+      });
+      drawLine(ma(5), UP);
+      drawLine(ma(20), DOWN);
+
+      const volMax = Math.max(1, ...rows.map((r) => r.buyVolume + r.sellVolume + r.neutralVolume));
+      rows.forEach((r, i) => {
+        const x = cx(i);
+        const up = r.close >= r.open;
+        const color = up ? UP : DOWN;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(x, y(r.high));
+        ctx.lineTo(x, y(r.low));
+        ctx.stroke();
+        const top = y(Math.max(r.open, r.close));
+        const bottom = y(Math.min(r.open, r.close));
+        ctx.fillStyle = color;
+        ctx.fillRect(x - candleW / 2, top, candleW, Math.max(1, bottom - top));
+
+        const volume = r.buyVolume + r.sellVolume + r.neutralVolume;
+        const vh = (volume / volMax) * volH;
+        if (vh > 0.5) {
+          ctx.fillStyle = up ? "rgba(178,58,58,.4)" : "rgba(51,85,127,.4)";
+          ctx.fillRect(x - candleW / 2, volTop + volH - vh, candleW, vh);
+        }
+      });
+
+      const last = rows[rows.length - 1];
+      const prevClose = rows.length > 1 ? rows[rows.length - 2].close : last.open;
+      const lastColor = last.close >= prevClose ? UP : DOWN;
+      const lastY = Math.min(Math.max(y(last.close), pad.top + 7), pad.top + priceH - 7);
+      ctx.strokeStyle = lastColor;
+      ctx.lineWidth = 1;
+      ctx.setLineDash([2, 2]);
+      ctx.beginPath();
+      ctx.moveTo(pad.left, y(last.close));
+      ctx.lineTo(pad.left + plotW, y(last.close));
+      ctx.stroke();
+      ctx.setLineDash([]);
+      const lastText = fmt(last.close);
+      ctx.font = `bold ${FONT}`;
+      const tagW = ctx.measureText(lastText).width + 10;
+      ctx.fillStyle = lastColor;
+      ctx.fillRect(pad.left + plotW + 1, lastY - 7, tagW, 14);
+      ctx.fillStyle = PAPER;
+      ctx.textAlign = "center";
+      ctx.fillText(lastText, pad.left + plotW + 1 + tagW / 2, lastY);
+      ctx.textAlign = "left";
+
+      ctx.strokeStyle = HAIR;
+      ctx.beginPath();
+      ctx.moveTo(pad.left, volTop + volH);
+      ctx.lineTo(pad.left + plotW, volTop + volH);
+      ctx.stroke();
+
+      ctx.fillStyle = MUTED;
+      ctx.font = FONT;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "alphabetic";
+      const TICKS = 5;
+      const used = new Set();
+      for (let i = 0; i < TICKS; i++) {
+        const idx = Math.round((i * (rows.length - 1)) / (TICKS - 1));
+        if (used.has(idx)) continue;
+        used.add(idx);
+        ctx.fillText(chartTimeLabel(rows[idx].label), cx(idx), h - 9);
+      }
+      ctx.textAlign = "left";
+      ctx.textBaseline = "alphabetic";
+    }
+
+    function drawProfile(rows) {
+      const canvas = $("profileCanvas");
+      if (!canvas) return;
+      const panel = canvas.closest(".profile-panel");
+      if (!rows || rows.length < 2) {
+        if (panel) panel.style.display = "none";
+        return;
+      }
+      if (panel) panel.style.display = "";
+      const sub = $("profileSub");
+      const rect = canvas.getBoundingClientRect();
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.floor(rect.width * ratio));
+      canvas.height = Math.max(1, Math.floor(rect.height * ratio));
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      const w = rect.width;
+      const h = rect.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const BINS = 22;
+      const UP = "#B23A3A";
+      const DOWN = "#33557F";
+      const NEUTRAL = "#B9AE97";
+      const INK = "#101010";
+      const MUTED = "#8A8578";
+      const pad = { left: 4, right: 56, top: 8, bottom: 8 };
+      const plotW = w - pad.left - pad.right;
+      const plotH = h - pad.top - pad.bottom;
+      const binH = plotH / BINS;
+
+      const pMin = Math.min(...rows.map((r) => r.low));
+      const pMax = Math.max(...rows.map((r) => r.high));
+      const span = Math.max(1, pMax - pMin);
+      const lo = pMin - span * 0.04;
+      const hi = pMax + span * 0.04;
+
+      const bins = Array.from({ length: BINS }, () => ({ buy: 0, sell: 0, neutral: 0, total: 0 }));
+      rows.forEach((r) => {
+        const buy = num(r.buyVolume);
+        const sell = num(r.sellVolume);
+        const neutral = num(r.neutralVolume);
+        const volume = buy + sell + neutral;
+        if (!volume) return;
+        const range = r.high - r.low;
+        if (range <= 0) {
+          const b = Math.min(BINS - 1, Math.max(0, Math.floor(((hi - r.close) / (hi - lo)) * BINS)));
+          bins[b].buy += buy;
+          bins[b].sell += sell;
+          bins[b].neutral += neutral;
+          bins[b].total += volume;
+          return;
+        }
+        for (let b = 0; b < BINS; b++) {
+          const bHi = hi - ((hi - lo) * b) / BINS;
+          const bLo = hi - ((hi - lo) * (b + 1)) / BINS;
+          const overlap = Math.min(r.high, bHi) - Math.max(r.low, bLo);
+          if (overlap <= 0) continue;
+          const weight = overlap / range;
+          bins[b].buy += buy * weight;
+          bins[b].sell += sell * weight;
+          bins[b].neutral += neutral * weight;
+          bins[b].total += volume * weight;
+        }
+      });
+
+      let poc = 0;
+      let maxVol = 0;
+      bins.forEach((bin, i) => {
+        if (bin.total > maxVol) {
+          maxVol = bin.total;
+          poc = i;
+        }
+      });
+      const volScale = plotW / Math.max(1, maxVol);
+      const barFont = '9px "Pretendard", "Malgun Gothic", Arial, sans-serif';
+      const pocFont = 'bold 9px "Pretendard", "Malgun Gothic", Arial, sans-serif';
+
+      ctx.textBaseline = "middle";
+      bins.forEach((bin, i) => {
+        const cy = pad.top + i * binH + binH / 2;
+        const bh = Math.max(1, binH - 2.5);
+        let x = pad.left;
+        const wSell = bin.sell * volScale;
+        const wNeutral = bin.neutral * volScale;
+        const wBuy = bin.buy * volScale;
+        if (wSell > 0.4) {
+          ctx.fillStyle = DOWN;
+          ctx.fillRect(x, cy - bh / 2, wSell, bh);
+        }
+        x += wSell;
+        if (wNeutral > 0.4) {
+          ctx.fillStyle = NEUTRAL;
+          ctx.fillRect(x, cy - bh / 2, wNeutral, bh);
+        }
+        x += wNeutral;
+        if (wBuy > 0.4) {
+          ctx.fillStyle = UP;
+          ctx.fillRect(x, cy - bh / 2, wBuy, bh);
+        }
+        const price = hi - ((hi - lo) * (i + 0.5)) / BINS;
+        ctx.font = i === poc ? pocFont : barFont;
+        ctx.fillStyle = i === poc ? INK : MUTED;
+        ctx.textAlign = "left";
+        ctx.fillText(fmt(Math.round(price)), pad.left + plotW + 5, cy);
+      });
+
+      if (sub) {
+        const pocPrice = hi - ((hi - lo) * (poc + 0.5)) / BINS;
+        sub.textContent = `POC ${fmt(Math.round(pocPrice))}`;
+      }
+    }
+
+    async function loadChart(date, code) {
+      const time = $("time").value || "90000000";
+      const gap = $("chartGap").value;
+      const res = await fetch(`player/chart.php?date=${encodeURIComponent(date)}&code=${encodeURIComponent(code)}&time=${encodeURIComponent(time)}&bong=1&gap=${encodeURIComponent(gap)}`);
+      if (!res.ok) throw new Error("chart load failed");
+      state.chartRows = parseChart(await res.text());
+      drawChart(chartRowsAtCurrentTime());
+    }
+
+    function dateInputValue(value) {
+      const text = String(value || "").replaceAll("-", "");
+      return text.length === 8 ? `${text.slice(0, 4)}-${text.slice(4, 6)}-${text.slice(6, 8)}` : "";
+    }
+
+    function applyInitialUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      const date = dateInputValue(params.get("date") || params.get("d"));
+      const code = params.get("code") || params.get("c");
+      const no = params.get("no");
+      const time = params.get("time") || params.get("t");
+      if (date) $("date").value = date;
+      if (code) $("code").value = code;
+      if (no !== null) {
+        $("no").value = String(Math.max(0, Number(no) || 0));
+        state.no = Math.max(0, Number(no) || 0);
+      }
+      if (time) state.initialJumpTime = time;
+    }
+
+    async function jumpToTime(date, code, timeText, direction = "forward") {
+      $("status").textContent = `${timeText} 시점으로 이동 중...`;
+      const res = await fetch(`api/time-index?date=${encodeURIComponent(date)}&code=${encodeURIComponent(code)}&time=${encodeURIComponent(timeText)}&direction=${encodeURIComponent(direction)}`);
+      const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.error || "시간 이동 실패");
+      const eventNo = Math.max(0, Number(data.event_no || 0) - 1);
+      $("no").value = String(eventNo);
+      $("time").value = data.event_time || timeText;
+      state.no = eventNo;
+      return data;
+    }
+
+    async function loadAtTime(timeText, direction = "forward") {
+      const date = $("date").value.replaceAll("-", "");
+      const code = resolveCode();
+      await ensureLocalEvents(date, code);
+      const target = await jumpToTime(date, code, timeText, direction);
+      const eventNo = Math.max(1, Number(target.event_no || 1));
+      const warmupNo = Math.max(0, eventNo - 500);
+      $("no").value = String(warmupNo);
+      state.no = warmupNo;
+      return load(eventNo - warmupNo);
+    }
+
+    function loadMarketOpen() {
+      return loadAtTime("090000000");
+    }
+
+    function chartStampToEventTime(stamp) {
+      const safeStamp = Math.max(0, Math.min(86_399_999, Math.floor(stamp)));
+      const hour = Math.floor(safeStamp / 3_600_000);
+      const minute = Math.floor(safeStamp % 3_600_000 / 60_000);
+      const second = Math.floor(safeStamp % 60_000 / 1_000);
+      return `${String(hour).padStart(2, "0")}${String(minute).padStart(2, "0")}${String(second).padStart(2, "0")}000`;
+    }
+
+    async function seekToTime(timeText, direction = "forward") {
+      stopPlayback();
+      resetRuntimeState();
+      return loadAtTime(timeText, direction);
+    }
+
+    function seekBySeconds(seconds) {
+      const currentStamp = eventTimeToChartStamp(state.currentEventTime || $("time").value);
+      const targetStamp = currentStamp + Number(seconds) * 1000;
+      return seekToTime(chartStampToEventTime(targetStamp), seconds < 0 ? "backward" : "forward");
+    }
+
+    const TRADE_EVENT_KEYS = ["price", "change_rate", "trade_volume", "acc_volume", "acc_amount", "open", "high", "low", "prev_volume_delta", "prev_volume_ratio", "turnover_rate", "trade_strength"];
+    const AFTER_EVENT_KEYS = ["after_sell_total", "after_sell_total_delta", "after_buy_total", "after_buy_total_delta"];
+    const BOOK_EVENT_KEYS = [];
+    for (const side of ["ask", "bid"]) {
+      for (const field of ["price", "qty", "delta"]) {
+        for (let level = 1; level <= 10; level++) BOOK_EVENT_KEYS.push(`${side}_${field}_${level}`);
+      }
+    }
+    BOOK_EVENT_KEYS.push("ask_total_qty", "ask_total_delta", "bid_total_qty", "bid_total_delta");
+    const BROKER_EVENT_KEYS = [];
+    for (const side of ["sell", "buy"]) {
+      for (const suffix of ["", "_qty", "_delta"]) {
+        for (let level = 1; level <= 5; level++) BROKER_EVENT_KEYS.push(`${side}_broker${suffix}_${level}`);
+      }
+    }
+    BROKER_EVENT_KEYS.push("foreign_sell_estimate", "foreign_sell_estimate_delta", "foreign_buy_estimate", "foreign_buy_estimate_delta", "foreign_net_buy_estimate", "foreign_net_buy_delta");
+
+    function eventSecondKeyLocal(value) {
+      const text = String(value || "").replace(/\D/g, "");
+      if (!text) return -1;
+      return parseInt(text.padStart(9, "0").slice(0, 6), 10);
+    }
+
+    function parseEventLine(line, date, code) {
+      const p = line.split("\t");
+      const type = p[0] || "";
+      const ev = {
+        date,
+        code,
+        event_type: type,
+        serial: p[1] ?? "",
+        no: p[2] ?? "",
+        time: p[3] ?? "",
+        stamp: p[4] ?? ""
+      };
+      const keys = type === "1" ? TRADE_EVENT_KEYS : type === "2" ? BOOK_EVENT_KEYS : type === "3" ? AFTER_EVENT_KEYS : type === "4" ? BROKER_EVENT_KEYS : null;
+      if (keys) {
+        let i = 5;
+        for (const key of keys) ev[key] = p[i++] ?? "";
+      }
+      return ev;
+    }
+
+    async function ensureLocalEvents(date, code) {
+      const key = `${date}/${code}`;
+      if (state.localKey === key && state.localLines) return true;
+      if (state.localFailed.has(key)) return false;
+      if (state.localLoading) return state.localLoading;
+      state.localLoading = (async () => {
+        try {
+          const bundleRes = await fetch(`api/events-bundle?date=${encodeURIComponent(date)}&code=${encodeURIComponent(code)}`);
+          if (!bundleRes.ok || !bundleRes.body) {
+            state.localFailed.add(key);
+            return false;
+          }
+          const loader = $("bundleLoader");
+          const loaderMb = $("bundleMb");
+          if (loader) loader.hidden = false;
+          const reader = bundleRes.body.getReader();
+          const chunks = [];
+          let received = 0;
+          for (;;) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            chunks.push(value);
+            received += value.byteLength;
+            if (loaderMb) loaderMb.textContent = `${Math.round(received / 1048576)} MB 받는 중`;
+            $("status").textContent = `이벤트 데이터 준비 중... ${Math.round(received / 1048576)}MB`;
+          }
+          if (loaderMb) loaderMb.textContent = "화면에 펼치는 중...";
+          const buffer = await new Blob(chunks).arrayBuffer();
+          const text = new TextDecoder().decode(buffer);
+          const lines = text.split("\n");
+          if (lines.length && lines[lines.length - 1] === "") lines.pop();
+          const nos = new Int32Array(lines.length);
+          for (let i = 0; i < lines.length; i++) {
+            const parts = lines[i].split("\t", 3);
+            nos[i] = parts.length > 2 ? (parseInt(parts[2], 10) || 0) : 0;
+          }
+          let info = {};
+          try {
+            const infoRes = await fetch(`api/info?date=${encodeURIComponent(date)}&code=${encodeURIComponent(code)}`);
+            if (infoRes.ok) info = await infoRes.json();
+          } catch (infoErr) { /* info is optional */ }
+          state.localLines = lines;
+          state.localNos = nos;
+          state.localKey = key;
+          state.localInfo = info;
+          return true;
+        } catch (err) {
+          state.localFailed.add(key);
+          return false;
+        } finally {
+          state.localLoading = null;
+          const loader = $("bundleLoader");
+          if (loader) loader.hidden = true;
+        }
+      })();
+      return state.localLoading;
+    }
+
+    function localSnapshot(date, code, no, safeLimit, windowSize, advanceSecond) {
+      const nos = state.localNos;
+      const lines = state.localLines;
+      let lo = 0;
+      let hi = nos.length;
+      while (lo < hi) {
+        const mid = (lo + hi) >> 1;
+        if (nos[mid] <= no) lo = mid + 1;
+        else hi = mid;
+      }
+      const afterSecond = advanceSecond ? eventSecondKeyLocal(state.currentEventTime) : -1;
+      const applySecond = advanceSecond && afterSecond >= 0;
+      let targetSecond = null;
+      const events = [];
+      const end = Math.min(lo + windowSize, nos.length);
+      for (let i = lo; i < end; i++) {
+        const ev = parseEventLine(lines[i], date, code);
+        if (applySecond) {
+          const sec = eventSecondKeyLocal(ev.time);
+          if (targetSecond === null && sec > afterSecond) targetSecond = sec;
+          if (targetSecond !== null && sec > targetSecond) break;
+        }
+        events.push(ev);
+        if (events.length >= safeLimit) break;
+      }
+      return { date, code, info: state.localInfo || {}, events };
+    }
+
+    async function stepEvent(direction) {
+      stopPlayback();
+      const currentNo = Math.max(1, Number($("no").value || state.no || 1));
+      if (direction > 0) return load(1, false);
+      const targetNo = Math.max(1, currentNo - 1);
+      const warmupNo = Math.max(0, targetNo - 500);
+      resetRuntimeState();
+      $("no").value = String(warmupNo);
+      state.no = warmupNo;
+      return load(targetNo - warmupNo, true);
+    }
+
+    async function load(limit = 1000, refreshChart = true, advanceSecond = false) {
+      const date = $("date").value.replaceAll("-", "");
+      const code = resolveCode();
+      const no = Math.max(0, Number($("no").value || state.no || 0));
+      $("status").textContent = "불러오는 중...";
+      const safeLimit = Math.max(1, Math.floor(Number(limit) || 1));
+      const batches = Math.max(1, Math.ceil(safeLimit / 500));
+      let data;
+      if (await ensureLocalEvents(date, code)) {
+        data = localSnapshot(date, code, no, safeLimit, batches * 500, advanceSecond);
+      } else {
+        const nextSecondQuery = advanceSecond
+          ? `&next_second=1&after_time=${encodeURIComponent(state.currentEventTime)}`
+          : "";
+        const res = await fetch(`api/snapshot?date=${encodeURIComponent(date)}&code=${encodeURIComponent(code)}&no=${no}&batches=${batches}&limit=${safeLimit}${nextSecondQuery}`);
+        data = await res.json();
+        if (!res.ok || data.error) throw new Error(data.error || "API error");
+      }
+      const trade = latest(data.events, "1");
+      const book = latest(data.events, "2");
+      const after = latest(data.events, "3");
+      const broker = latest(data.events, "4");
+      state.info = data.info || {};
+      mergeLatest(data.events);
+      const currentEvent = data.events[data.events.length - 1];
+      if (currentEvent?.time) state.currentEventTime = currentEvent.time;
+      const fills = processPendingOrders(data.events);
+      renderTop(data.info, state.lastTrade);
+      renderBook(state.lastBook);
+      renderBrokers(state.lastBroker);
+      const maxNo = data.events.reduce((m, e) => Math.max(m, Number(e.no || 0)), no);
+      state.no = maxNo;
+      $("no").value = String(maxNo);
+      $("time").value = state.currentEventTime || state.lastTrade.time || state.lastBook.time || state.lastAfter.time || "";
+      if (!state.orderPriceLocked) $("priceInput").value = fmt(currentPrice());
+      updatePortfolio();
+      const pending = state.pendingOrders.length ? ` · 대기 ${state.pendingOrders.length}건` : "";
+      const filled = fills.length ? ` · ${fills.join(", ")}` : "";
+      $("status").textContent = `${data.date} ${data.code} · 이벤트 ${data.events.length.toLocaleString("ko-KR")}건 · no=${maxNo}${pending}${filled}`;
+      const dl = $("datelineDate");
+      const dt = String(data.date || "").replaceAll("-", "");
+      if (dl && dt.length === 8) dl.textContent = `${dt.slice(0, 4)}년 ${Number(dt.slice(4, 6))}월 ${Number(dt.slice(6, 8))}일`;
+      if (refreshChart) await loadChart(date, code);
+      else drawChart(chartRowsAtCurrentTime());
+      return data.events.length;
+    }
+
+    $("dateButton").addEventListener("click", () => {
+      const input = $("date");
+      if (typeof input.showPicker === "function") input.showPicker();
+      else input.focus();
+    });
+    $("date").addEventListener("change", () => {
+      $("no").value = "0";
+      resetRuntimeState();
+      loadSymbols()
+        .then(() => loadMarketOpen())
+        .catch((err) => $("status").textContent = err.message);
+    });
+    $("code").addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        $("no").value = "0";
+        resetRuntimeState();
+        loadMarketOpen().catch((err) => $("status").textContent = err.message);
+      }
+    });
+    $("search").addEventListener("click", () => {
+      $("no").value = "0";
+      resetRuntimeState();
+      loadMarketOpen().catch((err) => $("status").textContent = err.message);
+    });
+    $("quoteRefresh").addEventListener("click", () => {
+      load().catch((err) => $("status").textContent = err.message);
+    });
+    $("buyButton").addEventListener("click", () => order("buy"));
+    $("sellButton").addEventListener("click", () => order("sell"));
+    $("ordersList").addEventListener("click", (event) => {
+      const target = event.target.closest("[data-cancel-order]");
+      if (!target) return;
+      const id = Number(target.dataset.cancelOrder);
+      state.pendingOrders = state.pendingOrders.filter((order) => order.id !== id);
+      renderOrders();
+      $("status").textContent = `대기 주문 취소 #${id}`;
+    });
+    $("clearOrders").addEventListener("click", () => {
+      const count = state.pendingOrders.length;
+      state.pendingOrders = [];
+      renderOrders();
+      $("status").textContent = count ? `대기 주문 ${count}건 취소` : "취소할 대기 주문이 없습니다";
+    });
+    $("marketButton").addEventListener("click", () => {
+      $("priceInput").value = "";
+      state.orderPriceLocked = false;
+      $("status").textContent = "시장가 모드";
+    });
+    $("priceInput").addEventListener("input", () => {
+      state.orderPriceLocked = Boolean($("priceInput").value.trim());
+    });
+    $("asks").addEventListener("click", (event) => {
+      const target = event.target.closest("[data-price]");
+      if (target) selectOrderPrice(target.dataset.price);
+    });
+    $("bids").addEventListener("click", (event) => {
+      const target = event.target.closest("[data-price]");
+      if (target) selectOrderPrice(target.dataset.price);
+    });
+    $("speedLabel").addEventListener("click", cycleSpeed);
+    $("speedChip").addEventListener("click", cycleSpeed);
+    $("chartReload").addEventListener("click", () => {
+      const date = $("date").value.replaceAll("-", "");
+      const code = resolveCode();
+      loadChart(date, code).catch((err) => $("status").textContent = err.message);
+    });
+    $("chartGap").addEventListener("change", () => {
+      const date = $("date").value.replaceAll("-", "");
+      const code = resolveCode();
+      loadChart(date, code).catch((err) => $("status").textContent = err.message);
+    });
+    document.querySelectorAll("[data-size-pct]").forEach((button) => {
+      button.addEventListener("click", () => applySizePercent(Number(button.dataset.sizePct)));
+    });
+    window.addEventListener("resize", () => {
+      const date = $("date").value.replaceAll("-", "");
+      const code = resolveCode();
+      loadChart(date, code).catch(() => {});
+    });
+    document.querySelectorAll("[data-seek-time]").forEach((button) => {
+      button.addEventListener("click", () => seekToTime(button.dataset.seekTime).catch((err) => $("status").textContent = err.message));
+    });
+    document.querySelectorAll("[data-seek-seconds]").forEach((button) => {
+      button.addEventListener("click", () => seekBySeconds(Number(button.dataset.seekSeconds)).catch((err) => $("status").textContent = err.message));
+    });
+    document.querySelectorAll("[data-step-event]").forEach((button) => {
+      button.addEventListener("click", () => stepEvent(Number(button.dataset.stepEvent)).catch((err) => $("status").textContent = err.message));
+    });
+    $("play").addEventListener("click", () => {
+      if (state.timer) {
+        stopPlayback();
+        return;
+      }
+      startPlayback();
+    });
+    updateSpeedUi();
+    applyInitialUrlParams();
+    loadReplayDates()
+      .then(() => loadSymbols())
+      .then(async () => {
+        if (state.initialJumpTime) {
+          const initialTime = state.initialJumpTime;
+          state.initialJumpTime = "";
+          return loadAtTime(initialTime);
+        }
+        return loadMarketOpen();
+      })
+      .catch((err) => $("status").textContent = err.message);
+  </script>
+</body>
+</html>

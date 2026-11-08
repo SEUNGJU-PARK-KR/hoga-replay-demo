@@ -1,4 +1,6 @@
 __pycache__/
+remote_index.db
+bundle_cache/
 data/20240717/20240717.part0002.zip
 data/20240717/20240717.part0003.zip
 data/20240717/20240717.part0002.zip.sha256

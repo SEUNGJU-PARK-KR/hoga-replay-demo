@@ -9,6 +9,8 @@ import io
 import json
 import os
 import re
+import sqlite3
+import threading
 import zipfile
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -33,6 +35,104 @@ REMOTE_INDEX_CACHE: dict[
 ] = {}
 REMOTE_CHART_CACHE: dict[tuple[str, str, int], str] = {}
 REMOTE_EVENT_CACHE: OrderedDict[tuple[str, str], tuple[list[int], list[str]]] = OrderedDict()
+REMOTE_INDEX_DB = ROOT / "remote_index.db"
+BUNDLE_CACHE_DIR = ROOT / "bundle_cache"
+BUNDLE_MAX_BYTES = 300 * 1024 * 1024
+_INDEX_DB_LOCK = threading.Lock()
+
+
+def _index_db() -> "sqlite3.Connection":
+    import sqlite3
+
+    conn = sqlite3.connect(str(REMOTE_INDEX_DB), timeout=60)
+    conn.execute(
+        "CREATE TABLE IF NOT EXISTS zip_sig("
+        "date TEXT NOT NULL, archive TEXT NOT NULL, size INTEGER NOT NULL,"
+        "mtime INTEGER NOT NULL, PRIMARY KEY(date, archive))"
+    )
+    conn.execute(
+        "CREATE TABLE IF NOT EXISTS code_member("
+        "date TEXT NOT NULL, code TEXT NOT NULL, kind TEXT NOT NULL, seq INTEGER NOT NULL,"
+        "archive TEXT NOT NULL, entry TEXT NOT NULL,"
+        "PRIMARY KEY(date, code, kind, seq))"
+    )
+    return conn
+
+
+def _load_remote_index_disk(date: str, signature: tuple) -> dict | None:
+    import sqlite3
+
+    try:
+        with _INDEX_DB_LOCK:
+            conn = _index_db()
+            try:
+                rows = conn.execute(
+                    "SELECT archive, size, mtime FROM zip_sig WHERE date=? ORDER BY archive",
+                    (date,),
+                ).fetchall()
+                if [tuple(r) for r in rows] != [tuple(s) for s in signature]:
+                    return None
+                out: dict[str, dict[str, object]] = {}
+                for code, kind, seq, archive, entry in conn.execute(
+                    "SELECT code, kind, seq, archive, entry FROM code_member"
+                    " WHERE date=? ORDER BY code, kind, seq",
+                    (date,),
+                ):
+                    bucket = out.setdefault(code, {"info": None, "chart": None, "events": []})
+                    member = (REMOTE_REPLAY_ROOT / date / archive, entry)
+                    if kind == "info":
+                        bucket["info"] = member
+                    elif kind == "chart":
+                        bucket["chart"] = member
+                    else:
+                        bucket["events"].append(member)
+                conn.close()
+                return out or None
+            finally:
+                try:
+                    conn.close()
+                except Exception:
+                    pass
+    except sqlite3.Error:
+        return None
+
+
+def _save_remote_index_disk(
+    date: str, signature: tuple, code_files: dict[str, dict[str, object]]
+) -> None:
+    import sqlite3
+
+    try:
+        with _INDEX_DB_LOCK:
+            conn = _index_db()
+            try:
+                conn.execute("DELETE FROM zip_sig WHERE date=?", (date,))
+                conn.execute("DELETE FROM code_member WHERE date=?", (date,))
+                conn.executemany(
+                    "INSERT INTO zip_sig(date, archive, size, mtime) VALUES(?,?,?,?)",
+                    [(date, name, size, mtime) for name, size, mtime in signature],
+                )
+                rows = []
+                for code, bucket in code_files.items():
+                    for kind, key, seq in (
+                        ("info", "info", 0),
+                        ("chart", "chart", 0),
+                    ):
+                        member = bucket.get(key)
+                        if member:
+                            rows.append((date, code, kind, seq, Path(member[0]).name, member[1]))
+                    for seq, member in enumerate(bucket.get("events") or []):
+                        rows.append((date, code, "events", seq, Path(member[0]).name, member[1]))
+                conn.executemany(
+                    "INSERT INTO code_member(date, code, kind, seq, archive, entry)"
+                    " VALUES(?,?,?,?,?,?)",
+                    rows,
+                )
+                conn.commit()
+            finally:
+                conn.close()
+    except sqlite3.Error:
+        pass
 
 
 class ReusableThreadingHTTPServer(ThreadingHTTPServer):
@@ -86,6 +186,12 @@ def remote_index_for(date: str) -> dict[str, dict[str, object]] | None:
     cached = REMOTE_INDEX_CACHE.get(date)
     if cached and cached[0] == signature:
         return cached[1]
+
+    disk = _load_remote_index_disk(date, signature)
+    if disk is not None:
+        REMOTE_INDEX_CACHE[date] = (signature, disk)
+        return disk
+
     if cached:
         for key in list(REMOTE_EVENT_CACHE):
             if key[0] == date:
@@ -118,6 +224,7 @@ def remote_index_for(date: str) -> dict[str, dict[str, object]] | None:
 
     for bucket in code_files.values():
         bucket["events"] = sorted(bucket["events"], key=lambda item: item[1])
+    _save_remote_index_disk(date, signature, code_files)
     REMOTE_INDEX_CACHE[date] = (signature, code_files)
     return code_files
 
@@ -265,6 +372,20 @@ def remote_event_rows(date: str, code: str) -> tuple[list[int], list[str]] | Non
         REMOTE_EVENT_CACHE.move_to_end(key)
         return cached
 
+    bundle_path = _bundle_cache_path(key[0], key[1])
+    if bundle_path.exists():
+        try:
+            text = gzip.decompress(bundle_path.read_bytes()).decode("utf-8", errors="replace")
+            lines = [ln for ln in text.split("\n") if ln]
+            result = ([_event_no_key(ln) for ln in lines], lines)
+            REMOTE_EVENT_CACHE[key] = result
+            REMOTE_EVENT_CACHE.move_to_end(key)
+            while len(REMOTE_EVENT_CACHE) > 4:
+                REMOTE_EVENT_CACHE.popitem(last=False)
+            return result
+        except (OSError, EOFError):
+            pass
+
     files = remote_files_for(date, code)
     if files is None:
         return None
@@ -284,7 +405,7 @@ def remote_event_rows(date: str, code: str) -> tuple[list[int], list[str]] | Non
     result = ([row_no for row_no, _line in rows], [line for _row_no, line in rows])
     REMOTE_EVENT_CACHE[key] = result
     REMOTE_EVENT_CACHE.move_to_end(key)
-    while len(REMOTE_EVENT_CACHE) > 2:
+    while len(REMOTE_EVENT_CACHE) > 4:
         REMOTE_EVENT_CACHE.popitem(last=False)
     return result
 
@@ -475,6 +596,79 @@ def events_for(date: str, code: str, no: str, batches: int) -> list[dict]:
     raise FileNotFoundError(f"Replay data not found: {date}/{code}")
 
 
+def _event_no_key(line: str) -> int:
+    parts = line.split("\t", 3)
+    if len(parts) < 3:
+        return 0
+    try:
+        return int(parts[2])
+    except ValueError:
+        return 0
+
+
+def _bundle_cache_path(date: str, code: str) -> Path:
+    return BUNDLE_CACHE_DIR / f"{date}_{code}.bundle.gz"
+
+
+def _store_bundle_cache(date: str, code: str, body: bytes) -> None:
+    try:
+        BUNDLE_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        cache_path = _bundle_cache_path(date, code)
+        tmp_path = cache_path.with_name(cache_path.name + ".tmp")
+        tmp_path.write_bytes(body)
+        tmp_path.replace(cache_path)
+    except OSError:
+        pass
+
+
+def local_bundle_lines(date: str, code: str) -> "list[str] | None":
+    bundle = replay_dir_for(date, code)
+    if not bundle:
+        return None
+    lines: list[str] = []
+    raw_path = bundle / "events_raw.tsv"
+    if raw_path.exists():
+        lines.extend(ln for ln in raw_path.read_text(encoding="utf-8", errors="replace").splitlines() if ln)
+    for gz_path in sorted(bundle.glob("events_raw*.tsv.gz")):
+        with gzip.open(gz_path, "rt", encoding="utf-8", errors="replace") as reader:
+            lines.extend(ln.rstrip("\r\n") for ln in reader if ln.strip())
+    if not lines:
+        return None
+    lines.sort(key=_event_no_key)
+    return lines
+
+
+def events_bundle_cached(date: str, code: str) -> "bytes | str | None":
+    """Gzipped TSV of every raw event line for date/code.
+
+    Returns "too_large" when the decompressed payload exceeds
+    BUNDLE_MAX_BYTES, or None when no event data exists.
+    """
+    date = normal_date(date)
+    if remote_date_dir(date) is not None:
+        cache_path = _bundle_cache_path(date, code)
+        if cache_path.exists():
+            return cache_path.read_bytes()
+        event_cache = remote_event_rows(date, code)
+        if event_cache is None:
+            return None
+        lines = event_cache[1]
+        if sum(len(line) + 1 for line in lines) > BUNDLE_MAX_BYTES:
+            return "too_large"
+        payload = ("\n".join(lines) + "\n").encode("utf-8")
+        body = gzip.compress(payload, compresslevel=6)
+        _store_bundle_cache(date, code, body)
+        return body
+
+    lines = local_bundle_lines(date, code)
+    if lines is None:
+        return None
+    if sum(len(line) + 1 for line in lines) > BUNDLE_MAX_BYTES:
+        return "too_large"
+    payload = ("\n".join(lines) + "\n").encode("utf-8")
+    return gzip.compress(payload, compresslevel=6)
+
+
 def time_to_stamp(value: str) -> int:
     text = value.strip().replace(":", "")
     if len(text) >= 8 and text.endswith("000"):
@@ -660,6 +854,12 @@ class Handler(BaseHTTPRequestHandler):
         if parsed.path == "/api/time-index":
             self.send_time_index(qs)
             return
+        if parsed.path == "/api/events-bundle":
+            self.send_events_bundle(qs)
+            return
+        if parsed.path == "/api/info":
+            self.send_info_json(qs)
+            return
         if parsed.path == "/player/info.php":
             self.send_compatible_info(qs)
             return
@@ -726,6 +926,45 @@ class Handler(BaseHTTPRequestHandler):
         code = one(qs, "code", "451060")
         try:
             body = json.dumps(condition_data_for(date, code), ensure_ascii=False).encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+        except Exception as exc:
+            self.send_json_error(exc)
+
+    def send_events_bundle(self, qs: dict) -> None:
+        date = one(qs, "date", "20260430").replace("-", "")
+        code = one(qs, "code", "451060")
+        try:
+            body = events_bundle_cached(date, code)
+            if body is None:
+                raise FileNotFoundError(f"Replay event data not found: {date}/{code}")
+            if body == "too_large":
+                payload = json.dumps({"error": "event bundle too large"}).encode("utf-8")
+                self.send_response(413)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(payload)))
+                self.end_headers()
+                self.wfile.write(payload)
+                return
+            self.send_response(200)
+            self.send_header("Content-Type", "text/plain; charset=utf-8")
+            self.send_header("Content-Encoding", "gzip")
+            self.send_header("Content-Length", str(len(body)))
+            self.send_header("Cache-Control", "private, max-age=86400, immutable")
+            self.end_headers()
+            self.wfile.write(body)
+        except Exception as exc:
+            self.send_json_error(exc)
+
+    def send_info_json(self, qs: dict) -> None:
+        date = one(qs, "date", "20260430").replace("-", "")
+        code = one(qs, "code", "451060")
+        try:
+            info = info_for(date, code)
+            body = json.dumps(info, ensure_ascii=False).encode("utf-8")
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.send_header("Content-Length", str(len(body)))
