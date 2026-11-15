@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hoga Viewer</title>
+  <title>호가플레이 — 과거 호가·체결 다시보기</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -1116,20 +1116,20 @@
 <body>
   <div class="bundle-loader" id="bundleLoader" hidden>
     <div class="bl-card">
-      <div class="bl-kicker">HOAGA · REPLAY</div>
-      <div class="bl-title">이벤트 데이터를<br/>준비하고 있습니다</div>
+      <div class="bl-kicker">호가플레이</div>
+      <div class="bl-title">자료를<br/>불러오고 있습니다</div>
       <div class="bl-bar"><i></i></div>
       <div class="bl-mb" id="bundleMb"></div>
     </div>
   </div>
   <main class="app">
     <div class="dateline">
-      <span>HOAGA · REPLAY</span>
+      <span>호가플레이</span>
       <span>장중 호가와 체결의 기록</span>
       <span id="datelineDate"></span>
     </div>
     <div class="masthead">
-      <span class="masthead-title">호가 리플레이</span>
+      <span class="masthead-title">호가 다시보기</span>
     </div>
     <section class="toolbar" aria-label="날짜 및 종목 조회">
       <input id="date" name="date" type="date" value="" aria-label="날짜">
@@ -1137,7 +1137,7 @@
       <input id="code" name="code" value="451060" list="symbolList" aria-label="종목코드 또는 종목명" placeholder="종목명">
       <datalist id="symbolList"></datalist>
       <button id="search" class="tool-btn cyan" title="조회">⌕</button>
-      <button class="tool-btn orange" title="랜덤">R</button>
+      <button class="tool-btn orange" title="아무 종목이나 골라 보기">🎲</button>
       <button class="tool-btn blue" title="설정">⚙</button>
       <button id="quoteRefresh" class="tool-btn" title="새로고침">↻</button>
     </section>
@@ -1171,7 +1171,7 @@
               <span id="quoteAfterValue">-</span>
               <strong>시간외</strong>
               <span id="quoteAfterRight"></span>
-              <button id="speedLabel" type="button" title="배속 변경">x1.0</button>
+              <button id="speedLabel" type="button" title="재생 속도 바꾸기">1배</button>
             </section>
           </div>
           <section id="topInfo" class="quote-stats" aria-label="종목 요약"></section>
@@ -1188,18 +1188,18 @@
       <button type="button" data-seek-time="090000000" title="장 시작 09:00으로 이동">처음</button>
       <button type="button" data-seek-seconds="-60" title="1분 이전">-1분</button>
       <button type="button" data-seek-seconds="-1" title="1초 이전">-1초</button>
-      <button type="button" data-step-event="-1" title="이전 이벤트">←</button>
+      <button type="button" data-step-event="-1" title="한 장면 이전으로">←</button>
       <button id="play" type="button" class="play" title="재생">재생</button>
-      <button type="button" data-step-event="1" title="다음 이벤트">→</button>
+      <button type="button" data-step-event="1" title="한 장면 다음으로">→</button>
       <button type="button" data-seek-seconds="1" title="1초 이후">+1초</button>
       <button type="button" data-seek-seconds="60" title="1분 이후">+1분</button>
       <button type="button" data-seek-time="153000000" title="장 마감 15:30으로 이동">끝</button>
     </section>
     <section class="inputs">
-      <input id="no" value="0" aria-label="이벤트 번호">
+      <input id="no" value="0" aria-label="순번">
       <input id="time" aria-label="시간">
       <div class="chip">◷</div>
-      <div id="speedChip" class="chip button-like" title="배속 변경">x1.0</div>
+      <div id="speedChip" class="chip button-like" title="재생 속도 바꾸기">1배</div>
     </section>
     <section class="trade">
       <div>기초</div><div id="asset">10,000,000</div><div>수수료</div><div>0.21</div><button id="marketButton" class="sell">시장가</button><input id="priceInput" aria-label="주문 가격" inputmode="numeric"><button id="buyButton" class="buy">매수</button>
@@ -1283,6 +1283,12 @@
       localLoading: null,
       localFailed: new Set()
     };
+
+    // 브라우저·서버가 영어로 던진 오류는 그대로 보여 주지 않는다
+    function errorText(err) {
+      const msg = String((err && err.message) || "");
+      return /[가-힣]/.test(msg) ? msg : "다시 시도해 주세요. 화면을 새로 고치면 대부분 해결됩니다.";
+    }
 
     function fmt(v) {
       if (v === undefined || v === null || v === "") return "";
@@ -1549,7 +1555,7 @@
     }
 
     function speedText() {
-      return `x${Number.isInteger(state.speed) ? state.speed.toFixed(1) : state.speed}`;
+      return `${Number.isInteger(state.speed) ? state.speed.toFixed(0) : state.speed}배`;
     }
 
     function updateSpeedUi() {
@@ -1580,12 +1586,12 @@
         load(1000, false, true)
           .then((eventCount) => {
             if (!eventCount) {
-              $("status").textContent = "마지막 이벤트입니다";
+              $("status").textContent = "마지막 장면입니다";
               stopPlayback();
             }
           })
           .catch((err) => {
-            $("status").textContent = err.message;
+            $("status").textContent = errorText(err);
             stopPlayback();
           })
           .finally(() => {
@@ -1599,7 +1605,7 @@
       const current = speeds.indexOf(state.speed);
       state.speed = speeds[(current + 1) % speeds.length];
       updateSpeedUi();
-      $("status").textContent = `배속 ${speedText()}`;
+      $("status").textContent = `재생 속도 ${speedText()}`;
       if (state.timer) startPlayback();
     }
 
@@ -1641,7 +1647,7 @@
       const budget = state.position.cash * (percent / 100);
       const qty = Math.floor(budget / (price * 1.0021));
       $("qtyInput").value = String(Math.max(0, qty));
-      $("status").textContent = `${percent}% 수량 ${fmt(qty)}주 @ ${fmt(price)}`;
+      $("status").textContent = `${percent}% 수량 ${fmt(qty)}주 · 한 주 ${fmt(price)}원`;
     }
 
     function renderOrders() {
@@ -1712,7 +1718,7 @@
         return;
       }
       state.pendingOrders.push({ id: state.nextOrderId++, side, qty, price, createdNo: Number($("no").value || state.no || 0) });
-      $("status").textContent = `${side === "buy" ? "매수" : "매도"} 대기 ${fmt(qty)}주 @ ${fmt(price)}`;
+      $("status").textContent = `${side === "buy" ? "매수" : "매도"} 대기 ${fmt(qty)}주 · ${fmt(price)}원`;
       renderOrders();
     }
 
@@ -1732,7 +1738,7 @@
           }
           const touched = order.side === "buy" ? trade.price <= order.price : trade.price >= order.price;
           if (touched && executeOrder(order.side, order.qty, trade.price)) {
-            fills.push(`${order.side === "buy" ? "매수" : "매도"} 체결 ${fmt(order.qty)}주 @ ${fmt(trade.price)} (주문 ${fmt(order.price)})`);
+            fills.push(`${order.side === "buy" ? "매수" : "매도"} 체결 ${fmt(order.qty)}주 · ${fmt(trade.price)}원`);
           } else {
             remaining.push(order);
           }
@@ -1760,7 +1766,7 @@
         $("status").textContent = side === "buy" ? "현금이 부족합니다" : "보유 수량이 부족합니다";
         return;
       }
-      $("status").textContent = `${side === "buy" ? "매수" : "매도"} 체결 ${fmt(qty)}주 @ ${fmt(price)}`;
+      $("status").textContent = `${side === "buy" ? "매수" : "매도"} 체결 ${fmt(qty)}주 · ${fmt(price)}원`;
       updatePortfolio();
     }
 
@@ -1782,12 +1788,12 @@
     async function loadReplayDates() {
       const res = await fetch("api/dates");
       const dates = await res.json();
-      if (!res.ok || !Array.isArray(dates) || !dates.length) throw new Error("T 드라이브 리플레이 날짜가 없습니다");
+      if (!res.ok || !Array.isArray(dates) || !dates.length) throw new Error("받아 둔 날짜가 없습니다. 먼저 데이터를 받아 주세요");
       const current = $("date").value.replaceAll("-", "");
       $("date").min = dateInputValue(dates[0]);
       $("date").max = dateInputValue(dates[dates.length - 1]);
       if (!dates.includes(current)) $("date").value = dateInputValue(dates[dates.length - 1]);
-      $("status").textContent = `T 드라이브 날짜 ${dates.length.toLocaleString("ko-KR")}개`;
+      $("status").textContent = `받아 둔 거래일 ${dates.length.toLocaleString("ko-KR")}개`;
     }
 
     async function loadSymbols() {
@@ -2142,7 +2148,7 @@
 
       if (sub) {
         const pocPrice = hi - ((hi - lo) * (poc + 0.5)) / BINS;
-        sub.textContent = `POC ${fmt(Math.round(pocPrice))}`;
+        sub.textContent = `거래가 가장 많았던 가격 ${fmt(Math.round(pocPrice))}원`;
       }
     }
 
@@ -2150,7 +2156,7 @@
       const time = $("time").value || "90000000";
       const gap = $("chartGap").value;
       const res = await fetch(`player/chart.php?date=${encodeURIComponent(date)}&code=${encodeURIComponent(code)}&time=${encodeURIComponent(time)}&bong=1&gap=${encodeURIComponent(gap)}`);
-      if (!res.ok) throw new Error("chart load failed");
+      if (!res.ok) throw new Error("차트를 불러오지 못했습니다");
       state.chartRows = parseChart(await res.text());
       drawChart(chartRowsAtCurrentTime());
     }
@@ -2289,8 +2295,8 @@
             if (done) break;
             chunks.push(value);
             received += value.byteLength;
-            if (loaderMb) loaderMb.textContent = `${Math.round(received / 1048576)} MB 받는 중`;
-            $("status").textContent = `이벤트 데이터 준비 중... ${Math.round(received / 1048576)}MB`;
+            if (loaderMb) loaderMb.textContent = `${Math.round(received / 1048576)} 메가바이트 받는 중`;
+            $("status").textContent = `자료를 받는 중입니다... ${Math.round(received / 1048576)} 메가바이트`;
           }
           if (loaderMb) loaderMb.textContent = "화면에 펼치는 중...";
           const buffer = await new Blob(chunks).arrayBuffer();
@@ -2380,7 +2386,7 @@
           : "";
         const res = await fetch(`api/snapshot?date=${encodeURIComponent(date)}&code=${encodeURIComponent(code)}&no=${no}&batches=${batches}&limit=${safeLimit}${nextSecondQuery}`);
         data = await res.json();
-        if (!res.ok || data.error) throw new Error(data.error || "API error");
+        if (!res.ok || data.error) throw new Error(data.error || "화면을 불러오지 못했습니다");
       }
       const trade = latest(data.events, "1");
       const book = latest(data.events, "2");
@@ -2402,7 +2408,7 @@
       updatePortfolio();
       const pending = state.pendingOrders.length ? ` · 대기 ${state.pendingOrders.length}건` : "";
       const filled = fills.length ? ` · ${fills.join(", ")}` : "";
-      $("status").textContent = `${data.date} ${data.code} · 이벤트 ${data.events.length.toLocaleString("ko-KR")}건 · no=${maxNo}${pending}${filled}`;
+      $("status").textContent = `${data.date} · 장면 ${data.events.length.toLocaleString("ko-KR")}개${pending}${filled}`;
       const dl = $("datelineDate");
       const dt = String(data.date || "").replaceAll("-", "");
       if (dl && dt.length === 8) dl.textContent = `${dt.slice(0, 4)}년 ${Number(dt.slice(4, 6))}월 ${Number(dt.slice(6, 8))}일`;
@@ -2421,22 +2427,22 @@
       resetRuntimeState();
       loadSymbols()
         .then(() => loadMarketOpen())
-        .catch((err) => $("status").textContent = err.message);
+        .catch((err) => $("status").textContent = errorText(err));
     });
     $("code").addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
         $("no").value = "0";
         resetRuntimeState();
-        loadMarketOpen().catch((err) => $("status").textContent = err.message);
+        loadMarketOpen().catch((err) => $("status").textContent = errorText(err));
       }
     });
     $("search").addEventListener("click", () => {
       $("no").value = "0";
       resetRuntimeState();
-      loadMarketOpen().catch((err) => $("status").textContent = err.message);
+      loadMarketOpen().catch((err) => $("status").textContent = errorText(err));
     });
     $("quoteRefresh").addEventListener("click", () => {
-      load().catch((err) => $("status").textContent = err.message);
+      load().catch((err) => $("status").textContent = errorText(err));
     });
     $("buyButton").addEventListener("click", () => order("buy"));
     $("sellButton").addEventListener("click", () => order("sell"));
@@ -2475,12 +2481,12 @@
     $("chartReload").addEventListener("click", () => {
       const date = $("date").value.replaceAll("-", "");
       const code = resolveCode();
-      loadChart(date, code).catch((err) => $("status").textContent = err.message);
+      loadChart(date, code).catch((err) => $("status").textContent = errorText(err));
     });
     $("chartGap").addEventListener("change", () => {
       const date = $("date").value.replaceAll("-", "");
       const code = resolveCode();
-      loadChart(date, code).catch((err) => $("status").textContent = err.message);
+      loadChart(date, code).catch((err) => $("status").textContent = errorText(err));
     });
     document.querySelectorAll("[data-size-pct]").forEach((button) => {
       button.addEventListener("click", () => applySizePercent(Number(button.dataset.sizePct)));
@@ -2491,13 +2497,13 @@
       loadChart(date, code).catch(() => {});
     });
     document.querySelectorAll("[data-seek-time]").forEach((button) => {
-      button.addEventListener("click", () => seekToTime(button.dataset.seekTime).catch((err) => $("status").textContent = err.message));
+      button.addEventListener("click", () => seekToTime(button.dataset.seekTime).catch((err) => $("status").textContent = errorText(err)));
     });
     document.querySelectorAll("[data-seek-seconds]").forEach((button) => {
-      button.addEventListener("click", () => seekBySeconds(Number(button.dataset.seekSeconds)).catch((err) => $("status").textContent = err.message));
+      button.addEventListener("click", () => seekBySeconds(Number(button.dataset.seekSeconds)).catch((err) => $("status").textContent = errorText(err)));
     });
     document.querySelectorAll("[data-step-event]").forEach((button) => {
-      button.addEventListener("click", () => stepEvent(Number(button.dataset.stepEvent)).catch((err) => $("status").textContent = err.message));
+      button.addEventListener("click", () => stepEvent(Number(button.dataset.stepEvent)).catch((err) => $("status").textContent = errorText(err)));
     });
     $("play").addEventListener("click", () => {
       if (state.timer) {
@@ -2518,7 +2524,7 @@
         }
         return loadMarketOpen();
       })
-      .catch((err) => $("status").textContent = err.message);
+      .catch((err) => $("status").textContent = errorText(err));
   </script>
 </body>
 </html>
